@@ -4,20 +4,38 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boukla — New Arrivals</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Preload du logo SVG pour un rendu net dès le premier paint -->
+  <link rel="preload" href="assets/images/logo-boukla-2.svg" as="image" type="image/svg+xml">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="boukla.css" />
 </head>
 <body>
   <!-- ENTÊTE -->
   <header class="header">
-    <a class="logo" href="#" aria-label="Boukla">boukla</a>
+    <!-- LOGO SVG -->
+    <a class="logo" href="#" aria-label="Boukla">
+      <img
+        src="assets/images/logo-boukla-2.svg"
+        alt="Boukla Logo"
+        height="60"
+        decoding="async"
+        fetchpriority="high"
+      >
+    </a>
 
+    <!-- NAV -->
     <nav class="nav" aria-label="Navigation principale">
       <a class="nav__link is-active" href="#" aria-current="page">HOME</a>
       <a class="nav__link" href="#">ABOUT US</a>
       <a class="nav__link" href="#">CONTACT</a>
     </nav>
 
+    <!-- ACTIONS -->
     <div class="header__actions">
       <a class="login" href="#">LOGIN</a>
       <button class="icon-btn" aria-label="Search">
@@ -41,27 +59,23 @@
 
   <!-- HERO EN PLEINE LARGEUR -->
   <main class="hero">
-    <!-- Colonne gauche : image modèle + compo produit -->
+    <!-- Colonne gauche : image pleine -->
     <section class="hero__left">
-      <img class="hero__model" src="assets/hero.jpg" alt="Model" />
-      <div class="product">
-        <img class="product__leaf product__leaf--left" src="assets/leaves.png" alt="" aria-hidden="true">
-        <img class="product__bottle" src="assets/bottle.png" alt="Bouteille Boukla">
-        <img class="product__leaf product__leaf--right" src="assets/leaves.png" alt="" aria-hidden="true">
-      </div>
+      <img class="hero__model" src="assets/images/boukla-1.png" alt="Photo Boukla" />
     </section>
 
     <!-- Colonne droite : carte promo avec carrousel -->
     <aside class="hero__right">
       <div class="promo" 
            data-images='[
-             "assets/promo.jpg",
-             "assets/promo-2.jpg",
-             "assets/promo-3.jpg"
+             "assets/images/étiquette-boukla-3.jpg",
+             "assets/images/étiquette-boukla-4.png",
+             "assets/images/étiquette-produit-boukla-2-mock-up.jpg"
            ]'>
         <!-- Bloc image + barre jaune -->
         <div class="promo__media">
-          <img class="promo__img" src="assets/promo.jpg" alt="Produits Boukla en promotion">
+          <!-- Important : src aligné sur la 1ère image de data-images -->
+          <img class="promo__img" src="assets/images/étiquette-boukla-3.jpg" alt="Produits Boukla en promotion">
           <div class="promo__stripe">
             <button class="promo__next" type="button" aria-label="Image suivante">›</button>
           </div>
@@ -95,9 +109,21 @@
 
       <!-- Colonne d’icônes à droite -->
       <div class="socials">
-        <a href="#" class="social" aria-label="Instagram">●</a>
-        <a href="#" class="social" aria-label="Pinterest">○</a>
-        <a href="#" class="social" aria-label="X/Twitter">×</a>
+       
+  
+  <a href="#" class="social" aria-label="Instagram">
+    <img src="assets/icons/instagram.svg" alt="Instagram">
+  </a>
+  <a href="#" class="social" aria-label="Pinterest">
+    <img src="assets/icons/pinterest.svg" alt="Pinterest">
+  </a>
+  <a href="#" class="social" aria-label="X">
+    <img src="assets/icons/x.svg" alt="X">
+  </a>
+</div>
+
+</div>
+
       </div>
     </section>
   </main>
@@ -106,6 +132,7 @@
   <script src="promo-slider.js"></script>
 </body>
 </html>
+
 
 
 

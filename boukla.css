@@ -1,5 +1,5 @@
 /* =========================
-   BOUKLA – CSS NETTOYÉ + SLIDER
+   BOUKLA – CSS NETTOYÉ
    ========================= */
 
 /* ====== VARIABLES ====== */
@@ -28,80 +28,122 @@ body{
 
 /* ====== HEADER ====== */
 .header{
-  position:absolute; inset:0 0 auto 0;
-  z-index:10; background:transparent;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 22px;
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  background: transparent;
+  --logo-w: 160px;
 }
+
 .logo{
-  font-family:"Playfair Display", Georgia, serif;
-  font-weight:700; font-size:24px; letter-spacing:.2px;
-  color:#fff; text-decoration:none;
+  position: absolute;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
 }
-.nav{ display:flex; gap:32px; }
+.logo img,
+.logo svg{
+  display: block;
+  height: 120px; /* ajuste la hauteur d’affichage du logo si besoin */
+  width: auto;
+}
+
+.nav{
+  margin-left: calc(var(--logo-w) + 620px);
+  display:flex;
+  gap:32px;
+}
 .nav__link{
-  font-weight:600; font-size:12px; letter-spacing:2px;
-  text-decoration:none; color:#fff; opacity:.9;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:2px;
+  text-decoration:none;
+  color:#fff;
+  opacity:.9;
 }
-.nav__link:hover,.nav__link.is-active{ opacity:1; }
-.header__actions{ display:flex; align-items:center; gap:14px; }
-.login{ font-size:12px; letter-spacing:2px; text-decoration:none; color:#fff; opacity:.9; }
+.nav__link:hover,
+.nav__link.is-active{
+  opacity:1;
+}
+
+.header__actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-left:auto;
+}
+.login{
+  font-size:12px;
+  letter-spacing:2px;
+  text-decoration:none;
+  color:#fff;
+  opacity:.9;
+}
 .icon-btn{
-  width:34px; height:34px; border-radius:8px;
+  width:34px;
+  height:34px;
+  border-radius:8px;
   border:1px solid rgba(255,255,255,.35);
   background:rgba(0,0,0,.08);
-  display:grid; place-items:center; cursor:pointer; color:#fff;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  color:#fff;
 }
-.hamburger{ display:none; width:28px; height:28px; background:transparent; border:0; }
-.hamburger span{ display:block; height:2px; background:#fff; margin:6px 0; }
+.hamburger{
+  display:none;
+  width:28px;
+  height:28px;
+  background:transparent;
+  border:0;
+}
+.hamburger span{
+  display:block;
+  height:2px;
+  background:#fff;
+  margin:6px 0;
+}
 
 /* ====== HERO ====== */
 .hero{
   width:100%;
   display:grid;
   grid-template-columns: 1.5fr 1fr;
-  grid-template-rows:auto;
   position:relative;
 }
 
-/* --- Colonne gauche --- */
-.hero__left{
-  background:var(--orange-bg);
-  min-height:580px;
-  position:relative;
-  padding:18px;
-  overflow:hidden;
-}
+.hero__left { background: none; padding: 0; }
 .hero__model{
-  width:100%; height:360px; object-fit:cover; object-position:center top;
-  border-radius:8px;
-  margin-top:var(--header-h);
+  width: 100%;
+  height: 570px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  margin-top: 0;
+  display: block;
 }
-.product{
-  position:absolute; left:24px; bottom:-52px;
-  display:flex; align-items:flex-end; gap:12px;
-}
-.product__leaf{ width:115px; filter:drop-shadow(0 6px 12px rgba(0,0,0,.25)); }
-.product__leaf--right{ transform:scaleX(-1); }
-.product__bottle{ width:90px; filter:drop-shadow(0 10px 18px rgba(0,0,0,.28)); }
 
-/* --- Colonne droite : promo --- */
 .hero__right{
   background:var(--white);
-  display:flex; align-items:center; justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:30px 22px;
 }
-
 .promo{
   width:min(420px,100%);
-  background:#fff; border:1px solid rgba(0,0,0,.06);
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
   overflow:hidden;
   transform:translateY(40px);
 }
 
-/* === Carrousel === */
 .promo__media{
   display:grid;
   grid-template-columns: 1fr 80px;
@@ -116,19 +158,21 @@ body{
 }
 .promo__stripe{
   background:var(--mustard);
-  display:grid; place-items:center;
+  display:grid;
+  place-items:center;
 }
 .promo__next{
   all:unset;
   cursor:pointer;
-  font-size:42px; line-height:1;
+  font-size:42px;
+  line-height:1;
   color:rgba(255,255,255,.9);
   padding:10px 6px;
   border-radius:6px;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: background .3s ease, color .3s ease, transform .2s ease;
 }
 .promo__next:hover{
-  background:rgba(255,255,255,0.15);
+  background:rgba(255,255,255,.15);
   color:#fff;
   transform:scale(1.1);
 }
@@ -136,18 +180,21 @@ body{
   outline:2px solid #fff;
   outline-offset:2px;
 }
-
-/* barre orange sous l’image (moitié gauche) */
 .promo__code-bar{
-  background:#d67a3b; color:#fff;
-  font-size:12px; font-weight:700; letter-spacing:1px;
-  padding:8px 12px; text-align:center;
-  width:50%; border-radius:0 0 0 6px; box-sizing:border-box;
+  background:#d67a3b;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:8px 12px;
+  text-align:center;
+  width:50%;
+  border-radius:0 0 0 6px;
 }
-
-/* méta (réduction) */
 .promo__meta{
-  display:flex; align-items:center; gap:16px;
+  display:flex;
+  align-items:center;
+  gap:16px;
   padding:14px 18px 24px;
 }
 .promo__off{
@@ -157,71 +204,137 @@ body{
   color:#8f2d10;
 }
 
-/* --- Bandeau bas --- */
+/* ====== BANDEAU BAS ====== */
 .hero__bottom{
   grid-column:1 / -1;
   position:relative;
   height:420px;
 }
 .bottom__split{
-  position:absolute; inset:0 auto 0 0; width:50%;
+  position:absolute;
+  inset:0 auto 0 0;
+  width:50%;
 }
 .bottom__split--white{ background:#fff; }
 .bottom__split--yellow{
-  position:absolute; top:0; right:0; left:30%;
-  bottom:120px;
-  width:auto; height:auto;
+  position:absolute;
+  top:0;
+  right:0;
+  left:30%;
+  bottom:180px;
+  width:auto;
+  height:auto;
   background:var(--mustard);
 }
 
-/* Titres */
 .kicker{
-  position:absolute; left:36px; top:-22px;
+  position:absolute;
+  left:320px;
+  top:-68px;
   font-family:"Playfair Display", Georgia, serif;
-  color:var(--dark-brown);
+  color:#8e3a16;
   font-size:clamp(56px,10vw,92px);
-  letter-spacing:.5px; margin:0;
+  margin:0;
 }
 .headline{
-  position:absolute; left:36px; top:110px;
+  position:absolute;
+  left:320px;
+  top:40px;
   font-family:"Playfair Display", Georgia, serif;
-  color:var(--dark-brown);
+  color:#8e3a16;
   font-size:clamp(56px,10vw,92px);
-  letter-spacing:.5px; margin:0;
+  margin:0;
 }
 
-/* Texte à droite */
 .subline{
-  position:absolute; left:52%; top:56px; margin:0;
-  font-weight:700; font-size:12px; letter-spacing:2px; color:#8a5a3d;
-  display:flex; align-items:center; gap:10px;
+  position:absolute;
+  left:52%;
+  top:56px;
+  margin:0;
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:2px;
+  color:#8a5a3d;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
-.subline .bar{ display:inline-block; width:14px; height:2px; background:#8a5a3d; }
+.subline .bar{
+  width:14px;
+  height:2px;
+  background:#8a5a3d;
+}
 .lead{
-  position:absolute; left:52%; top:92px; right:24px;
-  max-width:540px; color:#6c4b36; line-height:1.5; margin:0;
+  position:absolute;
+  left:52%;
+  top:92px;
+  right:24px;
+  max-width:540px;
+  color:#6c4b36;
+  line-height:1.5;
 }
 
-/* CTA */
 .cta{
-  position:absolute; left:36px; top:208px;
-  display:inline-block; text-decoration:none; font-weight:700; letter-spacing:.6px;
-  background:#d67a3b; color:#fff; padding:12px 18px; border-radius:6px;
+  position:absolute;
+  left:90px;
+  top:100px;
+  display:inline-block;
+  text-decoration:none;
+  font-weight:700;
+  background:#d67a3b;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:6px;
   box-shadow:0 10px 24px rgba(214,122,59,.35);
 }
 
-/* Icônes à droite */
+/* ====== RÉSEAUX SOCIAUX – SVG UNIQUES ====== */
+/* Centrage vertical exact par rapport au bloc jaune (bottom:180px) */
 .socials{
-  position:absolute; right:22px; top:76px;
-  display:flex; flex-direction:column; gap:16px;
-}
-.social{
-  width:44px; height:44px; border-radius:999px;
-  background:#000; color:#fff; display:grid; place-items:center;
-  text-decoration:none; font-size:18px; opacity:.9;
+  position:absolute;
+  right:22px;
+  top: calc((100% - 180px) / 2);
+  transform: translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0px; /* écart raisonnable par défaut */
+  z-index:2;
 }
 
-/* ====== RESPONSIVE ====== */
+/* Pas de pastilles : on affiche UNIQUEMENT tes SVG */
+.social{
+  display:block;
+  margin:0;
+  padding:0;
+  line-height:0;
+}
+
+.social {
+  margin-top: -10px; /* chevauchement vers le haut */
+}
+
+.social:first-child {
+  margin-top: 0; /* pas de chevauchement pour le premier */
+}
+
+/* Taille des icônes (responsive) */
+.social img{
+  display:block;
+  width:80px;
+  height:80px;
+}
+
+@media (max-width: 920px) {
+  .socials { gap:10px; }
+  .social img { width:32px; height:32px; }
+}
+@media (max-width: 640px) {
+  .socials { gap:8px; }
+  .social img { width:28px; height:28px; }
+}
+
+/* ====== RESPONSIVE (layout) ====== */
 @media (max-width:1100px){
   .hero{ grid-template-columns:1.2fr 1fr; }
   .promo__img{ height:220px; }
@@ -232,7 +345,7 @@ body{
   .hero__bottom{ height:360px; }
   .subline{ left:36px; top:220px; }
   .lead{ left:36px; right:22px; top:252px; }
-  .socials{ right:16px; top:24px; }
+  .socials{ right:16px; }
 }
 @media (max-width:640px){
   .kicker{ left:18px; top:-10px; }
@@ -240,8 +353,29 @@ body{
   .cta{ left:18px; top:230px; }
   .subline{ left:18px; }
   .lead{ left:18px; right:18px; }
-  .product{ left:12px; }
 }
+
+/* ===== Patch – Icônes header côté droit en noir ===== */
+.header .header__actions { color: #000 !important; }
+.header .header__actions .login { color: #000 !important; }
+.header .header__actions .icon-btn {
+  color: #000 !important;
+  border-color: rgba(0,0,0,.18) !important;
+  background: rgba(0,0,0,.04) !important;
+}
+.header .header__actions .icon-btn svg { stroke: currentColor !important; }
+.header .header__actions .icon-btn:hover,
+.header .header__actions .icon-btn:focus {
+  color: #000 !important;
+  border-color: rgba(0,0,0,.22) !important;
+  background: rgba(0,0,0,.06) !important;
+}
+.header .header__actions .hamburger span { background: #000 !important; }
+
+
+
+
+
 
 
 

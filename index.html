@@ -1,136 +1,191 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boukla — New Arrivals</title>
-
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Boukla &mdash; New Arrivals
+  </title>
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
   <!-- Preload du logo SVG pour un rendu net dès le premier paint -->
-  <link rel="preload" href="assets/images/logo-boukla-2.svg" as="image" type="image/svg+xml">
-
+  <link as="image" href="assets/images/logo-boukla-2.svg" rel="preload" type="image/svg+xml"/>
   <!-- CSS -->
-  <link rel="stylesheet" href="boukla.css" />
-</head>
-<body>
+  <link href="boukla.css" rel="stylesheet">
+  </link>
+ </head>
+ <body>
   <!-- ENTÊTE -->
   <header class="header">
-    <!-- LOGO SVG -->
-    <a class="logo" href="#" aria-label="Boukla">
-      <img
-        src="assets/images/logo-boukla-2.svg"
-        alt="Boukla Logo"
-        height="60"
-        decoding="async"
-        fetchpriority="high"
-      >
+   <!-- LOGO SVG -->
+   <a aria-label="Boukla" class="logo" href="#">
+    <img alt="Boukla Logo" decoding="async" fetchpriority="high" height="60" src="assets/images/logo-boukla-2.svg"/>
+   </a>
+   <!-- NAV -->
+   <nav aria-label="Navigation principale" class="nav">
+    <a aria-current="page" class="nav__link is-active" href="#">
+     HOME
     </a>
-
-    <!-- NAV -->
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="nav__link is-active" href="#" aria-current="page">HOME</a>
-      <a class="nav__link" href="#">ABOUT US</a>
-      <a class="nav__link" href="#">CONTACT</a>
-    </nav>
-
-    <!-- ACTIONS -->
-    <div class="header__actions">
-      <a class="login" href="#">LOGIN</a>
-      <button class="icon-btn" aria-label="Search">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-      </button>
-      <button class="icon-btn" aria-label="Cart">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="9" cy="21" r="1"></circle>
-          <circle cx="20" cy="21" r="1"></circle>
-          <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-        </svg>
-      </button>
-      <button class="hamburger" aria-label="Menu">
-        <span></span><span></span>
-      </button>
-    </div>
+    <a class="nav__link" href="#">
+     ABOUT US
+    </a>
+    <a class="nav__link" href="#">
+     CONTACT
+    </a>
+   </nav>
+   <!-- ACTIONS -->
+   <div class="header__actions">
+    <a class="login" href="#">
+     LOGIN
+    </a>
+    <button aria-label="Search" class="icon-btn">
+     <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+      <circle cx="11" cy="11" r="7">
+      </circle>
+      <line x1="21" x2="16.65" y1="21" y2="16.65">
+      </line>
+     </svg>
+    </button>
+    <button aria-label="Cart" class="icon-btn">
+     <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+      <circle cx="9" cy="21" r="1">
+      </circle>
+      <circle cx="20" cy="21" r="1">
+      </circle>
+      <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6">
+      </path>
+     </svg>
+    </button>
+    <button aria-label="Menu" class="hamburger">
+     <span>
+     </span>
+     <span>
+     </span>
+    </button>
+   </div>
   </header>
-
   <!-- HERO EN PLEINE LARGEUR -->
   <main class="hero">
-    <!-- Colonne gauche : image pleine -->
-    <section class="hero__left">
-      <img class="hero__model" src="assets/images/boukla-1.png" alt="Photo Boukla" />
-    </section>
-
-    <!-- Colonne droite : carte promo avec carrousel -->
-    <aside class="hero__right">
-      <div class="promo" 
-           data-images='[
+   <!-- Colonne gauche : image pleine -->
+   <section class="hero__left">
+    <img alt="Photo Boukla" class="hero__model" src="assets/images/boukla-1.png">
+    </img>
+   </section>
+   <!-- Colonne droite : carte promo avec carrousel -->
+   <aside class="hero__right">
+    <div class="promo" data-images='[
              "assets/images/étiquette-boukla-3.jpg",
              "assets/images/étiquette-boukla-4.png",
              "assets/images/étiquette-produit-boukla-2-mock-up.jpg"
            ]'>
-        <!-- Bloc image + barre jaune -->
-        <div class="promo__media">
-          <!-- Important : src aligné sur la 1ère image de data-images -->
-          <img class="promo__img" src="assets/images/étiquette-boukla-3.jpg" alt="Produits Boukla en promotion">
-          <div class="promo__stripe">
-            <button class="promo__next" type="button" aria-label="Image suivante">›</button>
-          </div>
-        </div>
-
-        <!-- Petit rectangle orange sous l'image -->
-        <div class="promo__code-bar">PROMO CODE 360C</div>
-
-        <!-- Réduction -->
-        <div class="promo__meta">
-          <h3 class="promo__off">65% OFF</h3>
-        </div>
+     <!-- Bloc image + barre jaune -->
+     <div class="promo__media">
+      <!-- Important : src aligné sur la 1ère image de data-images -->
+      <img alt="Produits Boukla en promotion" class="promo__img" src="assets/images/étiquette-boukla-3.jpg"/>
+      <div class="promo__stripe">
+       <button aria-label="Image suivante" class="promo__next" type="button">
+        &rsaquo;
+       </button>
       </div>
-    </aside>
-
-    <!-- Bandeau bas : NEW / ARRIVALS + texte -->
-    <section class="hero__bottom">
-      <div class="bottom__split bottom__split--white"></div>
-      <div class="bottom__split bottom__split--yellow"></div>
-
-      <h1 class="kicker">NEW</h1>
-      <h1 class="headline">ARRIVALS</h1>
-
-      <p class="subline"><span class="bar" aria-hidden="true"></span> NEW OFFERS EVERY WEEKS</p>
-      <p class="lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+     </div>
+     <!-- Petit rectangle orange sous l'image -->
+     <div class="promo__code-bar">
+      PROMO CODE 360C
+     </div>
+     <!-- Réduction -->
+     <div class="promo__meta">
+      <h3 class="promo__off">
+       65% OFF
+      </h3>
+     </div>
+    </div>
+   </aside>
+   <!-- Bandeau bas : NEW / ARRIVALS + texte -->
+   <section class="hero__bottom">
+    <div class="bottom__split bottom__split--white">
+    </div>
+    <div class="bottom__split bottom__split--yellow">
+    </div>
+    <h1 class="kicker">
+     NEW
+    </h1>
+    <h1 class="headline">
+     ARRIVALS
+    </h1>
+    <p class="subline">
+     <span aria-hidden="true" class="bar">
+     </span>
+     NEW OFFERS EVERY WEEKS
+    </p>
+    <p class="lead">
+     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-      </p>
+    </p>
+    <a class="cta" href="#">
+     SHOP NOW
+    </a>
+    <!-- Colonne d’icônes à droite -->
+    <div class="socials">
+     <a aria-label="Instagram" class="social" href="#">
+      <img alt="Instagram" src="assets/icons/instagram.svg"/>
+     </a>
+     <a aria-label="Pinterest" class="social" href="#">
+      <img alt="Pinterest" src="assets/icons/pinterest.svg"/>
+     </a>
+     <a aria-label="X" class="social" href="#">
+      <img alt="X" src="assets/icons/x.svg"/>
+     </a>
+    </div>
+   </section>
 
-      <a class="cta" href="#">SHOP NOW</a>
+   <!-- ===== Suite du design : section "natural / cosmetics" ===== -->
+<section class="section-natural">
+  <!-- bande jaune full-bleed (pleine largeur) -->
+  <div class="section-natural__band"></div>
 
-      <!-- Colonne d’icônes à droite -->
-      <div class="socials">
-       
-  
-  <a href="#" class="social" aria-label="Instagram">
-    <img src="assets/icons/instagram.svg" alt="Instagram">
-  </a>
-  <a href="#" class="social" aria-label="Pinterest">
-    <img src="assets/icons/pinterest.svg" alt="Pinterest">
-  </a>
-  <a href="#" class="social" aria-label="X">
-    <img src="assets/icons/x.svg" alt="X">
-  </a>
-</div>
+  <div class="section-natural__stage">
+    <!-- grande image centrale -->
+    <img
+      class="section-natural__img-large"
+      src="assets/images/boukla-2.jpg"
+      alt="Visuel principal Boukla"
+      width="860"
+      height="1080"
+      loading="lazy"
+    />
 
-</div>
+    <!-- petite image chevauchante en bas‑droite -->
+    <img
+      class="section-natural__img-small"
+      src="assets/images/boukla-3.jpg"
+      alt="Portrait Boukla"
+      width="420"
+      height="560"
+      loading="lazy"
+    />
 
-      </div>
-    </section>
+    <!-- titre sur 2 lignes (Playfair) posé par‑dessus les visuels -->
+    <h2 class="section-natural__title">
+      <span>natural</span>
+      <span>cosmetics</span>
+    </h2>
+  </div>
+
+  <!-- texte + bouton centrés sous la scène -->
+  <div class="section-natural__content">
+    <p class="section-natural__text">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+    </p>
+    <a class="section-natural__btn" href="#">SHOP NOW</a>
+  </div>
+</section>
+
   </main>
-
   <!-- Script carrousel -->
-  <script src="promo-slider.js"></script>
-</body>
+  <script src="promo-slider.js">
+  </script>
+ </body>
 </html>
 
 

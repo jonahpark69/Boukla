@@ -372,7 +372,180 @@ body{
 }
 .header .header__actions .hamburger span { background: #000 !important; }
 
+/* ==========================================================
+   SECTION: natural / cosmetics — full‑bleed, sans casser le hero
+   ========================================================== */
 
+/* 1) La section elle‑même */
+.section-natural{
+  position: relative;
+  background: #fff;
+  padding: 0 0 70px;          /* espace sous la scène */
+  overflow: visible;
+  isolation: isolate;         /* z-index indépendant du hero */
+}
+
+/* ⚠️ Si (et seulement si) la section est INSÉRÉE DANS la grille du hero,
+   on force l’élément à s’étendre sur TOUTES les colonnes de la grille.
+   (Si ta section est après </main>, cette règle est inoffensive.) */
+.hero > .section-natural{
+  grid-column: 1 / -1;        /* s'étire sur toute la grille */
+  width: 100%;                /* prend la largeur du hero */
+}
+
+/* 2) Bande jaune bord-à-bord (full‑bleed) SANS position:absolute pour éviter les conflits */
+.section-natural__band{
+  position: relative;         /* reste dans le flux → n'interfère pas avec le hero */
+  height: 600px;              /* ← augmente ici pour descendre plus bas */
+  
+  background: #d67a3b; 
+
+  /* full‑bleed robuste, même dans un parent centré ou en grid */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  z-index: 0;
+}
+
+/* 3) La scène (images + titre) chevauche la bande jaune proprement */
+.section-natural__stage{
+  position: relative;
+  width: min(1040px, 92vw);
+  margin: -110px auto 0;      /* ≈ moitié de la hauteur de la bande (220/2) */
+  z-index: 1;                 /* au-dessus du jaune */
+}
+
+/* 4) Images et titre (identiques à avant) */
+.section-natural__img-large{
+   width: 1000px;      /* largeur portrait */
+  height: 1080px;     /* grande hauteur */
+  object-fit: cover; /* conserve les proportions sans déformer, rogne si besoin */
+  display: block;
+  margin: 0 auto;    /* centré horizontalement */
+  box-shadow: var(--shadow);
+
+    /* Déplacements */
+  position: relative; /* permet d'utiliser top / left */
+  top: -280px;         /* vers le haut (-) ou vers le bas (+) */
+  left: -180px;         /* vers la droite (+) ou vers la gauche (-) */
+}
+.section-natural__img-small {
+  position: absolute;     /* indépendante du texte et de la grande image */
+  right: 30px;             /* distance depuis la droite */
+  bottom: -40px;           /* distance depuis le bas */
+  width: 600px;            /* largeur */
+  height: 650px;           /* hauteur */
+  top: 300px;         /* vers le haut (-) ou vers le bas (+) */
+  left: 500px;         /* vers la droite (+) ou vers la gauche (-) */
+  object-fit: cover;         /* remplit le bloc sans déformer */
+  object-position: 85% 40%;
+  box-shadow: var(--shadow);
+}
+
+.section-natural__title{
+  position: absolute;
+  left: clamp(18px, 8vw, 120px);
+  bottom: 90px;
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  line-height: .9;
+  color: #5b1d13;
+  pointer-events: none;
+}
+.section-natural__title span{
+  display: block;
+  font-size: clamp(42px, 9vw, 110px);
+}
+.section-natural__title span + span{ margin-top: .05em; }
+
+/* Premier mot : "Natural" */
+.section-natural__title span:first-child {
+  position: relative;
+  left: -350px;      /* décalage horizontal */
+  top: -50px;       /* décalage vertical */
+  color: #5b1d13;
+}
+
+/* Deuxième mot : "Cosmetics" */
+.section-natural__title span:last-child {
+  position: relative;
+  left: -220px;   /* + vers la droite / - vers la gauche */
+  top: -50px;   /* + vers le bas / - vers le haut */
+  color: #a0522d;
+}
+
+
+.section-natural__content{
+  width: min(680px, 88vw);
+  margin: 48px auto 0;
+  text-align: center;
+}
+.section-natural__text{
+  color:#6c4b36;
+  margin:0 0 18px;
+  line-height:1.55;
+  position: relative;   /* permet d'utiliser top / left */
+  top: -100px;               /* vers le haut (-) ou vers le bas (+) */
+  left: -350px;              /* vers la gauche (-) ou vers la droite (+) */
+  margin-bottom: 18px;  /* espace sous le texte pour ne pas coller au bouton */
+}
+.section-natural__btn{
+  display:inline-block;
+  background:#d67a3b;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  padding:10px 18px;
+  border-radius:6px;
+  box-shadow: 0 10px 24px rgba(214,122,59,.25);
+}
+
+/* =======================
+   Responsive adjustments
+   ======================= */
+@media (max-width: 980px){
+  .section-natural__band{ height: 190px; }
+  .section-natural__stage{ margin-top: -95px; }   /* ~ moitié de 190 */
+  .section-natural__title{ bottom: 72px; left: 5vw; }
+  .section-natural__img-small{ right: 4vw; bottom: -30px; }
+}
+@media (max-width: 640px){
+  .section-natural__band{ height: 160px; }
+  .section-natural__stage{ margin-top: -80px; }   /* ~ moitié de 160 */
+  .section-natural__title{ bottom: 56px; left: 4vw; }
+  .section-natural__img-small{ right: 3vw; bottom: -24px; }
+}
+
+/* === Déplacement indépendant du texte lorem ipsum (responsive) === */
+.section-natural__text {
+  /* Offsets par défaut (desktop) */
+  --text-offset-x: 16px;   /* + = droite, - = gauche */
+  --text-offset-y: -12px;  /* + = bas, - = haut */
+
+  position: relative;      /* permet top/left relatifs à la position initiale */
+  left: var(--text-offset-x);
+  top:  var(--text-offset-y);
+
+  margin-bottom: 18px;     /* garde l’espace avec le bouton */
+}
+
+/* Tablet (≤ 980px) */
+@media (max-width: 980px) {
+  .section-natural__text {
+    --text-offset-x: 10px;
+    --text-offset-y: -8px;
+  }
+}
+
+/* Mobile (≤ 640px) */
+@media (max-width: 640px) {
+  .section-natural__text {
+    --text-offset-x: 6px;
+    --text-offset-y: -4px;
+  }
+}
 
 
 

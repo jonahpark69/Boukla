@@ -1,5 +1,5 @@
 /* =========================
-   BOUKLA – CSS NETTOYÉ
+   BOUKLA — CSS NETTOYÉ
    ========================= */
 
 /* ====== VARIABLES ====== */
@@ -134,6 +134,7 @@ body{
   justify-content:center;
   padding:30px 22px;
 }
+
 .promo{
   width:min(420px,100%);
   background:#fff;
@@ -166,13 +167,13 @@ body{
   cursor:pointer;
   font-size:42px;
   line-height:1;
-  color:rgba(255,255,255,.9);
+  color:rgba(255,255,255,9);
   padding:10px 6px;
   border-radius:6px;
   transition: background .3s ease, color .3s ease, transform .2s ease;
 }
 .promo__next:hover{
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,15);
   color:#fff;
   transform:scale(1.1);
 }
@@ -227,6 +228,7 @@ body{
   background:var(--mustard);
 }
 
+/* Titres & textes dans le hero */
 .kicker{
   position:absolute;
   left:320px;
@@ -245,7 +247,6 @@ body{
   font-size:clamp(56px,10vw,92px);
   margin:0;
 }
-
 .subline{
   position:absolute;
   left:52%;
@@ -301,7 +302,6 @@ body{
   gap:0px; /* écart raisonnable par défaut */
   z-index:2;
 }
-
 /* Pas de pastilles : on affiche UNIQUEMENT tes SVG */
 .social{
   display:block;
@@ -309,50 +309,14 @@ body{
   padding:0;
   line-height:0;
 }
-
-.social {
-  margin-top: -10px; /* chevauchement vers le haut */
-}
-
-.social:first-child {
-  margin-top: 0; /* pas de chevauchement pour le premier */
-}
+.social { margin-top: -10px; }      /* chevauchement vers le haut */
+.social:first-child { margin-top: 0; }
 
 /* Taille des icônes (responsive) */
 .social img{
   display:block;
   width:80px;
   height:80px;
-}
-
-@media (max-width: 920px) {
-  .socials { gap:10px; }
-  .social img { width:32px; height:32px; }
-}
-@media (max-width: 640px) {
-  .socials { gap:8px; }
-  .social img { width:28px; height:28px; }
-}
-
-/* ====== RESPONSIVE (layout) ====== */
-@media (max-width:1100px){
-  .hero{ grid-template-columns:1.2fr 1fr; }
-  .promo__img{ height:220px; }
-}
-@media (max-width:920px){
-  .hero{ grid-template-columns:1fr; }
-  .hero__right{ order:2; }
-  .hero__bottom{ height:360px; }
-  .subline{ left:36px; top:220px; }
-  .lead{ left:36px; right:22px; top:252px; }
-  .socials{ right:16px; }
-}
-@media (max-width:640px){
-  .kicker{ left:18px; top:-10px; }
-  .headline{ left:18px; top:118px; }
-  .cta{ left:18px; top:230px; }
-  .subline{ left:18px; }
-  .lead{ left:18px; right:18px; }
 }
 
 /* ===== Patch – Icônes header côté droit en noir ===== */
@@ -373,10 +337,10 @@ body{
 .header .header__actions .hamburger span { background: #000 !important; }
 
 /* ==========================================================
-   SECTION: natural / cosmetics — full‑bleed, sans casser le hero
+   SECTION: natural / cosmetics — full-bleed, sans casser le hero
    ========================================================== */
 
-/* 1) La section elle‑même */
+/* 1) La section elle-même */
 .section-natural{
   position: relative;
   background: #fff;
@@ -385,7 +349,7 @@ body{
   isolation: isolate;         /* z-index indépendant du hero */
 }
 
-/* ⚠️ Si (et seulement si) la section est INSÉRÉE DANS la grille du hero,
+/* Si (et seulement si) la section est INSÉRÉE DANS la grille du hero,
    on force l’élément à s’étendre sur TOUTES les colonnes de la grille.
    (Si ta section est après </main>, cette règle est inoffensive.) */
 .hero > .section-natural{
@@ -393,14 +357,13 @@ body{
   width: 100%;                /* prend la largeur du hero */
 }
 
-/* 2) Bande jaune bord-à-bord (full‑bleed) SANS position:absolute pour éviter les conflits */
+/* 2) Bande jaune bord-à-bord (full-bleed) sans position:absolute */
 .section-natural__band{
   position: relative;         /* reste dans le flux → n'interfère pas avec le hero */
-  height: 600px;              /* ← augmente ici pour descendre plus bas */
-  
-  background: #d67a3b; 
+  height: 600px;              /* hauteur de la bande */
+  background: #d67a3b;
 
-  /* full‑bleed robuste, même dans un parent centré ou en grid */
+  /* full-bleed robuste, même dans un parent centré ou en grid */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
@@ -412,33 +375,33 @@ body{
 .section-natural__stage{
   position: relative;
   width: min(1040px, 92vw);
-  margin: -110px auto 0;      /* ≈ moitié de la hauteur de la bande (220/2) */
-  z-index: 1;                 /* au-dessus du jaune */
+  margin: -110px auto 0;      /* chevauchement visuel vers le haut */
+  z-index: 1;                  /* au-dessus du jaune */
 }
 
-/* 4) Images et titre (identiques à avant) */
+/* 4) Images et titre */
 .section-natural__img-large{
-   width: 1000px;      /* largeur portrait */
-  height: 1080px;     /* grande hauteur */
-  object-fit: cover; /* conserve les proportions sans déformer, rogne si besoin */
+  width: 1000px;
+  height: 1080px;
+  object-fit: cover;
   display: block;
-  margin: 0 auto;    /* centré horizontalement */
+  margin: 0 auto;
   box-shadow: var(--shadow);
 
-    /* Déplacements */
-  position: relative; /* permet d'utiliser top / left */
-  top: -280px;         /* vers le haut (-) ou vers le bas (+) */
-  left: -180px;         /* vers la droite (+) ou vers la gauche (-) */
+  position: relative;
+  top: -280px;     /* ajustable selon ton design */
+  left: -180px;
 }
-.section-natural__img-small {
-  position: absolute;     /* indépendante du texte et de la grande image */
-  right: 30px;             /* distance depuis la droite */
-  bottom: -40px;           /* distance depuis le bas */
-  width: 600px;            /* largeur */
-  height: 650px;           /* hauteur */
-  top: 300px;         /* vers le haut (-) ou vers le bas (+) */
-  left: 500px;         /* vers la droite (+) ou vers la gauche (-) */
-  object-fit: cover;         /* remplit le bloc sans déformer */
+
+.section-natural__img-small{
+  position: absolute;    /* indépendante du texte et de la grande image */
+  right: 30px;
+  bottom: -40px;
+  width: 600px;
+  height: 650px;
+  top: 300px;
+  left: 500px;
+  object-fit: cover;
   object-position: 85% 40%;
   box-shadow: var(--shadow);
 }
@@ -463,35 +426,46 @@ body{
 /* Premier mot : "Natural" */
 .section-natural__title span:first-child {
   position: relative;
-  left: -350px;      /* décalage horizontal */
-  top: -50px;       /* décalage vertical */
+  left: -350px;
+  top: -50px;
   color: #5b1d13;
 }
-
 /* Deuxième mot : "Cosmetics" */
 .section-natural__title span:last-child {
   position: relative;
-  left: -220px;   /* + vers la droite / - vers la gauche */
-  top: -50px;   /* + vers le bas / - vers le haut */
+  left: -220px;
+  top: -50px;
   color: #a0522d;
 }
 
-
+/* 5) Contenu texte (lorem + bouton) */
 .section-natural__content{
   width: min(680px, 88vw);
   margin: 48px auto 0;
   text-align: center;
 }
+
+/* Déplacement du texte via variables CSS UNIQUEMENT */
 .section-natural__text{
   color:#6c4b36;
-  margin:0 0 18px;
   line-height:1.55;
-  position: relative;   /* permet d'utiliser top / left */
-  top: -100px;               /* vers le haut (-) ou vers le bas (+) */
-  left: -350px;              /* vers la gauche (-) ou vers la droite (+) */
-  margin-bottom: 18px;  /* espace sous le texte pour ne pas coller au bouton */
+  
+  max-width: 320px;   /* largeur maximale du paragraphe */
+  margin: 0 auto 18px; /* centre horizontalement */
+  text-align: justify; /* (optionnel) donne une forme plus "bloc" */
+
+  /* Offsets par défaut (desktop) */
+  --text-offset-x: -380px;   /* + = droite, - = gauche */
+  --text-offset-y: -130px;  /* + = bas, - = haut */
+
+  position: relative;
+  left: var(--text-offset-x);
+  top:  var(--text-offset-y);
+
+  margin-bottom: 18px;     /* espace sous le texte pour ne pas coller au bouton */
 }
-.section-natural__btn{
+
+.section-natural__btn {
   display:inline-block;
   background:#d67a3b;
   color:#fff;
@@ -500,51 +474,191 @@ body{
   padding:10px 18px;
   border-radius:6px;
   box-shadow: 0 10px 24px rgba(214,122,59,.25);
+
+  position: relative;
+  --btn-offset-x: 280px; /* + = droite, - = gauche */
+  --btn-offset-y: -220px; /* + = bas, - = haut */
+  left: var(--btn-offset-x);
+  top: var(--btn-offset-y);
 }
 
 /* =======================
-   Responsive adjustments
+   RESPONSIVE (layout global)
+   ======================= */
+@media (max-width:1100px){
+  .hero{ grid-template-columns:1.2fr 1fr; }
+  .promo__img{ height:220px; }
+}
+@media (max-width:920px){
+  .hero{ grid-template-columns:1fr; }
+  .hero__right{ order:2; }
+  .hero__bottom{ height:360px; }
+  .subline{ left:36px; top:220px; }
+  .lead{ left:36px; right:22px; top:252px; }
+  .socials{ right:16px; }
+}
+@media (max-width:640px){
+  .kicker{ left:18px; top:-10px; }
+  .headline{ left:18px; top:118px; }
+  .cta{ left:18px; top:230px; }
+  .subline{ left:18px; }
+  .lead{ left:18px; right:18px; }
+}
+
+/* =======================
+   RESPONSIVE (section natural)
    ======================= */
 @media (max-width: 980px){
   .section-natural__band{ height: 190px; }
-  .section-natural__stage{ margin-top: -95px; }   /* ~ moitié de 190 */
-  .section-natural__title{ bottom: 72px; left: 5vw; }
-  .section-natural__img-small{ right: 4vw; bottom: -30px; }
-}
-@media (max-width: 640px){
-  .section-natural__band{ height: 160px; }
-  .section-natural__stage{ margin-top: -80px; }   /* ~ moitié de 160 */
-  .section-natural__title{ bottom: 56px; left: 4vw; }
-  .section-natural__img-small{ right: 3vw; bottom: -24px; }
-}
+  .section-natural__stage{ margin-top: -95px; } /* ≈ moitié de 190 */
 
-/* === Déplacement indépendant du texte lorem ipsum (responsive) === */
-.section-natural__text {
-  /* Offsets par défaut (desktop) */
-  --text-offset-x: 16px;   /* + = droite, - = gauche */
-  --text-offset-y: -12px;  /* + = bas, - = haut */
-
-  position: relative;      /* permet top/left relatifs à la position initiale */
-  left: var(--text-offset-x);
-  top:  var(--text-offset-y);
-
-  margin-bottom: 18px;     /* garde l’espace avec le bouton */
-}
-
-/* Tablet (≤ 980px) */
-@media (max-width: 980px) {
-  .section-natural__text {
+  /* Ajuste les offsets du texte (tablette) */
+  .section-natural__text{
     --text-offset-x: 10px;
     --text-offset-y: -8px;
   }
+
+  /* Petite image : s’adapte */
+  .section-natural__img-small{
+    width: 300px;
+    height: auto;
+    top: 0;
+    left: 0;
+    margin: 20px auto 0;
+    position: relative; /* repasse relative pour la pile mobile */
+  }
+
+  .section-natural__title{ bottom: 72px; left: 5vw; }
 }
 
-/* Mobile (≤ 640px) */
-@media (max-width: 640px) {
-  .section-natural__text {
+@media (max-width: 640px){
+  .section-natural__band{ height: 160px; }
+  .section-natural__stage{ margin-top: -80px; } /* ≈ moitié de 160 */
+
+  /* Offsets mobiles pour le texte */
+  .section-natural__text{
     --text-offset-x: 6px;
     --text-offset-y: -4px;
   }
+
+  .section-natural__img-small{ width: 220px; height: auto; }
+  .section-natural__title{ bottom: 56px; left: 4vw; }
+}
+
+/* =========================
+   SECTION — Featured (bloc marron) — FULL-BLEED
+   ========================= */
+.section-featured{
+  position: relative;
+  background: #8a3b1f;                             /* marron */
+  padding: clamp(28px, 5vw, 48px) 0;
+  color: #fff;
+
+  /* ⬇️ même technique que le bloc jaune */
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  z-index: 0;
+}
+
+.hero > .section-featured {
+  grid-column: 1 / -1;   /* force la section à couvrir toute la grille */
+  width: 100%;
+  padding: 50px 0;  /* 100px en haut et en bas */
+  position: relative;
+  top: -190px; /* décalage vers le haut */
+}
+
+.section-featured__inner{
+  /* on recentre le contenu à l’intérieur du fond full-bleed */
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(20px, 4vw, 36px);
+  align-items: start;
+}
+
+/* Images */
+.featured__figure {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.featured__figure img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 36vw, 360px);
+  object-fit: cover;
+  object-position: center;
+}
+.featured__figure--left { grid-column: 1 / 2; grid-row: 1 / 3; }   /* grande image sur 2 lignes */
+
+.featured__figure--left {
+  position: relative;
+  top: -80px;     /* monte l’image de 40px */
+  left: -250px;     /* décale vers la droite de 30px */
+}
+
+.featured__figure--left img {
+  width: 400px;   /* largeur fixe en px */
+  height: 800px;  /* hauteur fixe en px */
+  object-fit: cover; 
+  object-position: center; /* ajuste le cadrage si besoin */
+}
+
+
+.featured__figure--right { grid-column: 2 / 3; grid-row: 2 / 3; }  /* petite image en bas à droite */
+
+/* Texte + bouton (en haut à droite) */
+.featured__content {
+  grid-column: 2 / 3; grid-row: 1 / 2;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.featured__title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #ffd8bf;                   /* contraste doux */
+  font-size: clamp(18px, 2.2vw, 24px);
+}
+.featured__lead {
+  margin: 0;
+  color: #ffece2;                   /* lisible sur fond marron */
+  line-height: 1.55;
+  max-width: 38ch;                  /* évite les lignes trop longues */
+}
+.featured__btn {
+  justify-self: start;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  background: #d67a3b;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .15s ease, opacity .15s ease, background .2s ease;
+}
+.featured__btn:hover {
+  transform: translateY(-1px);
+  opacity: .95;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .section-featured__inner {
+    grid-template-columns: 1fr;     /* pile verticalement */
+  }
+  .featured__figure--left { grid-row:auto; }
+  .featured__content { order: 2; }
+  .featured__figure--right { order: 3; height: auto; }
+  .featured__figure img { height: clamp(220px, 42vw, 340px); }
 }
 
 

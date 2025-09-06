@@ -1,0 +1,401 @@
+/* =====================================================================
+ * Boukla — shop.css (styles dédiés à la page shop.html)
+ * Cohérent avec la home : Playfair Display + Inter, accents jaune doré.
+ * N'impacte que les composants présents sur shop.html.
+ * ===================================================================== */
+
+/* ---------- Palette & tokens ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #161616;
+  --muted: #6f6f6f;
+  --border: #e8e6ee;
+  --accent: #F2C94C;        /* jaune doré (cohérent avec la home) */
+  --accent-ink: #1a1a1a;
+  --card: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --radius: 16px;
+}
+
+/* ---------- Layout util ---------- */
+.container {
+  max-width: 1200px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Fil d'Ariane (garde ta position, cliquable) ---------- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 20px auto 8px;
+  margin-left: 820px;   /* ← ta valeur conservée */
+  position: relative;
+  top: -130px;            /* ← ta valeur conservée */
+  z-index: 4;           /* au-dessus de tout décor de fond */
+}
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+.breadcrumb span {
+  opacity: .6;
+}
+
+/* ---------- Hero (fin) ---------- */
+.hero--thin {
+  padding: clamp(20px, 6vw, 56px) 0 8px;
+  text-align: center;
+}
+.h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: .2px;
+  color: #f2e6d8;
+  margin: 0;
+  margin-left: -295px;
+  margin-top: 0;          /* reset pour éviter le collapse */
+  position: relative;
+  top: -120px;
+}
+.muted {
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* Descendre le logo sans impacter la mise en page */
+.header .logo{
+  position: relative;
+  top: 22px;
+}
+@media (max-width: 600px){
+  .header .logo{ top: 6px; }
+}
+
+/* ---------- Barre outils : filtres & tri ---------- */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Filtres = radio pills */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 12px 14px;
+  flex-wrap: wrap;
+}
+.filters fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-inline-size: 0;
+}
+.filters label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.filters label:hover {
+  border-color: color-mix(in oklab, var(--border) 70%, var(--text));
+  box-shadow: 0 4px 10px rgba(0,0,0,.04);
+}
+.filters input[type="radio"] {
+  appearance: none;
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--muted);
+  display: inline-block;
+  position: relative;
+}
+.filters input[type="radio"]:checked {
+  border-color: var(--accent);
+}
+.filters input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+/* Tri (select) */
+.sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.sort > span {
+  color: var(--muted);
+}
+#sort {
+  appearance: none;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  line-height: 1.1;
+  cursor: pointer;
+  min-width: 180px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text) 50%),
+                    linear-gradient(135deg, var(--text) 50%, transparent 50%),
+                    linear-gradient(to right, transparent, transparent);
+  background-position: calc(100% - 18px) calc(1em + 2px),
+                       calc(100% - 13px) calc(1em + 2px),
+                       100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+#sort:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Grille produits ---------- */
+.product-grid {
+  --min: 240px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  margin: 24px 0 72px;
+}
+
+/* Carte produit */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,.10);
+}
+.card:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Média */
+.card__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: #f7f7f8;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+/* Badge "New" si data-new="1" */
+.card[data-new="1"] .card__media::after {
+  content: "New";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+}
+
+/* Corps */
+.card__body {
+  padding: 14px 16px 18px;
+}
+.card__title {
+  margin: 0 0 6px;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.card__title a {
+  color: var(--text);
+  text-decoration: none;
+}
+.card__title a:hover {
+  text-decoration: underline;
+}
+.card__price {
+  margin: 2px 0 6px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: var(--text);
+}
+.card__meta {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Bouton fantôme (cohérent avec la home) */
+.btn.btn--ghost,
+.btn--ghost {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--text);
+  background: transparent;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: .2px;
+  transition: background .2s, color .2s, transform .05s;
+}
+.btn.btn--ghost:hover,
+.btn--ghost:hover {
+  background: var(--text);
+  color: #fff;
+}
+.btn.btn--ghost:active,
+.btn--ghost:active {
+  transform: translateY(1px);
+}
+.btn.btn--ghost:focus-visible,
+.btn--ghost:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Footer min ---------- */
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 14px;
+  background: var(--bg);
+}
+
+/* ---------- Responsif ---------- */
+@media (max-width: 900px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .sort {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .filters label {
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+  #sort {
+    min-width: 0;
+    width: 100%;
+  }
+  .card__title { font-size: 18px; }
+}
+
+/* ---------- Accessibilité & préférences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =====================================================================
+   RECADRAGE PUR CSS (sans modifier le HTML)
+   - object-position: x% y% pour déplacer le focus
+   - aspect-ratio pour changer le cadre
+   ===================================================================== */
+.card__media[href*="sku=aurora-ring"] { aspect-ratio: 4 / 5; }
+.card__media[href*="sku=aurora-ring"] img { object-position: 10% 10% !important; }
+.card__media[href*="sku=lyra-necklace"] { aspect-ratio: 4 / 5; }
+.card__media[href*="sku=lyra-necklace"] img { object-position: 60% 30% !important; }
+.card__media[href*="sku=eden-bracelet"] { aspect-ratio: 4 / 5; }
+.card__media[href*="sku=eden-bracelet"] img { object-position: 60% 30% !important; }
+.card__media[href*="sku=nova-earrings"] { aspect-ratio: 4 / 5; }
+.card__media[href*="sku=nova-earrings"] img { object-position: 50% 25% !important; }
+
+/* ----- Panneau coloré derrière le contenu (ne couvre PAS le breadcrumb/H1) ----- */
+#collection{
+  position: relative;
+  z-index: 0;
+}
+#collection::before{
+  content:"";
+  position: absolute;
+  /* ancien: inset: -120px -24px -60px; puis 0 -24px -60px; */
+  inset: -120px -60px -60px;   /* ↑ top | ←→ left/right | ↓ bottom */
+  background: #f2ba52;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06) inset;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+/* S'assure que ces éléments sont au-dessus si besoin */
+.header,
+.hero--thin,
+.toolbar,
+.breadcrumb {
+  position: relative;
+  z-index: 4;
+}
+
+#collection{
+  position: relative;
+  z-index: 0;
+  margin-top: -110px; /* ← remonte tout le panneau + la grille */
+}
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Boukla — Shop</title>
+
+  <!-- Fonts (mêmes que la home) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Preload corrigé : on précharge le logo réellement utilisé -->
+  <link rel="preload" as="image" href="assets/images/logo-boukla-3.svg" type="image/svg+xml"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="boukla.css">
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <!-- ====== ENTÊTE ====== -->
+  <header class="header">
+    <a class="logo" href="index.html" aria-label="Boukla">
+      <img src="assets/images/logo-boukla-3.svg" alt="Boukla" height="32" width="120" decoding="async"/>
+    </a>
+  </header>
+
+  <!-- ====== BREADCRUMB ====== -->
+  <div class="breadcrumb container">
+    <a href="index.html">Home</a> <span aria-hidden="true">/</span> <strong>Shop</strong>
+  </div>
+
+  <!-- ====== HERO COURT ====== -->
+  <section class="hero hero--thin container">
+    <h1 class="h1">New Arrivals</h1>
+  </section>
+
+  <!-- ====== GRILLE PRODUITS ====== -->
+  <main id="collection" class="container">
+    <ul id="grid" class="product-grid">
+      <li class="card" data-cat="rings" data-price="3490" data-new="1">
+        <a class="card__media" href="product.html?sku=aurora-ring">
+          <img src="assets/images/produit/boukla-1.png" alt="Crème hydratante" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.html?sku=aurora-ring">Crème hydratante</a></h3>
+          <p class="card__price">34,90 €</p>
+          <a class="btn btn--ghost" href="product.html?sku=aurora-ring">Voir le détail</a>
+        </div>
+      </li>
+
+      <li class="card" data-cat="necklaces" data-price="2490" data-new="1">
+        <a class="card__media" href="product.html?sku=lyra-necklace">
+          <img src="assets/images/produit/étiquette-boukla-3.jpg" alt="Masque hydratant" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.html?sku=lyra-necklace">Masque hydratant</a></h3>
+          <p class="card__price">24,90 €</p>
+          <a class="btn btn--ghost" href="product.html?sku=lyra-necklace">Voir le détail</a>
+        </div>
+      </li>
+
+      <li class="card" data-cat="bracelets" data-price="1490" data-new="0">
+        <a class="card__media" href="product.html?sku=eden-bracelet">
+          <img src="assets/images/produit/étiquette-boukla-4.png" alt="Shampoing solide" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.html?sku=eden-bracelet">Shampoing solide</a></h3>
+          <p class="card__price">14,90 €</p>
+          <a class="btn btn--ghost" href="product.html?sku=eden-bracelet">Voir le détail</a>
+        </div>
+      </li>
+
+      <li class="card" data-cat="earrings" data-price="2990" data-new="1">
+        <a class="card__media" href="product.html?sku=nova-earrings">
+          <img src="assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.html?sku=nova-earrings">Huile de ricin</a></h3>
+          <p class="card__price">29,90 €</p>
+          <a class="btn btn--ghost" href="product.html?sku=nova-earrings">Voir le détail</a>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <!-- ====== PIED ====== -->
+  <footer class="footer">
+    <div class="container">
+      <small>© Boukla — All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- ====== JS tolérant (aucune erreur si filtres/tri absents) ====== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('grid');
+    if (!grid) return;
+
+    const filters = document.getElementById('filters');
+    const sort    = document.getElementById('sort');
+
+    // Pré-sélection ?cat=...
+    const params = new URLSearchParams(location.search);
+    const initialCat = (params.get('cat') || 'all').toLowerCase();
+    if (filters) {
+      const input = filters.querySelector(`input[name="cat"][value="${initialCat}"]`);
+      if (input) input.checked = true;
+    }
+
+    function applySort() {
+      if (!sort) return; // pas de tri -> ordre HTML
+      const mode = sort.value;
+      const items = [...grid.children].filter(li => li.style.display !== 'none');
+      let cmp = null;
+      if (mode === 'price-asc')  cmp = (a,b) => (+a.dataset.price) - (+b.dataset.price);
+      if (mode === 'price-desc') cmp = (a,b) => (+b.dataset.price) - (+a.dataset.price);
+      if (mode === 'new')        cmp = (a,b) => (+b.dataset.new)   - (+a.dataset.new);
+      if (cmp) items.sort(cmp).forEach(li => grid.appendChild(li));
+    }
+
+    function applyFilters() {
+      const cat = filters?.querySelector('input[name="cat"]:checked')?.value || 'all';
+      [...grid.children].forEach(li => {
+        const ok = (cat === 'all') || (li.dataset.cat === cat);
+        li.style.display = ok ? '' : 'none';
+      });
+      applySort();
+    }
+
+    filters?.addEventListener('change', applyFilters);
+    sort?.addEventListener('change', applySort);
+
+    applyFilters();
+  });
+  </script>
+</body>
+</html>
+

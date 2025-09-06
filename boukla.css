@@ -4,12 +4,13 @@
 
 /* ====== VARIABLES ====== */
 :root{
-  --orange-bg: #d88c4f;
+  --orange-bg: #d67a3b;
   --dark-brown:#8e3a16;
   --mustard:   #f0ae3d;
   --white:     #ffffff;
   --ink:       #1a0903;
   --muted:     #6e5a4f;
+  
 
   --radius: 12px;
   --shadow: 0 18px 40px rgba(0,0,0,.12);
@@ -282,6 +283,7 @@ body{
   display:inline-block;
   text-decoration:none;
   font-weight:700;
+  
   background:#d67a3b;
   color:#fff;
   padding:12px 18px;
@@ -443,6 +445,11 @@ body{
   width: min(680px, 88vw);
   margin: 48px auto 0;
   text-align: center;
+  position: relative;
+  z-index: 2;
+  /* on redonne les offsets par défaut du bouton */
+  --btn-offset-x: 280px;
+  --btn-offset-y: -220px;
 }
 
 /* Déplacement du texte via variables CSS UNIQUEMENT */
@@ -465,22 +472,46 @@ body{
   margin-bottom: 18px;     /* espace sous le texte pour ne pas coller au bouton */
 }
 
-.section-natural__btn {
+/* Bouton "Shop now" — même style que les autres, sans contour noir */
+.section-natural__btn,
+.section-natural__btn:link,
+.section-natural__btn:visited{
   display:inline-block;
-  background:#d67a3b;
-  color:#fff;
   text-decoration:none;
   font-weight:700;
-  padding:10px 18px;
   border-radius:6px;
-  box-shadow: 0 10px 24px rgba(214,122,59,.25);
+  border:0;                   /* supprime le contour noir des <button> */
+  appearance:none;
+  -webkit-appearance:none;
+  background:#f2ba52;         /* même couleur que tes autres boutons */
+  color:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.25);
+  cursor:pointer;             /* curseur "main" */
+  transition: background .2s ease, transform .15s ease, opacity .15s ease;
 
   position: relative;
-  --btn-offset-x: 280px; /* + = droite, - = gauche */
-  --btn-offset-y: -220px; /* + = bas, - = haut */
-  left: var(--btn-offset-x);
-  top: var(--btn-offset-y);
+  left: var(--btn-offset-x, 280px);  /* fallback intégré */
+  top:  var(--btn-offset-y, -220px); /* fallback intégré */
+  z-index: 3;                 /* au-dessus des images */
+
+  padding: 12px 18px;   /* était 10px 18px → bouton plus grand */
+  font-size: 18px;      /* texte plus grand (ex: 16–18px selon ton goût) */
+  line-height: 1.1;     /* garde une bonne compacité verticale */
+  white-space: nowrap;  /* évite le retour à la ligne si "Shop now" */
 }
+
+.section-natural__btn:hover{
+  background:#f2ba52;         /* hover simple */
+  transform: translateY(-1px);
+  opacity:.95;
+}
+
+.section-natural__btn:active{ transform:none; opacity:1; }
+.section-natural__btn:focus-visible{ outline:3px solid rgba(255,255,255,.9); outline-offset:2px; }
+
+.section-natural__img-small{ z-index:1; }
+
+
 
 /* =======================
    RESPONSIVE (layout global)
@@ -564,7 +595,7 @@ body{
 .hero > .section-featured {
   grid-column: 1 / -1;   /* force la section à couvrir toute la grille */
   width: 100%;
-  padding: 50px 0;  /* 100px en haut et en bas */
+  padding: 50px 0;  /* espace haut/bas */
   position: relative;
   top: -190px; /* décalage vers le haut */
 }
@@ -575,7 +606,7 @@ body{
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(20px, 4vw, 36px);
   align-items: start;
 }
@@ -594,57 +625,93 @@ body{
   object-fit: cover;
   object-position: center;
 }
-.featured__figure--left { grid-column: 1 / 2; grid-row: 1 / 3; }   /* grande image sur 2 lignes */
+
+.featured__figure--left { 
+  grid-column: 1 / 2; 
+  grid-row: 1 / 3; 
+}   /* grande image sur 2 lignes */
 
 .featured__figure--left {
   position: relative;
-  top: -80px;     /* monte l’image de 40px */
-  left: -250px;     /* décale vers la droite de 30px */
+  top: 0px;                /* effet de remontée */
+  left: -50px;
+  height: clamp(700px, 82vh, 1100px); /* ← allonge le bloc ici */
 }
 
 .featured__figure--left img {
-  width: 400px;   /* largeur fixe en px */
-  height: 800px;  /* hauteur fixe en px */
+  width: 100%;
+  height: 100%;
   object-fit: cover; 
-  object-position: center; /* ajuste le cadrage si besoin */
+  object-position: 50% 50%; /* centre le cadrage (ajuste si besoin) */
 }
 
-
-.featured__figure--right { grid-column: 2 / 3; grid-row: 2 / 3; }  /* petite image en bas à droite */
-
-/* Texte + bouton (en haut à droite) */
-.featured__content {
-  grid-column: 2 / 3; grid-row: 1 / 2;
-  display: grid;
-  gap: 14px;
-  align-content: start;
+/* même hauteur + même span que la gauche */
+.featured__figure--right{
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;                       /* span sur 2 lignes comme la gauche */
+  position: relative;
+  top: 350px;                /* effet de remontée */
+  left: 0px;
+  height: clamp(700px, 82vh, 1100px);
+  z-index: 1;      /* même hauteur que la gauche */
 }
+
+.featured__figure--right img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;               /* ajuste si besoin: 40%/60% */
+}
+
+/* ——— Overlay du bloc texte sur l'image de droite (desktop) ——— */
+.featured__content{
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;           /* même span que .featured__figure--right */
+  position: relative;
+  z-index: 2;                /* au-dessus de l'image */
+  align-self: start;         /* coin haut */
+  justify-self: start;       /* coin gauche */
+  margin: 24px 0 0 24px;
+  margin-top: 120px;
+  left: -20px;
+  gap: 24px;
+       /* décale à l’intérieur de l’image */
+  /* optionnel pour la lisibilité :
+  text-shadow: 0 2px 8px rgba(0,0,0,.25);
+  */
+}
+
 .featured__title {
   margin: 0;
   font-family: "Playfair Display", Georgia, serif;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #ffd8bf;                   /* contraste doux */
+  color: #d88c4f;                   /* contraste doux */
   font-size: clamp(18px, 2.2vw, 24px);
+  margin: 0 0 12px;
 }
+
 .featured__lead {
   margin: 0;
   color: #ffece2;                   /* lisible sur fond marron */
   line-height: 1.55;
   max-width: 38ch;                  /* évite les lignes trop longues */
 }
+
 .featured__btn {
   justify-self: start;
   display: inline-block;
   text-decoration: none;
   font-weight: 700;
-  background: #d67a3b;
-  color: #fff;
+  background: #ffece2;
+  color: #000;
   padding: 10px 18px;
   border-radius: 6px;
   box-shadow: 0 10px 24px rgba(0,0,0,.25);
   transition: transform .15s ease, opacity .15s ease, background .2s ease;
+  margin-top: 16px;
 }
+
 .featured__btn:hover {
   transform: translateY(-1px);
   opacity: .95;
@@ -656,13 +723,228 @@ body{
     grid-template-columns: 1fr;     /* pile verticalement */
   }
   .featured__figure--left { grid-row:auto; }
-  .featured__content { order: 2; }
   .featured__figure--right { order: 3; height: auto; }
   .featured__figure img { height: clamp(220px, 42vw, 340px); }
 }
 
+@media (max-width:980px) {
+  .featured__figure--left{ left: 0; }
+}
+
+@media (max-width: 980px){
+  .featured__content{
+    grid-column: auto;
+    grid-row: auto;
+    order: 2;
+    margin: 16px 0 0;
+  }
+  .featured__figure--right{ order: 3; }
+}
+
+/* ===== Bloc sous la section marron (même disposition que le bloc marron) ===== */
+.section-after-featured{
+  background:#fff;
+  padding: 12px 0 80px;
+}
+.section-after-featured__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  position: relative;
+}
+
+.after-card{
+  width: clamp(320px, 40vw, 560px);
+  
+
+  /* placement simple (déplace le bloc) */
+  margin-left: 400px;   /* + = à droite | - = à gauche */
+  margin-top:  -170px;  /* - = plus haut | + = plus bas */
+
+  /* >>> disposition identique au bloc marron */
+  display: grid;
+  gap: 24px;               /* mêmes espacements titre/texte/bouton */
+  align-content: start;
+  text-align: left;        /* tout aligné à gauche */
+}
+
+.after-card__title{
+  margin: 0;               /* comme .featured__title */
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: #5b1d13;          /* adapte si tu veux */
+}
+.after-card__text{
+  margin: 0;               /* comme .featured__lead */
+  color: #6c4b36;
+  line-height: 1.55;
+  max-width: 38ch;
+  margin-top:-13px;
+}
+
+/* le bouton du bloc utilise .featured__btn → récupère tes styles unifiés */
+.after-card .featured__btn{
+  justify-self: start;     /* bouton aligné à gauche comme dans le bloc marron */
+  margin-left: 0px;
+  color: #5b1d13;
+  margin-top: -8px;
+             /* l’espacement est géré par gap */
+}
+
+/* Dernier bouton (dans .section-after-featured) */
+.section-after-featured .featured__btn{
+  background: var(--orange-bg) !important; /* ex : #8e3a16 */
+  color: #fff !important;
+}
+.section-after-featured .featured__btn:hover{
+  background: #d67a3b !important;          /* teinte un peu plus sombre au hover */
+}
+
+/* Responsive : recentre le bloc sous 980px */
+@media (max-width:980px){
+  .after-card{ margin: 0 auto; gap: 20px; }
+}
+
+/* --- Nouvelle section : titre uniquement --- */
+
+/* centre horizontalement et descend le bloc */
+.promo-social__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;        /* centre sur la page */
+  padding-top: 0px;    /* ↓ fais descendre (essaie 120–220px) */
+  text-align: center;    /* au cas où, garde le H1 centré */
+  
+}
+
+.section-promo-social{ 
+  padding: 120px 0 40px;            /* un peu d’air autour (optionnel) */
+  background: #fff;
+  margin-top: -70px;
+  grid-column: 1 / -1;   /* occupe toute la rangée de la grille */
+  justify-self: center;
+          
+}
+
+.section-promo-social .promo-social__title{
+  margin: 0 0 26px;           /* espace sous le titre */
+  text-align: center;         /* centré comme sur ta capture */
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;     /* espacement entre lettres */
+  color: var(--dark-brown);   /* #8e3a16 — change si besoin */
+  font-size: clamp(22px, 4vw, 40px);
+  
+}
+
+/* optionnel : resserrer un peu l’espacement en mobile */
+@media (max-width: 640px){
+  .section-promo-social .promo-social__title{
+    letter-spacing: 0.25em;
+  }
+}
+
+/* Nouvelle section — taille du bloc image */
+.section-promo-social .promo-social__figure{
+  width: 1080px;      /* ← largeur (horizontal). Ex: 560, 680, 720px */
+  margin: 0 auto;    /* centre le bloc */
+  margin-top: 40px;
+}
+
+.section-promo-social .promo-social__figure img{
+  width: 100%;
+  height: 420px;     /* ← hauteur (vertical). Ex: 280, 320, 420px */
+  object-fit: cover; /* recadre proprement */
+  object-position: 50% 0%;
+
+}
+
+/* Option responsive simple (évite de dépasser l’écran) */
+@media (max-width: 700px){
+  .section-promo-social .promo-social__figure{ width: 92vw; }
+  .section-promo-social .promo-social__figure img{ height: 52vw; }
+}
 
 
+/* === Icônes bas de page : même rendu que celles du haut === */
+.section-promo-social .promo-social__links{
+  display:flex;
+  justify-content:center;
+  gap: 28px;            /* écart entre icônes */
+  margin-top: 18px;
+}
 
+.section-promo-social .social-dot{
+  /* on NE recrée pas de rond: il est déjà dans le SVG */
+  background: transparent !important;
+  border-radius: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0;
+  box-shadow: none !important;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  cursor:pointer;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.section-promo-social .social-dot:hover{ transform: translateY(-1px); opacity:.95; }
+
+/* Taille des fichiers SVG chargés en <img> */
+.section-promo-social .social-dot img{
+  --icon: 48px;       /* ajuste ici : 44px, 52px… */
+  width: var(--icon);
+  height: var(--icon);
+  display:block;
+  filter: none;       /* surtout pas d’invert */
+}
+
+/* Taille des icônes dans les ronds du bas */
+.section-promo-social .social-dot img{
+  width: 100px;   /* ← essaie 48px, 56px, 64px, 72px */
+  height: 100px;
+}
+
+/* le strip appartient à la grille du hero, il prend toute la rangée */
+.hero > .motif-strip{ grid-column: 1 / -1; }
+
+/* bande transparente bord-à-bord avec motif répété */
+.motif-strip{
+  /* réglages simples */
+  --tile: 550px;   /* taille d’UN motif → 80/120/160px… */
+  --strip-h: 600px;/* hauteur de la bande transparente */
+  --overlap: 400px; /* chevauche l’orange (0 = pas de chevauchement) */
+  --shift-x: 0px;  /* décale le motif à gauche/droite si besoin */
+
+  position: relative;
+  height: var(--strip-h);
+  pointer-events: none;
+  z-index: 3; /* au-dessus de la bande orange */
+
+  /* full-bleed */
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: -290px;;
+
+  /* motif répété horizontalement */
+  background-image: url("assets/icons/motif-1.svg");
+  background-repeat: repeat-x;                 /* répète sur X */
+  background-size: var(--tile) auto;           /* taille du tile */
+  background-position: calc(50% + var(--shift-x)) center;
+
+  /* descend dans la section orange */
+  margin-bottom: calc(-1 * var(--overlap));
+}
+
+/* la bande orange reste derrière */
+.section-natural__band{ position: relative; z-index: 1; }
+
+/* responsive (exemple) */
+@media (max-width: 700px){
+  .motif-strip{ --tile: 90px; --strip-h: 160px; --overlap: 30px; }
+}
 
 

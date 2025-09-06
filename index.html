@@ -126,17 +126,29 @@
     </a>
     <!-- Colonne d’icônes à droite -->
     <div class="socials">
-     <a aria-label="Instagram" class="social" href="#">
-      <img alt="Instagram" src="assets/icons/instagram.svg"/>
-     </a>
-     <a aria-label="Pinterest" class="social" href="#">
-      <img alt="Pinterest" src="assets/icons/pinterest.svg"/>
-     </a>
-     <a aria-label="X" class="social" href="#">
-      <img alt="X" src="assets/icons/x.svg"/>
-     </a>
-    </div>
+  <a class="social" href="https://instagram.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Instagram" title="Instagram">
+    <img src="assets/icons/instagram.svg" alt="Instagram">
+  </a>
+
+  <a class="social" href="https://pinterest.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Pinterest" title="Pinterest">
+    <img src="assets/icons/pinterest.svg" alt="Pinterest">
+  </a>
+
+  <a class="social" href="https://x.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="X (Twitter)" title="X (Twitter)">
+    <img src="assets/icons/x.svg" alt="X (Twitter)">
+  </a>
+</div>
    </section>
+
+   <!-- Bande motif répétée, full-width -->
+<div class="motif-strip" aria-hidden="true"></div>
+
 
    <!-- ===== Suite du design : section "natural / cosmetics" ===== -->
 <section class="section-natural">
@@ -177,7 +189,7 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
       incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
     </p>
-    <a class="section-natural__btn" href="#">SHOP NOW</a>
+    <button type="button" class="section-natural__btn">Shop now</button>
   </div>
 </section>
 
@@ -189,7 +201,7 @@
 
     <!-- Colonne gauche : grande image produit -->
     <figure class="featured__figure featured__figure--left">
-      <img src="assets/img/huile-ricin.jpg" alt="Huile de ricin Boukla - flacon et étui" />
+      <img src="assets/images/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin Boukla - flacon et étui" />
     </figure>
 
     <!-- Colonne droite : titre + texte + bouton -->
@@ -204,11 +216,60 @@
 
     <!-- Colonne droite (bas) : seconde image produit -->
     <figure class="featured__figure featured__figure--right">
-      <img src="assets/img/masque-nourrissant.jpg" alt="Masque nourrissant Boukla - pot et étui" />
+      <img src="assets/images/produit-boukla-1.png" alt="Masque nourrissant Boukla - pot et étui" />
     </figure>
 
   </div>
 </section>
+
+<section class="section-after-featured" aria-labelledby="after-title">
+  <div class="section-after-featured__inner">
+    <article class="after-card">
+      <h2 id="after-title" class="after-card__title">HUILE DE RICIN</h2>
+      <p class="after-card__text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua.
+      </p>
+      <a href="#shop" class="featured__btn">Shop now</a>
+    </article>
+  </div>
+</section>
+
+<section class="section-promo-social" aria-labelledby="promo-social-title">
+  <div class="promo-social__inner">
+    <h1 id="promo-social-title" class="promo-social__title">
+      50% OFF ONLY ONLINE 24H
+    </h1>
+
+    <figure class="promo-social__figure">
+      <img src="assets/images/My project-1-24.jpg" alt="Amies souriantes — promo Boukla" />
+    </figure>
+
+  <!-- Icônes en bas (section promo-social) -->
+<div class="promo-social__links">
+  <a class="social-dot" href="https://instagram.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Instagram" title="Instagram">
+    <img src="assets/icons/instagram.svg" alt="Instagram">
+  </a>
+
+  <a class="social-dot" href="https://pinterest.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="Pinterest" title="Pinterest">
+    <img src="assets/icons/pinterest.svg" alt="Pinterest">
+  </a>
+
+  <a class="social-dot" href="https://x.com/VOTRE_PROFIL"
+     target="_blank" rel="noopener noreferrer"
+     aria-label="X (Twitter)" title="X (Twitter)">
+    <img src="assets/icons/x.svg" alt="X (Twitter)">
+  </a>
+</div>
+
+
+  </div>
+</section>
+
 
   </main>
   <!-- Script carrousel -->

@@ -1,23 +1,34 @@
-/* =========================
-   BOUKLA — CSS NETTOYÉ
-   ========================= */
+/* ======================================================================
+   BOUKLA — home.css (nettoyé & commenté, sans casser le design actuel)
+   Structure :
+   1) Variables & Reset
+   2) Header & Navigation
+   3) Hero (grille principale) + Promo card
+   4) Hero bottom (bandeaux + titres/texte/CTA) & Réseaux sociaux
+   5) Section Natural / Cosmetics (bande orange + scène + texte + bouton)
+   6) Section Featured (bloc marron) & Section After-Featured
+   7) Section Promo Social (titre + visuel + icônes) & Motif strip
+   8) Responsive
+   ====================================================================== */
 
-/* ====== VARIABLES ====== */
+/* ------------------------------------------------------------------ */
+/* 1) VARIABLES & RESET                                               */
+/* ------------------------------------------------------------------ */
 :root{
+  /* Couleurs principales */
   --orange-bg: #d67a3b;
   --dark-brown:#8e3a16;
   --mustard:   #f0ae3d;
   --white:     #ffffff;
   --ink:       #1a0903;
   --muted:     #6e5a4f;
-  
 
+  /* Tokens UI */
   --radius: 12px;
   --shadow: 0 18px 40px rgba(0,0,0,.12);
   --header-h: 60px;
 }
 
-/* ====== RESET ====== */
 *{ box-sizing:border-box }
 html,body{ height:100% }
 body{
@@ -27,7 +38,9 @@ body{
   background:var(--white);
 }
 
-/* ====== HEADER ====== */
+/* ------------------------------------------------------------------ */
+/* 2) HEADER & NAVIGATION                                             */
+/* ------------------------------------------------------------------ */
 .header{
   position: absolute;
   inset: 0 0 auto 0;
@@ -49,7 +62,7 @@ body{
 .logo img,
 .logo svg{
   display: block;
-  height: 120px; /* ajuste la hauteur d’affichage du logo si besoin */
+  height: 120px;        /* ajuste la hauteur d’affichage du logo si besoin */
   width: auto;
 }
 
@@ -71,6 +84,7 @@ body{
   opacity:1;
 }
 
+/* Actions header (login, icônes, hamburger) */
 .header__actions{
   display:flex;
   align-items:center;
@@ -109,7 +123,26 @@ body{
   margin:6px 0;
 }
 
-/* ====== HERO ====== */
+/* Patch : icônes header en noir (si besoin de contraste sur fond clair) */
+.header .header__actions { color: #000 !important; }
+.header .header__actions .login { color: #000 !important; }
+.header .header__actions .icon-btn {
+  color: #000 !important;
+  border-color: rgba(0,0,0,.18) !important;
+  background: rgba(0,0,0,.04) !important;
+}
+.header .header__actions .icon-btn svg { stroke: currentColor !important; }
+.header .header__actions .icon-btn:hover,
+.header .header__actions .icon-btn:focus {
+  color: #000 !important;
+  border-color: rgba(0,0,0,.22) !important;
+  background: rgba(0,0,0,.06) !important;
+}
+.header .header__actions .hamburger span { background: #000 !important; }
+
+/* ------------------------------------------------------------------ */
+/* 3) HERO (GRILLE PRINCIPALE) + PROMO CARD                           */
+/* ------------------------------------------------------------------ */
 .hero{
   width:100%;
   display:grid;
@@ -136,6 +169,7 @@ body{
   padding:30px 22px;
 }
 
+/* Promo card */
 .promo{
   width:min(420px,100%);
   background:#fff;
@@ -168,13 +202,13 @@ body{
   cursor:pointer;
   font-size:42px;
   line-height:1;
-  color:rgba(255,255,255,9);
+  color:rgba(255,255,255,.9);          /* fix: alpha 0..1 */
   padding:10px 6px;
   border-radius:6px;
   transition: background .3s ease, color .3s ease, transform .2s ease;
 }
 .promo__next:hover{
-  background:rgba(255,255,255,15);
+  background:rgba(255,255,255,.15);    /* fix: alpha 0..1 */
   color:#fff;
   transform:scale(1.1);
 }
@@ -206,12 +240,16 @@ body{
   color:#8f2d10;
 }
 
-/* ====== BANDEAU BAS ====== */
+/* ------------------------------------------------------------------ */
+/* 4) HERO BOTTOM & CONTENT (bandeaux + titres + textes + CTA)        */
+/* ------------------------------------------------------------------ */
 .hero__bottom{
   grid-column:1 / -1;
   position:relative;
   height:420px;
 }
+
+/* Bandeaux */
 .bottom__split{
   position:absolute;
   inset:0 auto 0 0;
@@ -229,7 +267,7 @@ body{
   background:var(--mustard);
 }
 
-/* Titres & textes dans le hero */
+/* Titres / textes positionnés */
 .kicker{
   position:absolute;
   left:320px;
@@ -276,6 +314,7 @@ body{
   line-height:1.5;
 }
 
+/* CTA principal */
 .cta{
   position:absolute;
   left:90px;
@@ -283,7 +322,6 @@ body{
   display:inline-block;
   text-decoration:none;
   font-weight:700;
-  
   background:#d67a3b;
   color:#fff;
   padding:12px 18px;
@@ -291,97 +329,68 @@ body{
   box-shadow:0 10px 24px rgba(214,122,59,.35);
 }
 
-/* ====== RÉSEAUX SOCIAUX – SVG UNIQUES ====== */
-/* Centrage vertical exact par rapport au bloc jaune (bottom:180px) */
+/* Réseaux sociaux (colonne d’icônes) */
 .socials{
   position:absolute;
   right:22px;
-  top: calc((100% - 180px) / 2);
+  top: calc((100% - 180px) / 2); /* centré verticalement par rapport au bloc jaune */
   transform: translateY(-50%);
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:0px; /* écart raisonnable par défaut */
+  gap:0; 
   z-index:2;
 }
-/* Pas de pastilles : on affiche UNIQUEMENT tes SVG */
 .social{
   display:block;
   margin:0;
   padding:0;
   line-height:0;
 }
-.social { margin-top: -10px; }      /* chevauchement vers le haut */
+.social { margin-top: -10px; }
 .social:first-child { margin-top: 0; }
-
-/* Taille des icônes (responsive) */
 .social img{
   display:block;
   width:80px;
   height:80px;
 }
 
-/* ===== Patch – Icônes header côté droit en noir ===== */
-.header .header__actions { color: #000 !important; }
-.header .header__actions .login { color: #000 !important; }
-.header .header__actions .icon-btn {
-  color: #000 !important;
-  border-color: rgba(0,0,0,.18) !important;
-  background: rgba(0,0,0,.04) !important;
-}
-.header .header__actions .icon-btn svg { stroke: currentColor !important; }
-.header .header__actions .icon-btn:hover,
-.header .header__actions .icon-btn:focus {
-  color: #000 !important;
-  border-color: rgba(0,0,0,.22) !important;
-  background: rgba(0,0,0,.06) !important;
-}
-.header .header__actions .hamburger span { background: #000 !important; }
-
-/* ==========================================================
-   SECTION: natural / cosmetics — full-bleed, sans casser le hero
-   ========================================================== */
-
-/* 1) La section elle-même */
+/* ------------------------------------------------------------------ */
+/* 5) SECTION NATURAL / COSMETICS                                     */
+/* ------------------------------------------------------------------ */
 .section-natural{
   position: relative;
   background: #fff;
-  padding: 0 0 70px;          /* espace sous la scène */
+  padding: 0 0 70px;         /* espace sous la scène */
   overflow: visible;
-  isolation: isolate;         /* z-index indépendant du hero */
+  isolation: isolate;        /* z-index indépendant du hero */
 }
-
-/* Si (et seulement si) la section est INSÉRÉE DANS la grille du hero,
-   on force l’élément à s’étendre sur TOUTES les colonnes de la grille.
-   (Si ta section est après </main>, cette règle est inoffensive.) */
+/* Si la section est dans .hero, elle s’étire sur toute la grille */
 .hero > .section-natural{
-  grid-column: 1 / -1;        /* s'étire sur toute la grille */
-  width: 100%;                /* prend la largeur du hero */
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
-/* 2) Bande jaune bord-à-bord (full-bleed) sans position:absolute */
+/* Bande orange full-bleed (dans le flux) */
 .section-natural__band{
-  position: relative;         /* reste dans le flux → n'interfère pas avec le hero */
-  height: 600px;              /* hauteur de la bande */
+  position: relative;
+  height: 600px;
   background: #d67a3b;
-
-  /* full-bleed robuste, même dans un parent centré ou en grid */
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-
   z-index: 0;
 }
 
-/* 3) La scène (images + titre) chevauche la bande jaune proprement */
+/* Scène au-dessus de la bande */
 .section-natural__stage{
   position: relative;
   width: min(1040px, 92vw);
-  margin: -110px auto 0;      /* chevauchement visuel vers le haut */
-  z-index: 1;                  /* au-dessus du jaune */
+  margin: -110px auto 0;     /* chevauchement visuel vers le haut */
+  z-index: 1;
 }
 
-/* 4) Images et titre */
+/* Grande image */
 .section-natural__img-large{
   width: 1000px;
   height: 1080px;
@@ -389,14 +398,14 @@ body{
   display: block;
   margin: 0 auto;
   box-shadow: var(--shadow);
-
   position: relative;
-  top: -280px;     /* ajustable selon ton design */
+  top: -280px;
   left: -180px;
 }
 
+/* Petite image */
 .section-natural__img-small{
-  position: absolute;    /* indépendante du texte et de la grande image */
+  position: absolute;
   right: 30px;
   bottom: -40px;
   width: 600px;
@@ -406,8 +415,10 @@ body{
   object-fit: cover;
   object-position: 85% 40%;
   box-shadow: var(--shadow);
+  z-index: 1;                /* consolidé ici (évite doublon plus bas) */
 }
 
+/* Titre sur la scène */
 .section-natural__title{
   position: absolute;
   left: clamp(18px, 8vw, 120px);
@@ -424,55 +435,33 @@ body{
   font-size: clamp(42px, 9vw, 110px);
 }
 .section-natural__title span + span{ margin-top: .05em; }
-
 /* Premier mot : "Natural" */
-.section-natural__title span:first-child {
-  position: relative;
-  left: -350px;
-  top: -50px;
-  color: #5b1d13;
-}
+.section-natural__title span:first-child { position: relative; left: -350px; top: -50px; color: #5b1d13; }
 /* Deuxième mot : "Cosmetics" */
-.section-natural__title span:last-child {
-  position: relative;
-  left: -220px;
-  top: -50px;
-  color: #a0522d;
-}
+.section-natural__title span:last-child  { position: relative; left: -220px; top: -50px; color: #a0522d; }
 
-/* 5) Contenu texte (lorem + bouton) */
+/* Texte + bouton */
 .section-natural__content{
   width: min(680px, 88vw);
   margin: 48px auto 0;
   text-align: center;
   position: relative;
   z-index: 2;
-  /* on redonne les offsets par défaut du bouton */
   --btn-offset-x: 280px;
   --btn-offset-y: -220px;
 }
-
-/* Déplacement du texte via variables CSS UNIQUEMENT */
 .section-natural__text{
   color:#6c4b36;
   line-height:1.55;
-  
-  max-width: 320px;   /* largeur maximale du paragraphe */
-  margin: 0 auto 18px; /* centre horizontalement */
-  text-align: justify; /* (optionnel) donne une forme plus "bloc" */
-
-  /* Offsets par défaut (desktop) */
-  --text-offset-x: -380px;   /* + = droite, - = gauche */
-  --text-offset-y: -130px;  /* + = bas, - = haut */
-
+  max-width: 320px;
+  margin: 0 auto 18px;
+  text-align: justify;
+  --text-offset-x: -380px;
+  --text-offset-y: -130px;
   position: relative;
   left: var(--text-offset-x);
   top:  var(--text-offset-y);
-
-  margin-bottom: 18px;     /* espace sous le texte pour ne pas coller au bouton */
 }
-
-/* Bouton "Shop now" — même style que les autres, sans contour noir */
 .section-natural__btn,
 .section-natural__btn:link,
 .section-natural__btn:visited{
@@ -480,42 +469,286 @@ body{
   text-decoration:none;
   font-weight:700;
   border-radius:6px;
-  border:0;                   /* supprime le contour noir des <button> */
+  border:0;
   appearance:none;
   -webkit-appearance:none;
-  background:#f2ba52;         /* même couleur que tes autres boutons */
+  background:#f2ba52;
   color:#fff;
   box-shadow:0 10px 24px rgba(0,0,0,.25);
-  cursor:pointer;             /* curseur "main" */
+  cursor:pointer;
   transition: background .2s ease, transform .15s ease, opacity .15s ease;
-
   position: relative;
-  left: var(--btn-offset-x, 280px);  /* fallback intégré */
-  top:  var(--btn-offset-y, -220px); /* fallback intégré */
-  z-index: 3;                 /* au-dessus des images */
-
-  padding: 12px 18px;   /* était 10px 18px → bouton plus grand */
-  font-size: 18px;      /* texte plus grand (ex: 16–18px selon ton goût) */
-  line-height: 1.1;     /* garde une bonne compacité verticale */
-  white-space: nowrap;  /* évite le retour à la ligne si "Shop now" */
+  left: var(--btn-offset-x, 280px);
+  top:  var(--btn-offset-y, -220px);
+  z-index: 3;
+  padding: 12px 18px;
+  font-size: 18px;
+  line-height: 1.1;
+  white-space: nowrap;
 }
-
-.section-natural__btn:hover{
-  background:#f2ba52;         /* hover simple */
-  transform: translateY(-1px);
-  opacity:.95;
-}
-
+.section-natural__btn:hover{ background:#f2ba52; transform: translateY(-1px); opacity:.95; }
 .section-natural__btn:active{ transform:none; opacity:1; }
 .section-natural__btn:focus-visible{ outline:3px solid rgba(255,255,255,.9); outline-offset:2px; }
 
-.section-natural__img-small{ z-index:1; }
+/* ------------------------------------------------------------------ */
+/* 6) SECTION FEATURED (marron) & SECTION AFTER-FEATURED               */
+/* ------------------------------------------------------------------ */
+.section-featured{
+  position: relative;
+  background: #8a3b1f;
+  padding: clamp(28px, 5vw, 48px) 0;
+  color: #fff;
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  z-index: 0;
+}
+/* Si la section est dans .hero : couvrir toute la grille et remonter visuellement */
+.hero > .section-featured {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 50px 0;
+  position: relative;
+  top: -190px; /* décalage vers le haut (garde l’effet existant) */
+}
 
+.section-featured__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 4vw, 36px);
+  align-items: start;
+}
 
+/* Figures (images) */
+.featured__figure {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.featured__figure img {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 36vw, 360px);
+  object-fit: cover;
+  object-position: center;
+}
 
-/* =======================
-   RESPONSIVE (layout global)
-   ======================= */
+/* Grande image gauche sur 2 lignes */
+.featured__figure--left { 
+  grid-column: 1 / 2; 
+  grid-row: 1 / 3;
+  position: relative;
+  top: 0;
+  left: -50px;
+  height: clamp(700px, 82vh, 1100px);
+}
+.featured__figure--left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: 50% 50%;
+}
+
+/* Grande image droite sur 2 lignes */
+.featured__figure--right{
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  position: relative;
+  top: 350px;
+  left: 0;
+  height: clamp(700px, 82vh, 1100px);
+  z-index: 1;
+}
+.featured__figure--right img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Bloc texte superposé à droite */
+.featured__content{
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  position: relative;
+  z-index: 2;
+  align-self: start;
+  justify-self: start;
+  margin: 120px 0 0 24px;
+  left: -20px;
+  gap: 24px;
+}
+.featured__title {
+  margin: 0 0 12px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d88c4f;
+  font-size: clamp(18px, 2.2vw, 24px);
+}
+.featured__lead {
+  margin: 0;
+  color: #ffece2;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+.featured__btn {
+  justify-self: start;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  background: #ffece2;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .15s ease, opacity .15s ease, background .2s ease;
+  margin-top: 16px;
+}
+.featured__btn:hover { transform: translateY(-1px); opacity: .95; }
+
+/* Section suivante (après le bloc marron) */
+.section-after-featured{
+  background:#fff;
+  padding: 12px 0 80px;
+}
+.section-after-featured__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  position: relative;
+}
+.after-card{
+  width: clamp(320px, 40vw, 560px);
+  /* placement */
+  margin-left: 400px;
+  margin-top:  -170px;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+  text-align: left;
+}
+.after-card__title{
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 24px);
+  color: #5b1d13;
+}
+.after-card__text{
+  margin: -13px 0 0;
+  color: #6c4b36;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+/* Bouton réutilise le style .featured__btn, avec teinte orange */
+.after-card .featured__btn{ justify-self: start; margin-left: 0; color: #5b1d13; margin-top: -8px; }
+.section-after-featured .featured__btn{ background: var(--orange-bg) !important; color: #fff !important; }
+.section-after-featured .featured__btn:hover{ background: #d67a3b !important; }
+
+/* ------------------------------------------------------------------ */
+/* 7) SECTION PROMO SOCIAL & MOTIF STRIP                              */
+/* ------------------------------------------------------------------ */
+.section-promo-social{ 
+  padding: 120px 0 40px;
+  background: #fff;
+  margin-top: -70px;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+.promo-social__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding-top: 0;
+  text-align: center;
+}
+.section-promo-social .promo-social__title{
+  margin: 0 0 26px;
+  text-align: center;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: var(--dark-brown);
+  font-size: clamp(22px, 4vw, 40px);
+}
+.section-promo-social .promo-social__figure{
+  width: 1080px;
+  margin: 40px auto 0;
+}
+.section-promo-social .promo-social__figure img{
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+
+/* Liens / icônes */
+.section-promo-social .promo-social__links{
+  display:flex;
+  justify-content:center;
+  gap: 28px;
+  margin-top: 18px;
+}
+.section-promo-social .social-dot{
+  background: transparent !important;
+  border-radius: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0;
+  box-shadow: none !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  cursor:pointer;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.section-promo-social .social-dot:hover{ transform: translateY(-1px); opacity:.95; }
+/* Taille des SVG (unifiée via variable) */
+.section-promo-social .social-dot img{
+  --icon: 100px;       /* ajuste ici : 48px, 56px, 64px, 100px… */
+  width: var(--icon);
+  height: var(--icon);
+  display:block;
+  filter: none;
+}
+
+/* Motif strip (bande transparente avec motif répété) */
+.hero > .motif-strip{ grid-column: 1 / -1; }
+.motif-strip{
+  --tile: 550px;   /* taille d’un motif */
+  --strip-h: 600px;
+  --overlap: 400px; 
+  --shift-x: 0px;
+
+  position: relative;
+  height: var(--strip-h);
+  pointer-events: none;
+  z-index: 3;              /* au-dessus de la bande orange */
+
+  width: 100vw;
+  margin-left:  calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: -290px;
+
+  background-image: url("assets/icons/motif-1.svg");
+  background-repeat: repeat-x;
+  background-size: var(--tile) auto;
+  background-position: calc(50% + var(--shift-x)) center;
+
+  margin-bottom: calc(-1 * var(--overlap)); /* descend dans la section orange */
+}
+/* la bande orange reste derrière */
+.section-natural__band{ position: relative; z-index: 1; }
+
+/* ------------------------------------------------------------------ */
+/* 8) RESPONSIVE                                                      */
+/* ------------------------------------------------------------------ */
+
+/* Layout global */
 @media (max-width:1100px){
   .hero{ grid-template-columns:1.2fr 1fr; }
   .promo__img{ height:220px; }
@@ -536,20 +769,11 @@ body{
   .lead{ left:18px; right:18px; }
 }
 
-/* =======================
-   RESPONSIVE (section natural)
-   ======================= */
+/* Section Natural */
 @media (max-width: 980px){
   .section-natural__band{ height: 190px; }
   .section-natural__stage{ margin-top: -95px; } /* ≈ moitié de 190 */
-
-  /* Ajuste les offsets du texte (tablette) */
-  .section-natural__text{
-    --text-offset-x: 10px;
-    --text-offset-y: -8px;
-  }
-
-  /* Petite image : s’adapte */
+  .section-natural__text{ --text-offset-x: 10px; --text-offset-y: -8px; }
   .section-natural__img-small{
     width: 300px;
     height: auto;
@@ -558,393 +782,56 @@ body{
     margin: 20px auto 0;
     position: relative; /* repasse relative pour la pile mobile */
   }
-
   .section-natural__title{ bottom: 72px; left: 5vw; }
 }
-
 @media (max-width: 640px){
   .section-natural__band{ height: 160px; }
   .section-natural__stage{ margin-top: -80px; } /* ≈ moitié de 160 */
-
-  /* Offsets mobiles pour le texte */
-  .section-natural__text{
-    --text-offset-x: 6px;
-    --text-offset-y: -4px;
-  }
-
+  .section-natural__text{ --text-offset-x: 6px; --text-offset-y: -4px; }
   .section-natural__img-small{ width: 220px; height: auto; }
   .section-natural__title{ bottom: 56px; left: 4vw; }
 }
 
-/* =========================
-   SECTION — Featured (bloc marron) — FULL-BLEED
-   ========================= */
-.section-featured{
-  position: relative;
-  background: #8a3b1f;                             /* marron */
-  padding: clamp(28px, 5vw, 48px) 0;
-  color: #fff;
-
-  /* ⬇️ même technique que le bloc jaune */
-  width: 100vw;
-  margin-left:  calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  z-index: 0;
-}
-
-.hero > .section-featured {
-  grid-column: 1 / -1;   /* force la section à couvrir toute la grille */
-  width: 100%;
-  padding: 50px 0;  /* espace haut/bas */
-  position: relative;
-  top: -190px; /* décalage vers le haut */
-}
-
-.section-featured__inner{
-  /* on recentre le contenu à l’intérieur du fond full-bleed */
-  width: min(1100px, 92vw);
-  margin: 0 auto;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 4vw, 36px);
-  align-items: start;
-}
-
-/* Images */
-.featured__figure {
-  margin: 0;
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.featured__figure img {
-  display: block;
-  width: 100%;
-  height: clamp(220px, 36vw, 360px);
-  object-fit: cover;
-  object-position: center;
-}
-
-.featured__figure--left { 
-  grid-column: 1 / 2; 
-  grid-row: 1 / 3; 
-}   /* grande image sur 2 lignes */
-
-.featured__figure--left {
-  position: relative;
-  top: 0px;                /* effet de remontée */
-  left: -50px;
-  height: clamp(700px, 82vh, 1100px); /* ← allonge le bloc ici */
-}
-
-.featured__figure--left img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; 
-  object-position: 50% 50%; /* centre le cadrage (ajuste si besoin) */
-}
-
-/* même hauteur + même span que la gauche */
-.featured__figure--right{
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;                       /* span sur 2 lignes comme la gauche */
-  position: relative;
-  top: 350px;                /* effet de remontée */
-  left: 0px;
-  height: clamp(700px, 82vh, 1100px);
-  z-index: 1;      /* même hauteur que la gauche */
-}
-
-.featured__figure--right img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;               /* ajuste si besoin: 40%/60% */
-}
-
-/* ——— Overlay du bloc texte sur l'image de droite (desktop) ——— */
-.featured__content{
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;           /* même span que .featured__figure--right */
-  position: relative;
-  z-index: 2;                /* au-dessus de l'image */
-  align-self: start;         /* coin haut */
-  justify-self: start;       /* coin gauche */
-  margin: 24px 0 0 24px;
-  margin-top: 120px;
-  left: -20px;
-  gap: 24px;
-       /* décale à l’intérieur de l’image */
-  /* optionnel pour la lisibilité :
-  text-shadow: 0 2px 8px rgba(0,0,0,.25);
-  */
-}
-
-.featured__title {
-  margin: 0;
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #d88c4f;                   /* contraste doux */
-  font-size: clamp(18px, 2.2vw, 24px);
-  margin: 0 0 12px;
-}
-
-.featured__lead {
-  margin: 0;
-  color: #ffece2;                   /* lisible sur fond marron */
-  line-height: 1.55;
-  max-width: 38ch;                  /* évite les lignes trop longues */
-}
-
-.featured__btn {
-  justify-self: start;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 700;
-  background: #ffece2;
-  color: #000;
-  padding: 10px 18px;
-  border-radius: 6px;
-  box-shadow: 0 10px 24px rgba(0,0,0,.25);
-  transition: transform .15s ease, opacity .15s ease, background .2s ease;
-  margin-top: 16px;
-}
-
-.featured__btn:hover {
-  transform: translateY(-1px);
-  opacity: .95;
-}
-
-/* Responsive */
+/* Section Featured & After-Featured */
 @media (max-width: 980px) {
-  .section-featured__inner {
-    grid-template-columns: 1fr;     /* pile verticalement */
-  }
-  .featured__figure--left { grid-row:auto; }
-  .featured__figure--right { order: 3; height: auto; }
+  .section-featured__inner { grid-template-columns: 1fr; }
+  .featured__figure--left { grid-row:auto; left: 0; height: auto; }
+  .featured__figure--right{ order: 3; height: auto; top: 0; }
   .featured__figure img { height: clamp(220px, 42vw, 340px); }
-}
-
-@media (max-width:980px) {
-  .featured__figure--left{ left: 0; }
-}
-
-@media (max-width: 980px){
   .featured__content{
     grid-column: auto;
     grid-row: auto;
     order: 2;
     margin: 16px 0 0;
+    left: 0;
   }
-  .featured__figure--right{ order: 3; }
-}
-
-/* ===== Bloc sous la section marron (même disposition que le bloc marron) ===== */
-.section-after-featured{
-  background:#fff;
-  padding: 12px 0 80px;
-}
-.section-after-featured__inner{
-  width: min(1100px, 92vw);
-  margin: 0 auto;
-  position: relative;
-}
-
-.after-card{
-  width: clamp(320px, 40vw, 560px);
-  
-
-  /* placement simple (déplace le bloc) */
-  margin-left: 400px;   /* + = à droite | - = à gauche */
-  margin-top:  -170px;  /* - = plus haut | + = plus bas */
-
-  /* >>> disposition identique au bloc marron */
-  display: grid;
-  gap: 24px;               /* mêmes espacements titre/texte/bouton */
-  align-content: start;
-  text-align: left;        /* tout aligné à gauche */
-}
-
-.after-card__title{
-  margin: 0;               /* comme .featured__title */
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 700;
-  font-size: clamp(18px, 2.2vw, 24px);
-  color: #5b1d13;          /* adapte si tu veux */
-}
-.after-card__text{
-  margin: 0;               /* comme .featured__lead */
-  color: #6c4b36;
-  line-height: 1.55;
-  max-width: 38ch;
-  margin-top:-13px;
-}
-
-/* le bouton du bloc utilise .featured__btn → récupère tes styles unifiés */
-.after-card .featured__btn{
-  justify-self: start;     /* bouton aligné à gauche comme dans le bloc marron */
-  margin-left: 0px;
-  color: #5b1d13;
-  margin-top: -8px;
-             /* l’espacement est géré par gap */
-}
-
-/* Dernier bouton (dans .section-after-featured) */
-.section-after-featured .featured__btn{
-  background: var(--orange-bg) !important; /* ex : #8e3a16 */
-  color: #fff !important;
-}
-.section-after-featured .featured__btn:hover{
-  background: #d67a3b !important;          /* teinte un peu plus sombre au hover */
-}
-
-/* Responsive : recentre le bloc sous 980px */
-@media (max-width:980px){
   .after-card{ margin: 0 auto; gap: 20px; }
 }
 
-/* --- Nouvelle section : titre uniquement --- */
-
-/* centre horizontalement et descend le bloc */
-.promo-social__inner{
-  width: min(1100px, 92vw);
-  margin: 0 auto;        /* centre sur la page */
-  padding-top: 0px;    /* ↓ fais descendre (essaie 120–220px) */
-  text-align: center;    /* au cas où, garde le H1 centré */
-  
-}
-
-.section-promo-social{ 
-  padding: 120px 0 40px;            /* un peu d’air autour (optionnel) */
-  background: #fff;
-  margin-top: -70px;
-  grid-column: 1 / -1;   /* occupe toute la rangée de la grille */
-  justify-self: center;
-          
-}
-
-.section-promo-social .promo-social__title{
-  margin: 0 0 26px;           /* espace sous le titre */
-  text-align: center;         /* centré comme sur ta capture */
-  font-family: "Playfair Display", Georgia, serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;     /* espacement entre lettres */
-  color: var(--dark-brown);   /* #8e3a16 — change si besoin */
-  font-size: clamp(22px, 4vw, 40px);
-  
-}
-
-/* optionnel : resserrer un peu l’espacement en mobile */
-@media (max-width: 640px){
-  .section-promo-social .promo-social__title{
-    letter-spacing: 0.25em;
-  }
-}
-
-/* Nouvelle section — taille du bloc image */
-.section-promo-social .promo-social__figure{
-  width: 1080px;      /* ← largeur (horizontal). Ex: 560, 680, 720px */
-  margin: 0 auto;    /* centre le bloc */
-  margin-top: 40px;
-}
-
-.section-promo-social .promo-social__figure img{
-  width: 100%;
-  height: 420px;     /* ← hauteur (vertical). Ex: 280, 320, 420px */
-  object-fit: cover; /* recadre proprement */
-  object-position: 50% 0%;
-
-}
-
-/* Option responsive simple (évite de dépasser l’écran) */
+/* Section Promo Social & motif strip */
 @media (max-width: 700px){
   .section-promo-social .promo-social__figure{ width: 92vw; }
   .section-promo-social .promo-social__figure img{ height: 52vw; }
-}
-
-
-/* === Icônes bas de page : même rendu que celles du haut === */
-.section-promo-social .promo-social__links{
-  display:flex;
-  justify-content:center;
-  gap: 28px;            /* écart entre icônes */
-  margin-top: 18px;
-}
-
-.section-promo-social .social-dot{
-  /* on NE recrée pas de rond: il est déjà dans le SVG */
-  background: transparent !important;
-  border-radius: 0 !important;
-  width: auto !important;
-  height: auto !important;
-  padding: 0;
-  box-shadow: none !important;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  cursor:pointer;
-  transition: transform .15s ease, opacity .15s ease;
-}
-.section-promo-social .social-dot:hover{ transform: translateY(-1px); opacity:.95; }
-
-/* Taille des fichiers SVG chargés en <img> */
-.section-promo-social .social-dot img{
-  --icon: 48px;       /* ajuste ici : 44px, 52px… */
-  width: var(--icon);
-  height: var(--icon);
-  display:block;
-  filter: none;       /* surtout pas d’invert */
-}
-
-/* Taille des icônes dans les ronds du bas */
-.section-promo-social .social-dot img{
-  width: 100px;   /* ← essaie 48px, 56px, 64px, 72px */
-  height: 100px;
-}
-
-/* le strip appartient à la grille du hero, il prend toute la rangée */
-.hero > .motif-strip{ grid-column: 1 / -1; }
-
-/* bande transparente bord-à-bord avec motif répété */
-.motif-strip{
-  /* réglages simples */
-  --tile: 550px;   /* taille d’UN motif → 80/120/160px… */
-  --strip-h: 600px;/* hauteur de la bande transparente */
-  --overlap: 400px; /* chevauche l’orange (0 = pas de chevauchement) */
-  --shift-x: 0px;  /* décale le motif à gauche/droite si besoin */
-
-  position: relative;
-  height: var(--strip-h);
-  pointer-events: none;
-  z-index: 3; /* au-dessus de la bande orange */
-
-  /* full-bleed */
-  width: 100vw;
-  margin-left:  calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  margin-top: -290px;;
-
-  /* motif répété horizontalement */
-  background-image: url("assets/icons/motif-1.svg");
-  background-repeat: repeat-x;                 /* répète sur X */
-  background-size: var(--tile) auto;           /* taille du tile */
-  background-position: calc(50% + var(--shift-x)) center;
-
-  /* descend dans la section orange */
-  margin-bottom: calc(-1 * var(--overlap));
-}
-
-/* la bande orange reste derrière */
-.section-natural__band{ position: relative; z-index: 1; }
-
-/* responsive (exemple) */
-@media (max-width: 700px){
   .motif-strip{ --tile: 90px; --strip-h: 160px; --overlap: 30px; }
 }
+@media (max-width: 640px){
+  .section-promo-social .promo-social__title{ letter-spacing: 0.25em; }
+}
 
+/* HOME uniquement (le header de la home contient .nav) */
+.header .nav ~ .header__actions{
+  position: absolute;
+  right: 22px;
+  top: var(--header-pad-y, 12px);
+  display: flex;
+  align-items: center;
+  gap: 12px;               /* espace entre loupe et panier */
+  z-index: 40;             /* au-dessus du logo centré */
+}
+/* Les boutons dans la barre : plus de position forcée, s’alignent en flex */
+.header .nav ~ .header__actions .icon-btn,
+.header .nav ~ .header__actions .btn-cart,
+.header .nav ~ .header__actions .hamburger{
+  position: static;
+}
 

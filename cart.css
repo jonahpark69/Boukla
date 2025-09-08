@@ -1,0 +1,207 @@
+/* =====================================================================
+   Boukla — cart.css (mini-panier modal / drawer)
+   S'intègre avec les tokens : --text, --muted, --border, --accent, --accent-ink, --radius, --shadow
+   ===================================================================== */
+
+html.no-scroll, body.no-scroll{ overflow:hidden; }
+
+/* === MODAL ROOT === */
+#cart-modal.cmodal{
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: rgba(0,0,0,.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+#cart-modal.cmodal[aria-hidden="false"]{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* === PANEL (drawer à droite) === */
+.cmodal__panel{
+  position: fixed;
+  right: 0; top: 0; bottom: 0;
+  width: min(420px, 92vw);
+  background: #fff;
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  transform: translateX(100%);
+  transition: transform .28s ease;
+}
+#cart-modal[aria-hidden="false"] .cmodal__panel{ transform: translateX(0); }
+
+/* Overlay click (zone hors panneau) */
+.cmodal__overlay{ grid-area: 1 / 1 / -1 / -1; }
+
+/* === HEADER === */
+.cmodal__header{
+  display:flex; align-items:center; justify-content:space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom:1px solid var(--border);
+}
+.cmodal__title{
+  font-size: 18px; font-weight: 700; color: var(--text);
+}
+.cmodal__close{
+  display:inline-flex; align-items:center; justify-content:center;
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+}
+.cmodal__close:hover{ background:#fafafa; }
+
+/* === LISTE === */
+.cmodal__list{
+  padding: 14px 14px 4px;
+  overflow: auto;
+}
+.cart-item{
+  display:grid;
+  grid-template-columns: 68px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.cart-item__media{
+  width: 68px; height: 68px; border-radius: 10px; overflow: hidden;
+  background:#f7f7f8; border:1px solid var(--border);
+}
+.cart-item__media img{ width:100%; height:100%; object-fit: cover; display:block; }
+.cart-item__title{ font-weight:600; color:var(--text); margin:0 0 2px; }
+.cart-item__meta{ color:var(--muted); font-size: 13px; }
+.cart-item__price{ font-weight:700; color:var(--text); }
+
+/* quantités */
+.qty{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--border);
+  border-radius: 999px; padding: 4px 8px;
+}
+.qty button{
+  width: 26px; height: 26px; border:0; background:#fff; cursor:pointer; border-radius:999px;
+}
+.qty input{
+  width: 28px; text-align:center; border:0; outline:0; background:transparent; font-weight:600;
+}
+
+/* actions item */
+.cart-item__actions{ display:flex; align-items:center; gap:10px; }
+.cart-item__remove{
+  border: 1px solid var(--border);
+  background:#fff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  cursor:pointer;
+}
+.cart-item__remove:hover{ background:#fafafa; }
+
+/* === FOOTER === */
+.cmodal__footer{
+  border-top:1px solid var(--border);
+  padding: 16px 18px;
+  display:grid;
+  gap: 12px;
+}
+.cart-total{
+  display:flex; align-items:center; justify-content:space-between;
+  font-weight:700; color:var(--text);
+}
+.btn-primary{
+  padding:12px 14px; border-radius:999px; border:0; background:var(--text); color:#fff; font-weight:700; cursor:pointer;
+}
+.btn-ghost{
+  padding:12px 14px; border-radius:999px; border:1.5px solid var(--text); background:transparent; color:var(--text); font-weight:600; cursor:pointer;
+}
+.btn-primary:hover{ opacity:.9; }
+.btn-ghost:hover{ background:var(--text); color:#fff; }
+
+/* === Icône compteur dans le header === */
+.btn-cart{
+  position: relative;
+}
+.btn-cart .badge{
+  position:absolute; right:-6px; top:-6px;
+  min-width:18px; height:18px; padding:0 5px;
+  display:inline-flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700;
+  background: var(--accent); color: var(--accent-ink);
+  border-radius: 999px; border:1px solid #fff;
+}
+
+/* === Responsive === */
+@media (max-width: 520px){
+  .cart-item{ grid-template-columns: 56px 1fr auto; gap:10px; }
+  .cart-item__media{ width:56px; height:56px; }
+}
+
+/* ===== Cart trigger (unique source of truth) ===== */
+.btn-cart,
+[data-cart-open]{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  transition: box-shadow .2s ease, transform .06s ease;
+  top: -30px;
+  right: -535px;
+}
+
+.btn-cart:hover,
+[data-cart-open]:hover{
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.btn-cart svg,
+[data-cart-open] svg{
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+/* Badge quantité — scope strict pour éviter les collisions */
+.header__actions .btn-cart{ position: relative; } /* ancre du badge */
+.btn-cart .badge,
+[data-cart-count]{
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Force l’apparence du bouton panier même si .icon-btn a d'autres styles */
+.icon-btn.btn-cart{
+  background: #fff !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+}

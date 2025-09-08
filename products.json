@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "creme-hydratante",
+    "name": "Crème hydratante",
+    "price": 34.9,
+    "currency": "EUR",
+    "short": "Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.",
+    "images": ["assets/images/produit/boukla-1.png"],
+    "badge": "Nouveau"
+  },
+  {
+    "slug": "masque-hydratant",
+    "name": "Masque hydratant",
+    "price": 24.9,
+    "currency": "EUR",
+    "short": "Soin profond hebdomadaire pour boucles repulpées et brillantes.",
+    "images": ["assets/images/produit/étiquette-boukla-3.jpg"]
+  },
+  {
+    "slug": "shampoing-solide",
+    "name": "Shampoing solide",
+    "price": 14.9,
+    "currency": "EUR",
+    "short": "Nettoyage doux, mousse fine, respecte le cuir chevelu.",
+    "images": ["assets/images/produit/étiquette-boukla-4.png"]
+  },
+  {
+    "slug": "huile-de-ricin",
+    "name": "Huile de ricin",
+    "price": 29.9,
+    "currency": "EUR",
+    "short": "Fortifie visiblement les longueurs, brillance naturelle.",
+    "images": ["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]
+  }
+]

@@ -3,16 +3,18 @@
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Boukla &mdash; New Arrivals
-  </title>
+  <title>Boukla — New Arrivals</title>
+
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
   <!-- Preload du logo SVG pour un rendu net dès le premier paint -->
   <link as="image" href="assets/images/logo-boukla-2.svg" rel="preload" type="image/svg+xml"/>
+
   <!-- CSS -->
-  <link href="boukla.css" rel="stylesheet">
-  </link>
+  <link href="boukla.css" rel="stylesheet"/>
+  <!-- Cart (mini-panier) -->
+  <link href="cart.css" rel="stylesheet"/>
  </head>
  <body>
   <!-- ENTÊTE -->
@@ -21,49 +23,49 @@
    <a aria-label="Boukla" class="logo" href="#">
     <img alt="Boukla Logo" decoding="async" fetchpriority="high" height="60" src="assets/images/logo-boukla-2.svg"/>
    </a>
+
    <!-- NAV -->
    <nav aria-label="Navigation principale" class="nav">
-    <a aria-current="page" class="nav__link is-active" href="#">
-     HOME
-    </a>
-    <a class="nav__link" href="#">
-     ABOUT US
-    </a>
-    <a class="nav__link" href="#">
-     CONTACT
-    </a>
+    <a aria-current="page" class="nav__link is-active" href="#">HOME</a>
+    <a class="nav__link" href="#">ABOUT US</a>
+    <a class="nav__link" href="#">CONTACT</a>
    </nav>
+
    <!-- ACTIONS -->
    <div class="header__actions">
-    <a class="login" href="#">
-     LOGIN
-    </a>
+    <a class="login" href="#">LOGIN</a>
+
     <button aria-label="Search" class="icon-btn">
      <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
       <circle cx="11" cy="11" r="7"></circle>
       <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
      </svg>
     </button>
-    <button aria-label="Cart" class="icon-btn">
+
+    <!-- Panier (ouvre le mini-panier) -->
+    <button class="icon-btn btn-cart" data-cart-open aria-controls="cart-modal" aria-expanded="false" aria-label="Ouvrir le panier">
      <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
       <circle cx="9" cy="21" r="1"></circle>
       <circle cx="20" cy="21" r="1"></circle>
       <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
      </svg>
+     <span class="badge" data-cart-count>0</span>
     </button>
+
     <button aria-label="Menu" class="hamburger">
      <span></span>
      <span></span>
     </button>
    </div>
   </header>
+
   <!-- HERO EN PLEINE LARGEUR -->
   <main class="hero">
    <!-- Colonne gauche : image pleine -->
    <section class="hero__left">
-    <img alt="Photo Boukla" class="hero__model" src="assets/images/boukla-1.png">
-    </img>
+    <img alt="Photo Boukla" class="hero__model" src="assets/images/boukla-1.png"/>
    </section>
+
    <!-- Colonne droite : carte promo avec carrousel -->
    <aside class="hero__right">
     <div class="promo" data-images='[
@@ -76,204 +78,172 @@
       <!-- Important : src aligné sur la 1ère image de data-images -->
       <img alt="Produits Boukla en promotion" class="promo__img" src="assets/images/étiquette-boukla-3.jpg"/>
       <div class="promo__stripe">
-       <button aria-label="Image suivante" class="promo__next" type="button">
-        &rsaquo;
-       </button>
+       <button aria-label="Image suivante" class="promo__next" type="button">&rsaquo;</button>
       </div>
      </div>
      <!-- Petit rectangle orange sous l'image -->
-     <div class="promo__code-bar">
-      PROMO CODE 360C
-     </div>
+     <div class="promo__code-bar">PROMO CODE 360C</div>
      <!-- Réduction -->
      <div class="promo__meta">
-      <h3 class="promo__off">
-       65% OFF
-      </h3>
+      <h3 class="promo__off">65% OFF</h3>
      </div>
     </div>
    </aside>
+
    <!-- Bandeau bas : NEW / ARRIVALS + texte -->
    <section class="hero__bottom">
-    <div class="bottom__split bottom__split--white">
-    </div>
-    <div class="bottom__split bottom__split--yellow">
-    </div>
-    <h1 class="kicker">
-     NEW
-    </h1>
-    <h1 class="headline">
-     ARRIVALS
-    </h1>
+    <div class="bottom__split bottom__split--white"></div>
+    <div class="bottom__split bottom__split--yellow"></div>
+    <h1 class="kicker">NEW</h1>
+    <h1 class="headline">ARRIVALS</h1>
     <p class="subline">
-     <span aria-hidden="true" class="bar">
-     </span>
+     <span aria-hidden="true" class="bar"></span>
      NEW OFFERS EVERY WEEKS
     </p>
     <p class="lead">
      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
     </p>
     <!-- Branché vers shop.html -->
-    <a class="cta" href="shop.html">
-     SHOP NOW
-    </a>
+    <a class="cta" href="shop.html">SHOP NOW</a>
+
     <!-- Colonne d’icônes à droite -->
     <div class="socials">
-  <a class="social" href="https://instagram.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Instagram" title="Instagram">
-    <img src="assets/icons/instagram.svg" alt="Instagram">
-  </a>
-
-  <a class="social" href="https://pinterest.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Pinterest" title="Pinterest">
-    <img src="assets/icons/pinterest.svg" alt="Pinterest">
-  </a>
-
-  <a class="social" href="https://x.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="X (Twitter)" title="X (Twitter)">
-    <img src="assets/icons/x.svg" alt="X (Twitter)">
-  </a>
-</div>
+      <a class="social" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+        <img src="assets/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a class="social" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
+        <img src="assets/icons/pinterest.svg" alt="Pinterest">
+      </a>
+      <a class="social" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+        <img src="assets/icons/x.svg" alt="X (Twitter)">
+      </a>
+    </div>
    </section>
 
    <!-- Bande motif répétée, full-width -->
-<div class="motif-strip" aria-hidden="true"></div>
-
+   <div class="motif-strip" aria-hidden="true"></div>
 
    <!-- ===== Suite du design : section "natural / cosmetics" ===== -->
-<section class="section-natural">
-  <!-- bande jaune full-bleed (pleine largeur) -->
-  <div class="section-natural__band"></div>
+   <section class="section-natural">
+    <!-- bande jaune full-bleed (pleine largeur) -->
+    <div class="section-natural__band"></div>
 
-  <div class="section-natural__stage">
-    <!-- grande image centrale -->
-    <img
-      class="section-natural__img-large"
-      src="assets/images/boukla-2.jpg"
-      alt="Visuel principal Boukla"
-      width="860"
-      height="1080"
-      loading="lazy"
-    />
+    <div class="section-natural__stage">
+      <!-- grande image centrale -->
+      <img
+        class="section-natural__img-large"
+        src="assets/images/boukla-2.jpg"
+        alt="Visuel principal Boukla"
+        width="860"
+        height="1080"
+        loading="lazy"
+      />
 
-    <!-- petite image chevauchante en bas-droite -->
-    <img
-      class="section-natural__img-small"
-      src="assets/images/boukla-3.jpg"
-      alt="Portrait Boukla"
-      width="420"
-      height="560"
-      loading="lazy"
-    />
+      <!-- petite image chevauchante en bas-droite -->
+      <img
+        class="section-natural__img-small"
+        src="assets/images/boukla-3.jpg"
+        alt="Portrait Boukla"
+        width="420"
+        height="560"
+        loading="lazy"
+      />
 
-    <!-- titre sur 2 lignes (Playfair) posé par-dessus les visuels -->
-    <h2 class="section-natural__title">
-      <span>natural</span>
-      <span>cosmetics</span>
-    </h2>
-  </div>
-
-  <!-- texte + bouton centrés sous la scène -->
-  <div class="section-natural__content">
-    <p class="section-natural__text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-      incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-    </p>
-    <!-- Bouton branché vers shop.html -->
-    <a href="shop.html" class="section-natural__btn" role="button">Shop now</a>
-  </div>
-</section>
-
-<!-- =========================
-     SECTION — Featured (bloc marron)
-     ========================= -->
-<section class="section-featured" aria-labelledby="featured-title">
-  <div class="section-featured__inner">
-
-    <!-- Colonne gauche : grande image produit -->
-    <figure class="featured__figure featured__figure--left">
-      <img src="assets/images/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin Boukla - flacon et étui" />
-    </figure>
-
-    <!-- Colonne droite : titre + texte + bouton -->
-    <div class="featured__content">
-      <h2 id="featured-title" class="featured__title">HUILE DE RICIN</h2>
-      <p class="featured__lead">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <!-- Bouton branché vers shop.html -->
-      <a href="shop.html" class="featured__btn">Shop now</a>
+      <!-- titre sur 2 lignes (Playfair) posé par-dessus les visuels -->
+      <h2 class="section-natural__title">
+        <span>natural</span>
+        <span>cosmetics</span>
+      </h2>
     </div>
 
-    <!-- Colonne droite (bas) : seconde image produit -->
-    <figure class="featured__figure featured__figure--right">
-      <img src="assets/images/produit-boukla-1.png" alt="Masque nourrissant Boukla - pot et étui" />
-    </figure>
-
-  </div>
-</section>
-
-<section class="section-after-featured" aria-labelledby="after-title">
-  <div class="section-after-featured__inner">
-    <article class="after-card">
-      <h2 id="after-title" class="after-card__title">HUILE DE RICIN</h2>
-      <p class="after-card__text">
+    <!-- texte + bouton centrés sous la scène -->
+    <div class="section-natural__content">
+      <p class="section-natural__text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
       </p>
       <!-- Bouton branché vers shop.html -->
-      <a href="shop.html" class="featured__btn">Shop now</a>
-    </article>
-  </div>
-</section>
+      <a href="shop.html" class="section-natural__btn" role="button">Shop now</a>
+    </div>
+   </section>
 
-<section class="section-promo-social" aria-labelledby="promo-social-title">
-  <div class="promo-social__inner">
-    <h1 id="promo-social-title" class="promo-social__title">
-      50% OFF ONLY ONLINE 24H
-    </h1>
+   <!-- =========================
+        SECTION — Featured (bloc marron)
+        ========================= -->
+   <section class="section-featured" aria-labelledby="featured-title">
+    <div class="section-featured__inner">
 
-    <figure class="promo-social__figure">
-      <img src="assets/images/My project-1-24.jpg" alt="Amies souriantes — promo Boukla" />
-    </figure>
+      <!-- Colonne gauche : grande image produit -->
+      <figure class="featured__figure featured__figure--left">
+        <img src="assets/images/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin Boukla - flacon et étui" />
+      </figure>
 
-  <!-- Icônes en bas (section promo-social) -->
-<div class="promo-social__links">
-  <a class="social-dot" href="https://instagram.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Instagram" title="Instagram">
-    <img src="assets/icons/instagram.svg" alt="Instagram">
-  </a>
+      <!-- Colonne droite : titre + texte + bouton -->
+      <div class="featured__content">
+        <h2 id="featured-title" class="featured__title">HUILE DE RICIN</h2>
+        <p class="featured__lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <!-- Bouton branché vers shop.html -->
+        <a href="shop.html" class="featured__btn">Shop now</a>
+      </div>
 
-  <a class="social-dot" href="https://pinterest.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Pinterest" title="Pinterest">
-    <img src="assets/icons/pinterest.svg" alt="Pinterest">
-  </a>
+      <!-- Colonne droite (bas) : seconde image produit -->
+      <figure class="featured__figure featured__figure--right">
+        <img src="assets/images/produit-boukla-1.png" alt="Masque nourrissant Boukla - pot et étui" />
+      </figure>
 
-  <a class="social-dot" href="https://x.com/VOTRE_PROFIL"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="X (Twitter)" title="X (Twitter)">
-    <img src="assets/icons/x.svg" alt="X (Twitter)">
-  </a>
-</div>
+    </div>
+   </section>
 
+   <section class="section-after-featured" aria-labelledby="after-title">
+    <div class="section-after-featured__inner">
+      <article class="after-card">
+        <h2 id="after-title" class="after-card__title">HUILE DE RICIN</h2>
+        <p class="after-card__text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </p>
+        <!-- Bouton branché vers shop.html -->
+        <a href="shop.html" class="featured__btn">Shop now</a>
+      </article>
+    </div>
+   </section>
 
-  </div>
-</section>
+   <section class="section-promo-social" aria-labelledby="promo-social-title">
+    <div class="promo-social__inner">
+      <h1 id="promo-social-title" class="promo-social__title">
+        50% OFF ONLY ONLINE 24H
+      </h1>
 
+      <figure class="promo-social__figure">
+        <img src="assets/images/My project-1-24.jpg" alt="Amies souriantes — promo Boukla" />
+      </figure>
 
+      <!-- Icônes en bas (section promo-social) -->
+      <div class="promo-social__links">
+        <a class="social-dot" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+          <img src="assets/icons/instagram.svg" alt="Instagram">
+        </a>
+        <a class="social-dot" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
+          <img src="assets/icons/pinterest.svg" alt="Pinterest">
+        </a>
+        <a class="social-dot" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+          <img src="assets/icons/x.svg" alt="X (Twitter)">
+        </a>
+      </div>
+    </div>
+   </section>
   </main>
-  <!-- Script carrousel -->
-  <script src="promo-slider.js">
-  </script>
+
+  <!-- Scripts -->
+  <script src="promo-slider.js"></script>
+  <script defer src="cart.js"></script>
  </body>
 </html>
+
 
 
 

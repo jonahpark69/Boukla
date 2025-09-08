@@ -1,0 +1,188 @@
+/* =====================================================================
+   Boukla — product.css (styles fiche produit)
+   Minimal, aligné avec les tokens déjà utilisés.
+   ===================================================================== */
+
+:root{
+  --text: #161616;
+  --muted:#6f6f6f;
+  --border:#e8e6ee;
+  --accent:#F2C94C;
+  --accent-ink:#1a1a1a;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --radius:16px;
+
+  /* hauteur visuelle du logo dans le header (fiche) */
+  --header-logo-h: 72px;
+  --header-pad-y: 12px; /* padding top/bottom défini sur .header */
+}
+
+/* ====== HEADER (override pour la fiche) ======
+   Le header de la home est en position:absolute avec un logo géant.
+   Ici on le remet dans le flux normal et on agrandit le logo. */
+.header{
+  position: relative;
+  inset: auto; /* annule le "inset" défini sur la home */
+  background: #fff;
+  padding: var(--header-pad-y) 22px;
+  box-shadow: 0 1px 0 var(--border);
+  z-index: 10;
+}
+.header .logo{
+  position: static; /* annule left/top/transform de la home */
+  left: auto; top: auto; transform: none;
+}
+.header .logo img{
+  height: var(--header-logo-h) !important;
+  width: auto !important;
+  display: block;
+}
+
+/* ====== Fil d'Ariane (même ligne, à droite du header) ====== */
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end; /* pousse à droite sur la largeur du container */
+  gap:10px;
+  font-size:14px;
+  color:var(--muted);
+
+  margin: 0 22px 0; /* mêmes latéraux que le header */
+  position: relative;
+  /* remonte au centre vertical du header : logo + padding haut */
+  top: calc(-1 * (var(--header-logo-h) / 2 + var(--header-pad-y)));
+  z-index: 20; /* au-dessus de la barre blanche du header */
+}
+.breadcrumb a{ color:inherit; text-decoration:none; }
+.breadcrumb a:hover{ color:var(--text); text-decoration:underline; }
+.breadcrumb span{ opacity:.6; }
+
+/* ====== Grille fiche ====== */
+.product{
+  display:grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: stretch; /* étire les 2 colonnes à la même hauteur */
+  margin: 24px 0 72px;
+}
+
+/* ====== Média principal ====== */
+.product__media{
+  background:#f7f7f8;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  position:relative;
+
+  /* au lieu d’un aspect-ratio fixe, on remplit la hauteur de la rangée */
+  height: 100%;
+}
+.product__media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* --- Variante intégrée (cas particulier : “Shampoing solide”)
+   On n'ajoute PAS de bloc à la fin : on garde la règle près du média.
+   Idée : empêcher l’étirement uniquement quand l’image ciblée est présente,
+   et verrouiller sa hauteur pour matcher ta “bonne” image (~586px). --- */
+.product:has(.product__media > img[alt="Shampoing solide"]){
+  align-items: start; /* ne stretch pas la grille pour ce cas précis */
+}
+.product__media:has(> img[alt="Shampoing solide"]){
+  height: 586px;       /* même hauteur visuelle que la fiche qui te convient */
+  aspect-ratio: auto;  /* neutralise tout ratio résiduel */
+  align-self: start;
+}
+.product__media:has(> img[alt="Shampoing solide"]) > img{
+  width: 100%;
+  height: 100%;
+  display:block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ====== Vignettes ====== */
+.product__thumbs{
+  position:absolute; left:12px; bottom:12px;
+  display:flex; gap:8px; z-index:2;
+}
+.product__thumbs .thumb{
+  border:0; padding:0; background:#fff; border-radius:10px; width:58px; height:58px; cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+.product__thumbs .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ====== Contenu ====== */
+.product__content .h1{
+  font-family: "Playfair Display", serif;
+  font-weight:700;
+  font-size: clamp(26px, 4vw, 40px);
+  margin: 0 0 6px;
+}
+.p-short{ margin:0 0 10px; color:var(--muted); }
+
+.p-price{
+  font-weight:700; letter-spacing:.2px; color:var(--text);
+  margin: 8px 0 16px;
+}
+
+/* ====== Badges ====== */
+.p-badges{ display:flex; flex-wrap:wrap; gap:8px; margin: 4px 0 14px; }
+.p-badge{
+  display:inline-block; padding:4px 10px; font-size:12px; font-weight:700;
+  background:var(--accent); color:var(--accent-ink); border-radius:999px;
+}
+
+/* ====== Blocs de texte ====== */
+.p-block{ margin: 18px 0; }
+.p-h2{
+  margin: 0 0 8px; font-weight:700; font-size:16px; letter-spacing:.2px; color:var(--text);
+}
+.p-list{
+  margin: 0; padding-left: 18px; color:var(--text); line-height:1.55;
+}
+.p-list li{ margin: 4px 0; }
+
+/* ====== Actions ====== */
+.p-actions{ display:flex; gap:10px; margin-top: 8px; }
+.btn.btn--ghost, .btn--ghost{
+  display:inline-block; padding:10px 14px; border-radius:999px;
+  border:1.5px solid var(--text); background:transparent; color:var(--text);
+  text-decoration:none; font-weight:600; letter-spacing:.2px;
+}
+.btn.btn--ghost:hover, .btn--ghost:hover{ background:var(--text); color:#fff; }
+.btn--primary{
+  padding:10px 14px; border-radius:999px; border:0; background:var(--text); color:#fff; font-weight:700; cursor:pointer;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 900px){
+  .product{ grid-template-columns: 1fr; }
+
+  /* en mobile, on remet le breadcrumb sous le header */
+  .breadcrumb{
+    position: static;
+    margin: 8px 22px 0;
+    top: 0;
+    justify-content:flex-start; /* aligné à gauche en mobile pour la lisibilité */
+  }
+
+  /* quand les colonnes s'empilent, on rétablit un ratio confortable pour l'image */
+  .product__media{
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* variante intégrée mobile (même logique, hauteur confortable) */
+  .product__media:has(> img[alt="Shampoing solide"]){
+    height: 70vh;
+    aspect-ratio: 4 / 5;
+  }
+}
+
+
+

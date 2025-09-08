@@ -1,7 +1,7 @@
 /* =====================================================================
  * Boukla — shop.css (styles dédiés à la page shop.html)
- * Cohérent avec la home : Playfair Display + Inter, accents jaune doré.
- * N'impacte que les composants présents sur shop.html.
+ * Version nettoyée : suppression des blocs inutilisés (catégories, filtres, tri, toolbar).
+ * Conserve uniquement les styles réellement utilisés par le HTML envoyé.
  * ===================================================================== */
 
 /* ---------- Palette & tokens ---------- */
@@ -26,7 +26,7 @@
   margin-right: auto;
 }
 
-/* ---------- Fil d'Ariane (garde ta position, cliquable) ---------- */
+/* ---------- Fil d'Ariane ---------- */
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -34,10 +34,10 @@
   font-size: 14px;
   color: var(--muted);
   margin: 20px auto 8px;
-  margin-left: 820px;   /* ← ta valeur conservée */
+  margin-left: 820px;   /* valeur conservée */
   position: relative;
-  top: -130px;            /* ← ta valeur conservée */
-  z-index: 4;           /* au-dessus de tout décor de fond */
+  top: -140px;          /* valeur conservée */
+  z-index: 4;
 }
 .breadcrumb a {
   color: inherit;
@@ -51,7 +51,7 @@
   opacity: .6;
 }
 
-/* ---------- Hero (fin) ---------- */
+/* ---------- Hero court ---------- */
 .hero--thin {
   padding: clamp(20px, 6vw, 56px) 0 8px;
   text-align: center;
@@ -65,127 +65,18 @@
   color: #f2e6d8;
   margin: 0;
   margin-left: -295px;
-  margin-top: 0;          /* reset pour éviter le collapse */
   position: relative;
   top: -120px;
 }
-.muted {
-  margin-top: 8px;
-  font-size: 15px;
-  color: var(--muted);
-}
 
-/* Descendre le logo sans impacter la mise en page */
+/* ---------- Logo entête ---------- */
 .header .logo{
   position: relative;
   top: 22px;
+  left: -550px;
 }
 @media (max-width: 600px){
   .header .logo{ top: 6px; }
-}
-
-/* ---------- Barre outils : filtres & tri ---------- */
-.toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
-  margin-top: 8px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-/* Filtres = radio pills */
-.filters {
-  display: flex;
-  align-items: center;
-  gap: 12px 14px;
-  flex-wrap: wrap;
-}
-.filters fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  min-inline-size: 0;
-}
-.filters label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: #fff;
-  color: var(--text);
-  cursor: pointer;
-  transition: border-color .2s, box-shadow .2s, background .2s;
-}
-.filters label:hover {
-  border-color: color-mix(in oklab, var(--border) 70%, var(--text));
-  box-shadow: 0 4px 10px rgba(0,0,0,.04);
-}
-.filters input[type="radio"] {
-  appearance: none;
-  inline-size: 16px;
-  block-size: 16px;
-  border-radius: 50%;
-  border: 2px solid var(--muted);
-  display: inline-block;
-  position: relative;
-}
-.filters input[type="radio"]:checked {
-  border-color: var(--accent);
-}
-.filters input[type="radio"]:checked::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-
-/* Tri (select) */
-.sort {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  white-space: nowrap;
-}
-.sort > span {
-  color: var(--muted);
-}
-#sort {
-  appearance: none;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fff;
-  font: inherit;
-  line-height: 1.1;
-  cursor: pointer;
-  min-width: 180px;
-  background-image: linear-gradient(45deg, transparent 50%, var(--text) 50%),
-                    linear-gradient(135deg, var(--text) 50%, transparent 50%),
-                    linear-gradient(to right, transparent, transparent);
-  background-position: calc(100% - 18px) calc(1em + 2px),
-                       calc(100% - 13px) calc(1em + 2px),
-                       100% 0;
-  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
-  background-repeat: no-repeat;
-}
-#sort:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
 }
 
 /* ---------- Grille produits ---------- */
@@ -197,7 +88,7 @@
   margin: 24px 0 72px;
 }
 
-/* Carte produit */
+/* ---------- Carte produit ---------- */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -273,11 +164,6 @@
   letter-spacing: .2px;
   color: var(--text);
 }
-.card__meta {
-  margin: 0 0 12px;
-  font-size: 13px;
-  color: var(--muted);
-}
 
 /* Bouton fantôme (cohérent avec la home) */
 .btn.btn--ghost,
@@ -317,30 +203,6 @@
   background: var(--bg);
 }
 
-/* ---------- Responsif ---------- */
-@media (max-width: 900px) {
-  .toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-  .sort {
-    align-self: flex-start;
-  }
-}
-
-@media (max-width: 560px) {
-  .filters label {
-    padding: 7px 10px;
-    font-size: 13px;
-  }
-  #sort {
-    min-width: 0;
-    width: 100%;
-  }
-  .card__title { font-size: 18px; }
-}
-
 /* ---------- Accessibilité & préférences ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -353,28 +215,30 @@
 }
 
 /* =====================================================================
-   RECADRAGE PUR CSS (sans modifier le HTML)
-   - object-position: x% y% pour déplacer le focus
-   - aspect-ratio pour changer le cadre
+   RECADRAGE PUR CSS (URLs propres /produit/<slug>)
    ===================================================================== */
-.card__media[href*="sku=aurora-ring"] { aspect-ratio: 4 / 5; }
-.card__media[href*="sku=aurora-ring"] img { object-position: 10% 10% !important; }
-.card__media[href*="sku=lyra-necklace"] { aspect-ratio: 4 / 5; }
-.card__media[href*="sku=lyra-necklace"] img { object-position: 60% 30% !important; }
-.card__media[href*="sku=eden-bracelet"] { aspect-ratio: 4 / 5; }
-.card__media[href*="sku=eden-bracelet"] img { object-position: 60% 30% !important; }
-.card__media[href*="sku=nova-earrings"] { aspect-ratio: 4 / 5; }
-.card__media[href*="sku=nova-earrings"] img { object-position: 50% 25% !important; }
+.card__media[href*="/produit/creme-hydratante"] { aspect-ratio: 4 / 5; }
+.card__media[href*="/produit/creme-hydratante"] img { object-position: 10% 10% !important; }
 
-/* ----- Panneau coloré derrière le contenu (ne couvre PAS le breadcrumb/H1) ----- */
+.card__media[href*="/produit/masque-hydratant"] { aspect-ratio: 4 / 5; }
+.card__media[href*="/produit/masque-hydratant"] img { object-position: 60% 30% !important; }
+
+.card__media[href*="/produit/shampoing-solide"] { aspect-ratio: 4 / 5; }
+.card__media[href*="/produit/shampoing-solide"] img { object-position: 60% 30% !important; }
+
+.card__media[href*="/produit/huile-de-ricin"] { aspect-ratio: 4 / 5; }
+.card__media[href*="/produit/huile-de-ricin"] img { object-position: 50% 25% !important; }
+
+
+/* ----- Panneau coloré derrière la grille ----- */
 #collection{
   position: relative;
   z-index: 0;
+  margin-top: -110px; /* remonte tout le panneau + la grille */
 }
 #collection::before{
   content:"";
   position: absolute;
-  /* ancien: inset: -120px -24px -60px; puis 0 -24px -60px; */
   inset: -120px -60px -60px;   /* ↑ top | ←→ left/right | ↓ bottom */
   background: #f2ba52;
   border-radius: 24px;
@@ -383,19 +247,54 @@
   pointer-events: none;
 }
 
-
-/* S'assure que ces éléments sont au-dessus si besoin */
+/* Assure la superposition correcte */
 .header,
 .hero--thin,
-.toolbar,
 .breadcrumb {
   position: relative;
   z-index: 4;
 }
 
-#collection{
-  position: relative;
-  z-index: 0;
-  margin-top: -110px; /* ← remonte tout le panneau + la grille */
+/* ---------- Responsif minimal ---------- */
+@media (max-width: 560px) {
+  .card__title { font-size: 18px; }
 }
 
+/* ====== Quick View (modale produit) ====== */
+.qv { border: none; padding: 0; width: min(920px, 92vw); }
+.qv::backdrop { background: rgba(0,0,0,.45); backdrop-filter: blur(2px); }
+
+.qv__box { border: 0; margin: 0; padding: 0; background: #fff; border-radius: 16px; overflow: hidden; }
+.qv__close {
+  position: absolute; top: 10px; right: 12px;
+  background: transparent; border: 0; font-size: 28px; line-height: 1; cursor: pointer;
+}
+
+.qv__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; }
+.qv__media { position: relative; background: #f7f7f8; min-height: 420px; }
+.qv__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.qv__thumbs { display: flex; gap: 8px; position: absolute; left: 10px; bottom: 10px; }
+.qv__thumb { border: 0; padding: 0; background: #fff; border-radius: 10px; overflow: hidden; width: 58px; height: 58px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+.qv__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.qv__content { padding: 18px 18px 20px; }
+.qv__badge { display: inline-block; padding: 4px 10px; background: var(--accent); color: var(--accent-ink); border-radius: 999px; font-size: 12px; font-weight: 700; }
+.qv__title { margin: 8px 0 6px; font-family: "Playfair Display", serif; font-weight: 700; font-size: 28px; }
+.qv__short { margin: 0 0 10px; color: var(--muted); }
+.qv__price { font-weight: 700; margin: 2px 0 14px; }
+
+.qv__actions { display: flex; gap: 10px; }
+.qv__actions .btn--primary {
+  padding: 10px 14px; border-radius: 999px; border: 0; background: var(--text); color: #fff; font-weight: 700; cursor: pointer;
+}
+@media (max-width: 760px){
+  .qv__grid { grid-template-columns: 1fr; }
+  .qv__media { min-height: 320px; }
+}
+
+/* Quick View — recadrage spécifique "Crème hydratante" */
+.qv .qv__media img[src*="boukla-1.png"] {
+  object-fit: cover;              /* déjà en place normalement */
+  object-position: 10% 10% !important; /* ← bouge le focus : x% y% */
+}

@@ -14,13 +14,41 @@
   <!-- CSS -->
   <link rel="stylesheet" href="boukla.css">
   <link rel="stylesheet" href="shop.css">
+  <!-- Mini-panier -->
+  <link rel="stylesheet" href="cart.css">
+
+  <!-- Patch d’alignement header (logo ↔︎ panier) sur le même container que le breadcrumb -->
+  <style>
+    .header .header__bar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: var(--header-pad-y, 12px) 0;
+    }
+  </style>
 </head>
 <body>
   <!-- ====== ENTÊTE ====== -->
   <header class="header">
-    <a class="logo" href="index.html" aria-label="Boukla">
-      <img src="assets/images/logo-boukla-3.svg" alt="Boukla" height="32" width="120" decoding="async"/>
-    </a>
+    <div class="container header__bar">
+      <a class="logo" href="index.html" aria-label="Boukla">
+        <img src="assets/images/logo-boukla-3.svg" alt="Boukla" height="32" width="120" decoding="async"/>
+      </a>
+
+      <!-- Bouton OUVRIR le mini-panier -->
+      <div class="header__actions">
+        <button class="icon-btn btn-cart"
+                data-cart-open
+                aria-controls="cart-modal"
+                aria-expanded="false"
+                aria-label="Ouvrir le panier">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="badge" data-cart-count>0</span>
+        </button>
+      </div>
+    </div>
   </header>
 
   <!-- ====== BREADCRUMB ====== -->
@@ -36,47 +64,51 @@
   <!-- ====== GRILLE PRODUITS ====== -->
   <main id="collection" class="container">
     <ul id="grid" class="product-grid">
-      <li class="card" data-cat="rings" data-price="3490" data-new="1">
-        <a class="card__media" href="product.html?sku=aurora-ring">
+      <!-- Crème hydratante -->
+      <li class="card" data-cat="soins" data-price="3490" data-new="1">
+        <a class="card__media" href="/produit/creme-hydratante">
           <img src="assets/images/produit/boukla-1.png" alt="Crème hydratante" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="product.html?sku=aurora-ring">Crème hydratante</a></h3>
+          <h3 class="card__title"><a href="/produit/creme-hydratante">Crème hydratante</a></h3>
           <p class="card__price">34,90 €</p>
-          <a class="btn btn--ghost" href="product.html?sku=aurora-ring">Voir le détail</a>
+          <a class="btn btn--ghost" href="/produit/creme-hydratante">Voir le détail</a>
         </div>
       </li>
 
-      <li class="card" data-cat="necklaces" data-price="2490" data-new="1">
-        <a class="card__media" href="product.html?sku=lyra-necklace">
+      <!-- Masque hydratant -->
+      <li class="card" data-cat="masques" data-price="2490" data-new="1">
+        <a class="card__media" href="/produit/masque-hydratant">
           <img src="assets/images/produit/étiquette-boukla-3.jpg" alt="Masque hydratant" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="product.html?sku=lyra-necklace">Masque hydratant</a></h3>
+          <h3 class="card__title"><a href="/produit/masque-hydratant">Masque hydratant</a></h3>
           <p class="card__price">24,90 €</p>
-          <a class="btn btn--ghost" href="product.html?sku=lyra-necklace">Voir le détail</a>
+          <a class="btn btn--ghost" href="/produit/masque-hydratant">Voir le détail</a>
         </div>
       </li>
 
-      <li class="card" data-cat="bracelets" data-price="1490" data-new="0">
-        <a class="card__media" href="product.html?sku=eden-bracelet">
+      <!-- Shampoing solide -->
+      <li class="card" data-cat="shampoings" data-price="1490" data-new="0">
+        <a class="card__media" href="/produit/shampoing-solide">
           <img src="assets/images/produit/étiquette-boukla-4.png" alt="Shampoing solide" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="product.html?sku=eden-bracelet">Shampoing solide</a></h3>
+          <h3 class="card__title"><a href="/produit/shampoing-solide">Shampoing solide</a></h3>
           <p class="card__price">14,90 €</p>
-          <a class="btn btn--ghost" href="product.html?sku=eden-bracelet">Voir le détail</a>
+          <a class="btn btn--ghost" href="/produit/shampoing-solide">Voir le détail</a>
         </div>
       </li>
 
-      <li class="card" data-cat="earrings" data-price="2990" data-new="1">
-        <a class="card__media" href="product.html?sku=nova-earrings">
+      <!-- Huile de ricin -->
+      <li class="card" data-cat="huiles" data-price="2990" data-new="1">
+        <a class="card__media" href="/produit/huile-de-ricin">
           <img src="assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="product.html?sku=nova-earrings">Huile de ricin</a></h3>
+          <h3 class="card__title"><a href="/produit/huile-de-ricin">Huile de ricin</a></h3>
           <p class="card__price">29,90 €</p>
-          <a class="btn btn--ghost" href="product.html?sku=nova-earrings">Voir le détail</a>
+          <a class="btn btn--ghost" href="/produit/huile-de-ricin">Voir le détail</a>
         </div>
       </li>
     </ul>
@@ -89,49 +121,305 @@
     </div>
   </footer>
 
-  <!-- ====== JS tolérant (aucune erreur si filtres/tri absents) ====== -->
+  <!-- ====== MODALE QUICK VIEW ====== -->
+  <dialog id="qv" class="qv">
+    <form method="dialog" class="qv__box">
+      <button class="qv__close" aria-label="Fermer" value="close">×</button>
+
+      <div class="qv__grid">
+        <div class="qv__media">
+          <img id="qv-image" alt="" loading="lazy">
+          <div id="qv-thumbs" class="qv__thumbs"></div>
+        </div>
+
+        <div class="qv__content">
+          <p id="qv-badge" class="qv__badge" hidden>Nouveau</p>
+          <h2 id="qv-title" class="qv__title"></h2>
+          <p id="qv-short" class="qv__short"></p>
+          <p class="qv__price"><span id="qv-price"></span></p>
+
+          <div class="qv__actions">
+            <a id="qv-link" class="btn btn--ghost" href="#">Voir la fiche</a>
+            <button id="qv-add" type="button" class="btn btn--primary">Ajouter au panier</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ====== JSON INLINE (pour fonctionner sans serveur) ====== -->
+  <script id="products-json" type="application/json">
+  [
+    {
+      "slug": "creme-hydratante",
+      "name": "Crème hydratante",
+      "price": 34.9,
+      "currency": "EUR",
+      "short": "Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.",
+      "images": ["assets/images/produit/boukla-1.png"],
+      "badge": "Nouveau"
+    },
+    {
+      "slug": "masque-hydratant",
+      "name": "Masque hydratant",
+      "price": 24.9,
+      "currency": "EUR",
+      "short": "Soin profond hebdomadaire pour boucles repulpées et brillantes.",
+      "images": ["assets/images/produit/étiquette-boukla-3.jpg"]
+    },
+    {
+      "slug": "shampoing-solide",
+      "name": "Shampoing solide",
+      "price": 14.9,
+      "currency": "EUR",
+      "short": "Nettoyage doux, mousse fine, respecte le cuir chevelu.",
+      "images": ["assets/images/produit/étiquette-boukla-4.png"]
+    },
+    {
+      "slug": "huile-de-ricin",
+      "name": "Huile de ricin",
+      "price": 29.9,
+      "currency": "EUR",
+      "short": "Fortifie visiblement les longueurs, brillance naturelle.",
+      "images": ["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]
+    }
+  ]
+  </script>
+
+  <!-- ====== JS (cart) ====== -->
+  <script defer src="cart.js"></script>
+
+  <!-- ====== JS (liste : filtres/tri tolérant) ====== -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('grid');
+  document.addEventListener('DOMContentLoaded', function () {
+    var grid = document.getElementById('grid');
     if (!grid) return;
 
-    const filters = document.getElementById('filters');
-    const sort    = document.getElementById('sort');
+    var filters = document.getElementById('filters');
+    var sort    = document.getElementById('sort');
 
     // Pré-sélection ?cat=...
-    const params = new URLSearchParams(location.search);
-    const initialCat = (params.get('cat') || 'all').toLowerCase();
+    var params = new URLSearchParams(location.search);
+    var initialCat = (params.get('cat') || 'all').toLowerCase();
     if (filters) {
-      const input = filters.querySelector(`input[name="cat"][value="${initialCat}"]`);
+      var input = filters.querySelector('input[name="cat"][value="' + initialCat + '"]');
       if (input) input.checked = true;
     }
 
     function applySort() {
       if (!sort) return; // pas de tri -> ordre HTML
-      const mode = sort.value;
-      const items = [...grid.children].filter(li => li.style.display !== 'none');
-      let cmp = null;
-      if (mode === 'price-asc')  cmp = (a,b) => (+a.dataset.price) - (+b.dataset.price);
-      if (mode === 'price-desc') cmp = (a,b) => (+b.dataset.price) - (+a.dataset.price);
-      if (mode === 'new')        cmp = (a,b) => (+b.dataset.new)   - (+a.dataset.new);
-      if (cmp) items.sort(cmp).forEach(li => grid.appendChild(li));
+      var mode = sort.value;
+      var items = Array.prototype.slice.call(grid.children).filter(function(li){ return li.style.display !== 'none'; });
+      var cmp = null;
+      if (mode === 'price-asc')  cmp = function(a,b){ return (+a.dataset.price) - (+b.dataset.price); };
+      if (mode === 'price-desc') cmp = function(a,b){ return (+b.dataset.price) - (+a.dataset.price); };
+      if (mode === 'new')        cmp = function(a,b){ return (+b.dataset.new)   - (+a.dataset.new); };
+      if (cmp) items.sort(cmp).forEach(function(li){ grid.appendChild(li); });
     }
 
     function applyFilters() {
-      const cat = filters?.querySelector('input[name="cat"]:checked')?.value || 'all';
-      [...grid.children].forEach(li => {
-        const ok = (cat === 'all') || (li.dataset.cat === cat);
+      var cat = filters && filters.querySelector('input[name="cat"]:checked') ? filters.querySelector('input[name="cat"]:checked').value : 'all';
+      Array.prototype.forEach.call(grid.children, function(li){
+        var ok = (cat === 'all') || (li.dataset.cat === cat);
         li.style.display = ok ? '' : 'none';
       });
       applySort();
     }
 
-    filters?.addEventListener('change', applyFilters);
-    sort?.addEventListener('change', applySort);
+    // Wire buttons inside cards if they already exist
+    function slugFromHref(href){
+      var m = href ? href.match(/(?:^|\/)produit\/([^\/?#]+)/i) : null;
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+    function parsePrice(text){
+      var n = parseFloat(String(text).replace(/[^0-9,.-]/g,'').replace(',', '.'));
+      return isNaN(n) ? 0 : n;
+    }
+    function wireCardButtons(){
+      var cards = grid.querySelectorAll('.card');
+      Array.prototype.forEach.call(cards, function(card){
+        var link = card.querySelector('.card__title a, .card__media[href*="/produit/"]');
+        var slug = link ? slugFromHref(link.getAttribute('href')) : null;
+        var name = (card.querySelector('.card__title') && card.querySelector('.card__title').textContent) ? card.querySelector('.card__title').textContent.trim() : 'Produit';
+        var priceTxt = card.querySelector('.card__price') ? card.querySelector('.card__price').textContent : '0';
+        var price = parsePrice(priceTxt);
+        var imageEl = card.querySelector('.card__media img');
+        var image = imageEl ? imageEl.getAttribute('src') : '';
+
+        // trouve des boutons existants qui ressemblent à “Ajouter au panier”
+        var candidates = card.querySelectorAll('[data-add-to-cart], [data-role="add-to-cart"], .btn--primary, button, a');
+        Array.prototype.forEach.call(candidates, function(btn){
+          var label = (btn.textContent || '').toLowerCase();
+          var seemsAdd = (label.indexOf('ajout') > -1 || label.indexOf('panier') > -1 || label.indexOf('add') > -1) &&
+                         (label.indexOf('detail') === -1 && label.indexOf('fiche') === -1 && label.indexOf('voir') === -1);
+          if (!seemsAdd) return;
+          btn.setAttribute('data-add-to-cart','');
+          if (slug) btn.dataset.id = slug;
+          btn.dataset.name = name;
+          btn.dataset.price = price;
+          btn.dataset.image = image;
+        });
+      });
+    }
+
+    filters && filters.addEventListener('change', function(){ applyFilters(); wireCardButtons(); });
+    sort && sort.addEventListener('change', function(){ applySort(); wireCardButtons(); });
 
     applyFilters();
+    wireCardButtons(); // première passe
   });
+  </script>
+
+  <!-- ====== JS QUICK VIEW (compatible file:// + fetch) ====== -->
+  <script>
+  (function () {
+    'use strict';
+
+    var DATA_URL = 'products.json';       // utilisera fetch plus tard si tu mets un serveur
+    var modal = document.getElementById('qv');
+    if (!modal) return;
+
+    var els = {
+      img:    document.getElementById('qv-image'),
+      thumbs: document.getElementById('qv-thumbs'),
+      title:  document.getElementById('qv-title'),
+      short:  document.getElementById('qv-short'),
+      price:  document.getElementById('qv-price'),
+      badge:  document.getElementById('qv-badge'),
+      link:   document.getElementById('qv-link'),
+      add:    document.getElementById('qv-add')
+    };
+
+    var isFileProto = location.protocol === 'file:';
+    var bySlug = new Map();
+    var loaded = false;
+
+    // Charger les données : 1) JSON inline, 2) window.PRODUCTS, 3) fetch
+    function ensureData() {
+      if (loaded) return Promise.resolve();
+
+      var inline = document.getElementById('products-json');
+      if (inline && inline.textContent.trim()) {
+        try {
+          var list = JSON.parse(inline.textContent);
+          bySlug = new Map(list.map(function(p){ return [p.slug, p]; }));
+          loaded = true;
+          return Promise.resolve();
+        } catch(e){
+          console.warn('JSON inline invalide', e);
+        }
+      }
+
+      if (Array.isArray(window.PRODUCTS)) {
+        bySlug = new Map(window.PRODUCTS.map(function(p){ return [p.slug, p]; }));
+        loaded = true;
+        return Promise.resolve();
+      }
+
+      if (isFileProto) {
+        console.warn('En file://, fetch(products.json) est bloqué par le navigateur.');
+        return Promise.reject(new Error('fetch bloqué en file://'));
+      }
+
+      return fetch(DATA_URL, { cache: 'no-store' })
+        .then(function(res){ return res.json(); })
+        .then(function(list){
+          bySlug = new Map(list.map(function(p){ return [p.slug, p]; }));
+          loaded = true;
+        });
+    }
+
+    // extraire /produit/<slug> ou produit/<slug>
+    function slugFromHref(href) {
+      var m = href && href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+
+    function openDialog() {
+      if (typeof modal.showModal === 'function') modal.showModal();
+      else modal.setAttribute('open', '');
+    }
+    function closeDialog() {
+      if (typeof modal.close === 'function') modal.close();
+      else modal.removeAttribute('open');
+    }
+
+    function formatPrice(n, currency){
+      try {
+        return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: currency || 'EUR' }).format(n || 0);
+      } catch(e){ return (n || 0) + ' €'; }
+    }
+
+    function parsePrice(text){
+      var n = parseFloat(String(text).replace(/[^0-9,.-]/g,'').replace(',', '.'));
+      return isNaN(n) ? 0 : n;
+    }
+
+    function openQV(slug) {
+      ensureData().then(function(){
+        var p = bySlug.get(slug);
+        if (!p) return;
+
+        els.title.textContent = p.name || '';
+        els.short.textContent = p.short || '';
+        els.price.textContent = formatPrice(p.price, p.currency);
+
+        if (p.badge) { els.badge.textContent = p.badge; els.badge.hidden = false; }
+        else { els.badge.hidden = true; }
+
+        var main = (p.images && p.images[0]) || '';
+        els.img.src = main; els.img.alt = p.name || '';
+
+        els.thumbs.innerHTML = '';
+        (p.images || []).forEach(function(src){
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'qv__thumb';
+          var im = document.createElement('img'); im.src = src; im.alt = '';
+          b.appendChild(im);
+          b.addEventListener('click', function(){ els.img.src = src; });
+          els.thumbs.appendChild(b);
+        });
+
+        // Lien fiche : en file:// → product.html?slug=..., sinon → /produit/<slug>
+        var href = isFileProto ? ('product.html?slug=' + slug) : ('/produit/' + slug);
+        els.link.setAttribute('href', href);
+
+        // === Brancher le bouton "Ajouter au panier" DE LA MODALE ===
+        els.add.setAttribute('data-add-to-cart','');
+        els.add.dataset.id = slug;
+        els.add.dataset.name = p.name;
+        els.add.dataset.price = (typeof p.price === 'number') ? p.price : parsePrice(p.price);
+        els.add.dataset.image = main || '';
+
+        openDialog();
+      }).catch(function(){
+        alert("Impossible de charger les produits en mode fichier.\nAssure-toi que le JSON inline est présent.");
+      });
+    }
+
+    // Intercepter clic gauche sur /produit/... OU produit/...
+    document.addEventListener('click', function(e){
+      var a = e.target.closest('a[href*="/produit/"], a[href^="produit/"]');
+      if (!a) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // laisser "ouvrir dans un onglet"
+      e.preventDefault();
+      var slug = slugFromHref(a.getAttribute('href'));
+      if (slug) openQV(slug);
+    });
+
+    // Fermer la modale en cliquant hors du contenu
+    modal.addEventListener('click', function(e){
+      var box = e.target.closest('.qv__box');
+      if (!box) closeDialog();
+    });
+  })();
   </script>
 </body>
 </html>
+
+
+
+
+
+
 

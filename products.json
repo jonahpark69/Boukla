@@ -5,8 +5,12 @@
     "price": 34.9,
     "currency": "EUR",
     "short": "Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.",
+    "description": "Notre Crème hydratante nourrit intensément sans alourdir, pour des boucles souples, définies et lumineuses. Sa texture fondante enveloppe la fibre pour limiter les frisottis et maintenir l’hydratation tout au long de la journée.",
     "images": ["assets/images/produit/boukla-1.png"],
-    "badge": "Nouveau"
+    "benefits": ["Hydrate en profondeur", "Réduit les frisottis", "Boucles souples et lumineuses"],
+    "actives": ["Aloe vera", "Beurre de karité", "Glycérine végétale", "Huile de jojoba"],
+    "how_to": "Sur cheveux humides ou secs, appliquer une noisette en scrunch des longueurs vers les pointes. Ne pas rincer.",
+    "badges": ["Sans silicones", "Vegan", "Cruelty-free"]
   },
   {
     "slug": "masque-hydratant",
@@ -14,7 +18,11 @@
     "price": 24.9,
     "currency": "EUR",
     "short": "Soin profond hebdomadaire pour boucles repulpées et brillantes.",
-    "images": ["assets/images/produit/étiquette-boukla-3.jpg"]
+    "description": "Le Masque hydratant repulpe et assouplit la fibre pour des boucles rebondies et faciles à coiffer. Aide à limiter la casse liée à la sécheresse.",
+    "images": ["assets/images/produit/étiquette-boukla-3.jpg"],
+    "benefits": ["Hydratation intense", "Démêle et assouplit", "Brillance et définition"],
+    "actives": ["Aloe vera", "Beurre de karité", "Huile de coco", "Protéines végétales"],
+    "how_to": "Après shampoing, sur cheveux essorés : appliquer généreusement mèche par mèche, laisser poser 10–20 min, rincer."
   },
   {
     "slug": "shampoing-solide",
@@ -22,7 +30,11 @@
     "price": 14.9,
     "currency": "EUR",
     "short": "Nettoyage doux, mousse fine, respecte le cuir chevelu.",
-    "images": ["assets/images/produit/étiquette-boukla-4.png"]
+    "description": "Shampoing solide doux qui nettoie sans décaper et laisse les boucles souples, prêtes à recevoir les soins.",
+    "images": ["assets/images/produit/étiquette-boukla-4.png"],
+    "benefits": ["Nettoyage doux", "Respect du cuir chevelu", "Mousse fine"],
+    "actives": ["Tensioactifs doux", "Huile de coco", "Argile blanche", "Glycérine"],
+    "how_to": "Mouiller le galet et les cheveux. Faire mousser, masser, rincer. Laisser sécher le galet."
   },
   {
     "slug": "huile-de-ricin",
@@ -30,6 +42,11 @@
     "price": 29.9,
     "currency": "EUR",
     "short": "Fortifie visiblement les longueurs, brillance naturelle.",
-    "images": ["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]
+    "description": "Huile de ricin pure, pressée à froid, idéale pour bains d’huile et massages du cuir chevelu.",
+    "images": ["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"],
+    "benefits": ["Fortifie visiblement", "Limite la casse", "Apporte de la brillance"],
+    "actives": ["Ricinus Communis (Castor) Seed Oil 100%"],
+    "how_to": "Massage cuir chevelu (quelques gouttes, 3–5 min), ou bain d’huile (1 part ricin + 2 parts huile légère)."
   }
 ]
+

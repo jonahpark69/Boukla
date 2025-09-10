@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
- <head>
+<head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>Boukla — New Arrivals</title>
@@ -8,241 +8,466 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 
-  <!-- Preload du logo SVG pour un rendu net dès le premier paint -->
-  <link as="image" href="assets/images/logo-boukla-2.svg" rel="preload" type="image/svg+xml"/>
+  <!-- Preload du logo SVG -->
+  <link rel="preload" as="image" href="assets/images/logo-boukla-2.svg" type="image/svg+xml"/>
 
-  <!-- CSS -->
-  <link href="boukla.css" rel="stylesheet"/>
-  <!-- Cart (mini-panier) -->
-  <link href="cart.css" rel="stylesheet"/>
- </head>
- <body>
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="boukla.css"/>
+  <link rel="stylesheet" href="login-modal.css"/>
+  <link rel="stylesheet" href="contact-modal.css"/>
+  <link rel="stylesheet" href="checkout-modal.css"/>
+</head>
+
+<body>
   <!-- ENTÊTE -->
   <header class="header">
-   <!-- LOGO SVG -->
-   <a aria-label="Boukla" class="logo" href="#">
-    <img alt="Boukla Logo" decoding="async" fetchpriority="high" height="60" src="assets/images/logo-boukla-2.svg"/>
-   </a>
+    <div class="header__inner">
+      <!-- LOGO SVG -->
+      <a aria-label="Boukla" class="logo" href="index.html">
+        <img alt="Boukla Logo" decoding="async" fetchpriority="high" height="60" src="assets/images/logo-boukla-2.svg"/>
+      </a>
 
-   <!-- NAV -->
-   <nav aria-label="Navigation principale" class="nav">
-    <a aria-current="page" class="nav__link is-active" href="#">HOME</a>
-    <a class="nav__link" href="#">ABOUT US</a>
-    <a class="nav__link" href="#">CONTACT</a>
-   </nav>
+      <!-- NAV -->
+      <nav aria-label="Navigation principale" class="nav">
+        <a aria-current="page" class="nav__link is-active" href="index.html">HOME</a>
+        <a class="nav__link" href="about.php">ABOUT US</a>
+        <a class="nav__link" href="contact.php" id="nav-contact" data-modal-target="#contact-modal">CONTACT</a>
+      </nav>
 
-   <!-- ACTIONS -->
-   <div class="header__actions">
-    <a class="login" href="#">LOGIN</a>
+      <!-- ACTIONS -->
+      <div class="header__actions">
+        <a class="login js-auth-open"
+           href="#"
+           aria-haspopup="dialog"
+           aria-controls="auth-modal"
+           aria-expanded="false">LOGIN</a>
 
-    <button aria-label="Search" class="icon-btn">
-     <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
-      <circle cx="11" cy="11" r="7"></circle>
-      <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
-     </svg>
-    </button>
+        <!-- Bouton loupe + champ qui apparaît au clic -->
+        <div class="search-wrap">
+          <button type="button"
+                  class="icon-btn js-search-toggle"
+                  aria-label="Rechercher"
+                  aria-expanded="false"
+                  aria-controls="home-search">
+            <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+            </svg>
+          </button>
 
-    <!-- Panier (ouvre le mini-panier) -->
-    <button class="icon-btn btn-cart" data-cart-open aria-controls="cart-modal" aria-expanded="false" aria-label="Ouvrir le panier">
-     <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
-      <circle cx="9" cy="21" r="1"></circle>
-      <circle cx="20" cy="21" r="1"></circle>
-      <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-     </svg>
-     <span class="badge" data-cart-count>0</span>
-    </button>
+          <form id="home-search" class="search-popover" role="search" action="/recherche" method="get" hidden>
+            <input class="search-popover__input"
+                   type="search"
+                   name="q"
+                   placeholder="Rechercher un produit…"
+                   autocomplete="on"
+                   inputmode="search" />
+            <button class="search-popover__btn" type="submit">OK</button>
+          </form>
+        </div>
 
-    <button aria-label="Menu" class="hamburger">
-     <span></span>
-     <span></span>
-    </button>
-   </div>
+        <!-- Panier (ouvre le mini-panier) -->
+        <button class="icon-btn btn-cart" data-cart-open aria-controls="cart-modal" aria-expanded="false" aria-label="Ouvrir le panier">
+          <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="badge" data-cart-count>0</span>
+        </button>
+
+        <!-- Menu burger -->
+        <button aria-label="Menu" class="hamburger">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
   </header>
 
   <!-- HERO EN PLEINE LARGEUR -->
   <main class="hero">
-   <!-- Colonne gauche : image pleine -->
-   <section class="hero__left">
-    <img alt="Photo Boukla" class="hero__model" src="assets/images/boukla-1.png"/>
-   </section>
+    <!-- Colonne gauche : image pleine -->
+    <section class="hero__left">
+      <img alt="Photo Boukla" class="hero__model" src="assets/images/boukla-1.png"/>
+    </section>
 
-   <!-- Colonne droite : carte promo avec carrousel -->
-   <aside class="hero__right">
-    <div class="promo" data-images='[
-             "assets/images/étiquette-boukla-3.jpg",
-             "assets/images/étiquette-boukla-4.png",
-             "assets/images/étiquette-produit-boukla-2-mock-up.jpg"
-           ]'>
-     <!-- Bloc image + barre jaune -->
-     <div class="promo__media">
-      <!-- Important : src aligné sur la 1ère image de data-images -->
-      <img alt="Produits Boukla en promotion" class="promo__img" src="assets/images/étiquette-boukla-3.jpg"/>
-      <div class="promo__stripe">
-       <button aria-label="Image suivante" class="promo__next" type="button">&rsaquo;</button>
+    <!-- Colonne droite : carte promo avec carrousel -->
+    <aside class="hero__right">
+      <div class="promo" data-images='[
+               "assets/images/étiquette-boukla-3.jpg",
+               "assets/images/étiquette-boukla-4.png",
+               "assets/images/étiquette-produit-boukla-2-mock-up.jpg"
+             ]'>
+        <div class="promo__media">
+          <img alt="Produits Boukla en promotion" class="promo__img" src="assets/images/étiquette-boukla-3.jpg"/>
+          <div class="promo__stripe">
+            <button aria-label="Image suivante" class="promo__next" type="button">&rsaquo;</button>
+          </div>
+        </div>
+        <div class="promo__code-bar">PROMO CODE 360C</div>
+        <div class="promo__meta">
+          <h3 class="promo__off">65% OFF</h3>
+        </div>
       </div>
-     </div>
-     <!-- Petit rectangle orange sous l'image -->
-     <div class="promo__code-bar">PROMO CODE 360C</div>
-     <!-- Réduction -->
-     <div class="promo__meta">
-      <h3 class="promo__off">65% OFF</h3>
-     </div>
-    </div>
-   </aside>
+    </aside>
 
-   <!-- Bandeau bas : NEW / ARRIVALS + texte -->
-   <section class="hero__bottom">
-    <div class="bottom__split bottom__split--white"></div>
-    <div class="bottom__split bottom__split--yellow"></div>
-    <h1 class="kicker">NEW</h1>
-    <h1 class="headline">ARRIVALS</h1>
-    <p class="subline">
-     <span aria-hidden="true" class="bar"></span>
-     NEW OFFERS EVERY WEEKS
-    </p>
-    <p class="lead">
-     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-     incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
-    </p>
-    <!-- Branché vers shop.html -->
-    <a class="cta" href="shop.html">SHOP NOW</a>
-
-    <!-- Colonne d’icônes à droite -->
-    <div class="socials">
-      <a class="social" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
-        <img src="assets/icons/instagram.svg" alt="Instagram">
-      </a>
-      <a class="social" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
-        <img src="assets/icons/pinterest.svg" alt="Pinterest">
-      </a>
-      <a class="social" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
-        <img src="assets/icons/x.svg" alt="X (Twitter)">
-      </a>
-    </div>
-   </section>
-
-   <!-- Bande motif répétée, full-width -->
-   <div class="motif-strip" aria-hidden="true"></div>
-
-   <!-- ===== Suite du design : section "natural / cosmetics" ===== -->
-   <section class="section-natural">
-    <!-- bande jaune full-bleed (pleine largeur) -->
-    <div class="section-natural__band"></div>
-
-    <div class="section-natural__stage">
-      <!-- grande image centrale -->
-      <img
-        class="section-natural__img-large"
-        src="assets/images/boukla-2.jpg"
-        alt="Visuel principal Boukla"
-        width="860"
-        height="1080"
-        loading="lazy"
-      />
-
-      <!-- petite image chevauchante en bas-droite -->
-      <img
-        class="section-natural__img-small"
-        src="assets/images/boukla-3.jpg"
-        alt="Portrait Boukla"
-        width="420"
-        height="560"
-        loading="lazy"
-      />
-
-      <!-- titre sur 2 lignes (Playfair) posé par-dessus les visuels -->
-      <h2 class="section-natural__title">
-        <span>natural</span>
-        <span>cosmetics</span>
-      </h2>
-    </div>
-
-    <!-- texte + bouton centrés sous la scène -->
-    <div class="section-natural__content">
-      <p class="section-natural__text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+    <!-- Bandeau bas : NEW / ARRIVALS + texte -->
+    <section class="hero__bottom">
+      <div class="bottom__split bottom__split--white"></div>
+      <div class="bottom__split bottom__split--yellow"></div>
+      <h1 class="kicker">NEW</h1>
+      <h1 class="headline">ARRIVALS</h1>
+      <p class="subline">
+        <span aria-hidden="true" class="bar"></span>
+        NEW OFFERS EVERY WEEKS
       </p>
-      <!-- Bouton branché vers shop.html -->
-      <a href="shop.html" class="section-natural__btn" role="button">Shop now</a>
-    </div>
-   </section>
+      <p class="lead">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.
+      </p>
+      <a class="cta" href="shop.html">SHOP NOW</a>
 
-   <!-- =========================
-        SECTION — Featured (bloc marron)
-        ========================= -->
-   <section class="section-featured" aria-labelledby="featured-title">
-    <div class="section-featured__inner">
-
-      <!-- Colonne gauche : grande image produit -->
-      <figure class="featured__figure featured__figure--left">
-        <img src="assets/images/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin Boukla - flacon et étui" />
-      </figure>
-
-      <!-- Colonne droite : titre + texte + bouton -->
-      <div class="featured__content">
-        <h2 id="featured-title" class="featured__title">HUILE DE RICIN</h2>
-        <p class="featured__lead">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <!-- Bouton branché vers shop.html -->
-        <a href="shop.html" class="featured__btn">Shop now</a>
-      </div>
-
-      <!-- Colonne droite (bas) : seconde image produit -->
-      <figure class="featured__figure featured__figure--right">
-        <img src="assets/images/produit-boukla-1.png" alt="Masque nourrissant Boukla - pot et étui" />
-      </figure>
-
-    </div>
-   </section>
-
-   <section class="section-after-featured" aria-labelledby="after-title">
-    <div class="section-after-featured__inner">
-      <article class="after-card">
-        <h2 id="after-title" class="after-card__title">HUILE DE RICIN</h2>
-        <p class="after-card__text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
-        </p>
-        <!-- Bouton branché vers shop.html -->
-        <a href="shop.html" class="featured__btn">Shop now</a>
-      </article>
-    </div>
-   </section>
-
-   <section class="section-promo-social" aria-labelledby="promo-social-title">
-    <div class="promo-social__inner">
-      <h1 id="promo-social-title" class="promo-social__title">
-        50% OFF ONLY ONLINE 24H
-      </h1>
-
-      <figure class="promo-social__figure">
-        <img src="assets/images/My project-1-24.jpg" alt="Amies souriantes — promo Boukla" />
-      </figure>
-
-      <!-- Icônes en bas (section promo-social) -->
-      <div class="promo-social__links">
-        <a class="social-dot" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+      <!-- Colonne d’icônes à droite -->
+      <div class="socials">
+        <a class="social" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
           <img src="assets/icons/instagram.svg" alt="Instagram">
         </a>
-        <a class="social-dot" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
+        <a class="social" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
           <img src="assets/icons/pinterest.svg" alt="Pinterest">
         </a>
-        <a class="social-dot" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+        <a class="social" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
           <img src="assets/icons/x.svg" alt="X (Twitter)">
         </a>
       </div>
-    </div>
-   </section>
+    </section>
+
+    <!-- Bande motif -->
+    <div class="motif-strip" aria-hidden="true"></div>
+
+    <!-- Section natural -->
+    <section class="section-natural">
+      <div class="section-natural__band"></div>
+
+      <div class="section-natural__stage">
+        <img class="section-natural__img-large" src="assets/images/boukla-2.jpg" alt="Visuel principal Boukla" width="860" height="1080" loading="lazy"/>
+        <img class="section-natural__img-small" src="assets/images/boukla-3.jpg" alt="Portrait Boukla" width="420" height="560" loading="lazy"/>
+        <h2 class="section-natural__title">
+          <span>natural</span>
+          <span>cosmetics</span>
+        </h2>
+      </div>
+
+      <div class="section-natural__content">
+        <p class="section-natural__text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        </p>
+        <a href="shop.html" class="section-natural__btn" role="button">Shop now</a>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="section-featured" aria-labelledby="featured-title">
+      <div class="section-featured__inner">
+        <figure class="featured__figure featured__figure--left">
+          <img src="assets/images/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin Boukla - flacon et étui" />
+        </figure>
+
+        <div class="featured__content">
+          <h2 id="featured-title" class="featured__title">MASQUE NOURRISSANT</h2>
+          <p class="featured__lead">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <a href="shop.html" class="featured__btn">Shop now</a>
+        </div>
+
+        <figure class="featured__figure featured__figure--right">
+          <img src="assets/images/produit-boukla-1.png" alt="Masque nourrissant Boukla - pot et étui" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-after-featured" aria-labelledby="after-title">
+      <div class="section-after-featured__inner">
+        <article class="after-card">
+          <h2 id="after-title" class="after-card__title">HUILE DE RICIN</h2>
+          <p class="after-card__text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </p>
+          <a href="shop.html" class="featured__btn">Shop now</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-promo-social" aria-labelledby="promo-social-title">
+      <div class="promo-social__inner">
+        <h1 id="promo-social-title" class="promo-social__title">
+          50% OFF ONLY ONLINE 24H
+        </h1>
+
+        <figure class="promo-social__figure">
+          <img src="assets/images/My project-1-24.jpg" alt="Amies souriantes — promo Boukla" />
+        </figure>
+
+        <div class="promo-social__links">
+          <a class="social-dot" href="https://instagram.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+            <img src="assets/icons/instagram.svg" alt="Instagram">
+          </a>
+          <a class="social-dot" href="https://pinterest.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
+            <img src="assets/icons/pinterest.svg" alt="Pinterest">
+          </a>
+          <a class="social-dot" href="https://x.com/VOTRE_PROFIL" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+            <img src="assets/icons/x.svg" alt="X (Twitter)">
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- MODAL "Aucun résultat" -->
+  <div id="search-not-found" class="cmodal" aria-hidden="true" role="dialog" aria-labelledby="snf-title" aria-modal="true">
+    <div class="cmodal__overlay" data-snf-close></div>
+    <div class="cmodal__panel" role="document">
+      <header class="cmodal__header">
+        <div class="cmodal__title" id="snf-title">Aucun résultat</div>
+        <button class="cmodal__close" type="button" aria-label="Fermer" data-snf-close>×</button>
+      </header>
+      <div class="cmodal__list">
+        <p>On n’a trouvé aucun produit pour « <strong id="snf-q"></strong> ».</p>
+        <ul style="margin-top:10px; padding-left:18px;">
+          <li>Vérifie l’orthographe.</li>
+          <li>Essaie un mot-clé plus général.</li>
+        </ul>
+      </div>
+      <footer class="cmodal__footer">
+        <button class="btn-primary" type="button" data-snf-close>OK</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ===== MODAL AUTH (dédupliqué) ===== -->
+  <dialog id="auth-modal" class="auth-modal" aria-labelledby="auth-title">
+    <form method="dialog" class="auth-modal__box">
+      <button class="auth-modal__close" aria-label="Fermer" value="close">×</button>
+
+      <div class="auth-modal__tabs" role="tablist" aria-label="Connexion ou inscription">
+        <button type="button" role="tab" aria-selected="true"  class="js-auth-tab" data-view="login">Connexion</button>
+        <button type="button" role="tab" aria-selected="false" class="js-auth-tab" data-view="signup">Inscription</button>
+      </div>
+
+      <!-- Connexion -->
+      <section class="auth-view" data-view="login" aria-labelledby="auth-title">
+        <h2 id="auth-title" class="auth-modal__title">Connexion</h2>
+        <div class="auth-field">
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="login-pass">Mot de passe</label>
+          <div class="auth-passwrap">
+            <input id="login-pass" type="password" autocomplete="current-password" required>
+            <button type="button" class="auth-toggle-pass" aria-label="Afficher / masquer le mot de passe">👁</button>
+          </div>
+        </div>
+        <div class="auth-actions">
+          <button type="submit" class="btn btn--primary js-auth-submit" data-action="login">Se connecter</button>
+        </div>
+        <p class="auth-switch">Pas de compte ?
+          <button type="button" class="linklike js-auth-switch" data-view="signup">Créer un compte</button>
+        </p>
+      </section>
+
+      <!-- Inscription -->
+      <section class="auth-view" data-view="signup" hidden>
+        <h2 class="auth-modal__title">Créer un compte</h2>
+        <div class="auth-field">
+          <label for="su-email">Email</label>
+          <input id="su-email" type="email" autocomplete="email" required>
+        </div>
+        <div class="auth-field">
+          <label for="su-pass">Mot de passe</label>
+          <div class="auth-passwrap">
+            <input id="su-pass" type="password" minlength="6" autocomplete="new-password" required>
+            <button type="button" class="auth-toggle-pass" aria-label="Afficher / masquer le mot de passe">👁</button>
+          </div>
+          <small class="auth-hint">6 caractères minimum</small>
+        </div>
+        <div class="auth-field">
+          <label for="su-pass2">Confirmer le mot de passe</label>
+          <input id="su-pass2" type="password" minlength="6" required>
+        </div>
+        <label class="auth-check">
+          <input type="checkbox" id="su-cgu" required> J’accepte les CGU
+        </label>
+
+        <div class="auth-actions">
+          <button type="submit" class="btn btn--primary js-auth-submit" data-action="signup">Créer mon compte</button>
+        </div>
+        <p class="auth-switch">Déjà inscrit·e ?
+          <button type="button" class="linklike js-auth-switch" data-view="login">Se connecter</button>
+        </p>
+      </section>
+
+      <p class="auth-msg" role="status" aria-live="polite" hidden></p>
+    </form>
+  </dialog>
+
+  <!-- ===== MODAL CONTACT ===== -->
+  <div class="contact-modal" id="contact-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+    <div class="contact-modal__backdrop" data-close-modal></div>
+
+    <div class="contact-modal__dialog" role="document">
+      <button class="contact-modal__close" type="button" aria-label="Fermer" data-close-modal>&times;</button>
+
+      <header class="contact-modal__header">
+        <p class="eyebrow">Écrire à Boukla</p>
+        <h2 id="contact-title" class="title">Contact</h2>
+        <p class="subtitle">Une question, un projet, un suivi de commande ? On vous répond vite.</p>
+      </header>
+
+      <form class="contact-modal__form" id="contact-form" action="contact-handler.php" method="post" novalidate>
+        <input type="hidden" name="context" value="modal">
+        <!-- Anti-spam (honeypot) -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+
+        <div class="field">
+          <label for="c-name">Nom</label>
+          <input id="c-name" name="name" type="text" required maxlength="100" autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="c-email">E-mail</label>
+          <input id="c-email" name="email" type="email" required maxlength="160" autocomplete="email" />
+        </div>
+
+        <div class="field">
+          <label for="c-message">Message</label>
+          <textarea id="c-message" name="message" required rows="5" maxlength="2000" placeholder="Votre message…"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="contact-submit">Envoyer</button>
+          <a class="fallback" href="contact.php">Aller à la page contact</a>
+        </div>
+
+        <p class="form-note">En envoyant ce formulaire, vous acceptez notre traitement de vos données pour répondre à votre demande.</p>
+
+        <div class="form-feedback" id="contact-feedback" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== MODAL PAIEMENT (à déclencher depuis le bouton "Passer au paiement" du mini-panier) ===== -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <div class="checkout-modal__backdrop" data-close-modal></div>
+
+    <div class="checkout-modal__dialog" role="document">
+      <button class="checkout-modal__close" type="button" aria-label="Fermer" data-close-modal>&times;</button>
+
+      <header class="checkout-modal__header">
+        <p class="eyebrow">Vérification</p>
+        <h2 id="co-title" class="title">Procéder au paiement</h2>
+        <p class="subtitle">Dernier coup d’œil avant la page sécurisée.</p>
+      </header>
+
+      <div class="checkout-modal__body">
+        <div class="checkout-modal__lines">
+          <div class="line"><span>Total articles</span><span id="co-subtotal">—</span></div>
+          <div class="line"><span>Livraison</span><span id="co-shipping">—</span></div>
+          <div class="line total"><span>Total</span><span id="co-total">—</span></div>
+        </div>
+
+        <div class="checkout-modal__actions">
+          <!-- Lien fallback si JS off -->
+          <a class="btn btn--accent" href="checkout.php" data-checkout-go>Aller au paiement</a>
+          <button class="btn" data-close-modal>Modifier le panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="promo-slider.js"></script>
   <script defer src="cart.js"></script>
- </body>
+  <!-- Recherche (auto-index + popover + modal) -->
+  <script defer src="search.js"></script>
+  <script defer src="auth.js"></script>
+  <script defer src="contact-modal.js"></script>
+
+  <!-- Ouverture/fermeture du modal Paiement depuis n'importe quel bouton [data-open-checkout] (existe dans le mini-panier) -->
+  <script>
+    (function(){
+      'use strict';
+      const modal = document.getElementById('checkout-modal');
+      if(!modal) return;
+
+      const backdrop = modal.querySelector('.checkout-modal__backdrop');
+      const closeEls = modal.querySelectorAll('[data-close-modal]');
+      const subtotalEl = document.getElementById('co-subtotal');
+      const shippingEl = document.getElementById('co-shipping');
+      const totalEl    = document.getElementById('co-total');
+
+      function lockScroll(lock){
+        document.documentElement.classList.toggle('modal-open', lock);
+        document.body.classList.toggle('modal-open', lock);
+      }
+
+      function fillTotals(){
+        // Essaie de récupérer les totaux depuis le modal PANIER si présent
+        const sub = document.getElementById('cart-subtotal')?.textContent?.trim();
+        const ship= document.getElementById('cart-shipping')?.textContent?.trim();
+        const tot = document.getElementById('cart-total')?.textContent?.trim()
+                 || document.querySelector('.cart-modal__summary .line.total span:last-child')?.textContent?.trim();
+
+        if (sub && subtotalEl)  subtotalEl.textContent = sub;
+        if (ship && shippingEl) shippingEl.textContent = ship;
+        if (tot && totalEl)     totalEl.textContent    = tot;
+      }
+
+      function closeCartIfOpen(){
+        const cartModal = document.getElementById('cart-modal') || document.querySelector('.cart-modal');
+        if (cartModal && cartModal.getAttribute('aria-hidden') === 'false') {
+          cartModal.setAttribute('aria-hidden','true');
+        }
+      }
+
+      function openModal(){
+        fillTotals();
+        closeCartIfOpen();
+        modal.setAttribute('aria-hidden','false');
+        lockScroll(true);
+        document.addEventListener('keydown', onEsc);
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        lockScroll(false);
+        document.removeEventListener('keydown', onEsc);
+      }
+      function onEsc(e){ if(e.key === 'Escape') closeModal(); }
+
+      // Fermeture
+      closeEls.forEach(el => el.addEventListener('click', closeModal));
+      backdrop?.addEventListener('click', closeModal);
+
+      // OUVERTURE via n'importe quel élément [data-open-checkout] (même injecté dynamiquement dans le mini-panier)
+      document.addEventListener('click', (e)=>{
+        const trigger = e.target.closest('[data-open-checkout]');
+        if(!trigger) return;
+        // Laisse passer ctrl/cmd+clic & clic milieu (ouvre checkout.php en nouvel onglet)
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault();
+        openModal();
+      });
+    })();
+  </script>
+</body>
 </html>
+
+
+
 
 
 

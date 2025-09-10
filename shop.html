@@ -13,9 +13,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="boukla.css">
-  <link rel="stylesheet" href="shop.css">
-  <!-- Mini-panier -->
-  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="checkout-modal.css">
 
   <!-- Patch d’alignement header (logo ↔︎ panier) sur le même container que le breadcrumb -->
   <style>
@@ -66,49 +64,49 @@
     <ul id="grid" class="product-grid">
       <!-- Crème hydratante -->
       <li class="card" data-cat="soins" data-price="3490" data-new="1">
-        <a class="card__media" href="/produit/creme-hydratante">
+        <a class="card__media" href="product.php?slug=creme-hydratante">
           <img src="assets/images/produit/boukla-1.png" alt="Crème hydratante" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="/produit/creme-hydratante">Crème hydratante</a></h3>
+          <h3 class="card__title"><a href="product.php?slug=creme-hydratante">Crème hydratante</a></h3>
           <p class="card__price">34,90 €</p>
-          <a class="btn btn--ghost" href="/produit/creme-hydratante">Voir le détail</a>
+          <a class="btn btn--ghost" href="product.php?slug=creme-hydratante">Voir le détail</a>
         </div>
       </li>
 
       <!-- Masque hydratant -->
       <li class="card" data-cat="masques" data-price="2490" data-new="1">
-        <a class="card__media" href="/produit/masque-hydratant">
+        <a class="card__media" href="product.php?slug=masque-hydratant">
           <img src="assets/images/produit/étiquette-boukla-3.jpg" alt="Masque hydratant" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="/produit/masque-hydratant">Masque hydratant</a></h3>
+          <h3 class="card__title"><a href="product.php?slug=masque-hydratant">Masque hydratant</a></h3>
           <p class="card__price">24,90 €</p>
-          <a class="btn btn--ghost" href="/produit/masque-hydratant">Voir le détail</a>
+          <a class="btn btn--ghost" href="product.php?slug=masque-hydratant">Voir le détail</a>
         </div>
       </li>
 
       <!-- Shampoing solide -->
       <li class="card" data-cat="shampoings" data-price="1490" data-new="0">
-        <a class="card__media" href="/produit/shampoing-solide">
+        <a class="card__media" href="product.php?slug=shampoing-solide">
           <img src="assets/images/produit/étiquette-boukla-4.png" alt="Shampoing solide" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="/produit/shampoing-solide">Shampoing solide</a></h3>
+          <h3 class="card__title"><a href="product.php?slug=shampoing-solide">Shampoing solide</a></h3>
           <p class="card__price">14,90 €</p>
-          <a class="btn btn--ghost" href="/produit/shampoing-solide">Voir le détail</a>
+          <a class="btn btn--ghost" href="product.php?slug=shampoing-solide">Voir le détail</a>
         </div>
       </li>
 
       <!-- Huile de ricin -->
       <li class="card" data-cat="huiles" data-price="2990" data-new="1">
-        <a class="card__media" href="/produit/huile-de-ricin">
+        <a class="card__media" href="product.php?slug=huile-de-ricin">
           <img src="assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin" loading="lazy" width="480" height="600">
         </a>
         <div class="card__body">
-          <h3 class="card__title"><a href="/produit/huile-de-ricin">Huile de ricin</a></h3>
+          <h3 class="card__title"><a href="product.php?slug=huile-de-ricin">Huile de ricin</a></h3>
           <p class="card__price">29,90 €</p>
-          <a class="btn btn--ghost" href="/produit/huile-de-ricin">Voir le détail</a>
+          <a class="btn btn--ghost" href="product.php?slug=huile-de-ricin">Voir le détail</a>
         </div>
       </li>
     </ul>
@@ -147,42 +145,41 @@
     </form>
   </dialog>
 
+  <!-- ====== MODAL PAIEMENT (lié au bouton "Passer au paiement" du mini-panier) ====== -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <div class="checkout-modal__backdrop" data-close-modal></div>
+
+    <div class="checkout-modal__dialog" role="document">
+      <button class="checkout-modal__close" type="button" aria-label="Fermer" data-close-modal>&times;</button>
+
+      <header class="checkout-modal__header">
+        <p class="eyebrow">Vérification</p>
+        <h2 id="co-title" class="title">Procéder au paiement</h2>
+        <p class="subtitle">Dernier coup d’œil avant la page sécurisée.</p>
+      </header>
+
+      <div class="checkout-modal__body">
+        <div class="checkout-modal__lines">
+          <div class="line"><span>Total articles</span><span id="co-subtotal">—</span></div>
+          <div class="line"><span>Livraison</span><span id="co-shipping">—</span></div>
+          <div class="line total"><span>Total</span><span id="co-total">—</span></div>
+        </div>
+
+        <div class="checkout-modal__actions">
+          <a class="btn btn--accent" href="checkout.php" data-checkout-go>Aller au paiement</a>
+          <button class="btn" data-close-modal>Modifier le panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ====== JSON INLINE (pour fonctionner sans serveur) ====== -->
   <script id="products-json" type="application/json">
   [
-    {
-      "slug": "creme-hydratante",
-      "name": "Crème hydratante",
-      "price": 34.9,
-      "currency": "EUR",
-      "short": "Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.",
-      "images": ["assets/images/produit/boukla-1.png"],
-      "badge": "Nouveau"
-    },
-    {
-      "slug": "masque-hydratant",
-      "name": "Masque hydratant",
-      "price": 24.9,
-      "currency": "EUR",
-      "short": "Soin profond hebdomadaire pour boucles repulpées et brillantes.",
-      "images": ["assets/images/produit/étiquette-boukla-3.jpg"]
-    },
-    {
-      "slug": "shampoing-solide",
-      "name": "Shampoing solide",
-      "price": 14.9,
-      "currency": "EUR",
-      "short": "Nettoyage doux, mousse fine, respecte le cuir chevelu.",
-      "images": ["assets/images/produit/étiquette-boukla-4.png"]
-    },
-    {
-      "slug": "huile-de-ricin",
-      "name": "Huile de ricin",
-      "price": 29.9,
-      "currency": "EUR",
-      "short": "Fortifie visiblement les longueurs, brillance naturelle.",
-      "images": ["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]
-    }
+    {"slug":"creme-hydratante","name":"Crème hydratante","price":34.9,"currency":"EUR","short":"Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.","images":["assets/images/produit/boukla-1.png"],"badge":"Nouveau"},
+    {"slug":"masque-hydratant","name":"Masque hydratant","price":24.9,"currency":"EUR","short":"Soin profond hebdomadaire pour boucles repulpées et brillantes.","images":["assets/images/produit/étiquette-boukla-3.jpg"]},
+    {"slug":"shampoing-solide","name":"Shampoing solide","price":14.9,"currency":"EUR","short":"Nettoyage doux, mousse fine, respecte le cuir chevelu.","images":["assets/images/produit/étiquette-boukla-4.png"]},
+    {"slug":"huile-de-ricin","name":"Huile de ricin","price":29.9,"currency":"EUR","short":"Fortifie visiblement les longueurs, brillance naturelle.","images":["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]}
   ]
   </script>
 
@@ -228,8 +225,14 @@
 
     // Wire buttons inside cards if they already exist
     function slugFromHref(href){
-      var m = href ? href.match(/(?:^|\/)produit\/([^\/?#]+)/i) : null;
-      return m ? decodeURIComponent(m[1]) : null;
+      if (!href) return null;
+      var m = href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
+      if (m) return decodeURIComponent(m[1]);
+      try {
+        var u = new URL(href, location.origin);
+        var s = u.searchParams.get('slug');
+        return s ? decodeURIComponent(s) : null;
+      } catch(e){ return null; }
     }
     function parsePrice(text){
       var n = parseFloat(String(text).replace(/[^0-9,.-]/g,'').replace(',', '.'));
@@ -238,7 +241,7 @@
     function wireCardButtons(){
       var cards = grid.querySelectorAll('.card');
       Array.prototype.forEach.call(cards, function(card){
-        var link = card.querySelector('.card__title a, .card__media[href*="/produit/"]');
+        var link = card.querySelector('.card__title a, .card__media[href*="/produit/"], .card__media[href^="produit/"], .card__media[href*="product.php?slug="]');
         var slug = link ? slugFromHref(link.getAttribute('href')) : null;
         var name = (card.querySelector('.card__title') && card.querySelector('.card__title').textContent) ? card.querySelector('.card__title').textContent.trim() : 'Produit';
         var priceTxt = card.querySelector('.card__price') ? card.querySelector('.card__price').textContent : '0';
@@ -270,12 +273,12 @@
   });
   </script>
 
-  <!-- ====== JS QUICK VIEW (compatible file:// + fetch) ====== -->
+  <!-- ====== JS QUICK VIEW (ouvre aussi sur “Voir le détail”) ====== -->
   <script>
   (function () {
     'use strict';
 
-    var DATA_URL = 'products.json';       // utilisera fetch plus tard si tu mets un serveur
+    var DATA_URL = 'products.json';
     var modal = document.getElementById('qv');
     if (!modal) return;
 
@@ -294,7 +297,6 @@
     var bySlug = new Map();
     var loaded = false;
 
-    // Charger les données : 1) JSON inline, 2) window.PRODUCTS, 3) fetch
     function ensureData() {
       if (loaded) return Promise.resolve();
 
@@ -329,10 +331,15 @@
         });
     }
 
-    // extraire /produit/<slug> ou produit/<slug>
     function slugFromHref(href) {
-      var m = href && href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
-      return m ? decodeURIComponent(m[1]) : null;
+      if (!href) return null;
+      var m = href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
+      if (m) return decodeURIComponent(m[1]);
+      try {
+        var u = new URL(href, location.origin);
+        var s = u.searchParams.get('slug');
+        return s ? decodeURIComponent(s) : null;
+      } catch(e){ return null; }
     }
 
     function openDialog() {
@@ -380,11 +387,10 @@
           els.thumbs.appendChild(b);
         });
 
-        // Lien fiche : en file:// → product.html?slug=..., sinon → /produit/<slug>
-        var href = isFileProto ? ('product.html?slug=' + slug) : ('/produit/' + slug);
-        els.link.setAttribute('href', href);
+        /* Lien fiche : vers PHP (OK MAMP) */
+        els.link.setAttribute('href', 'product.php?slug=' + slug);
 
-        // === Brancher le bouton "Ajouter au panier" DE LA MODALE ===
+        // Brancher le bouton "Ajouter au panier" de la modale
         els.add.setAttribute('data-add-to-cart','');
         els.add.dataset.id = slug;
         els.add.dataset.name = p.name;
@@ -397,14 +403,27 @@
       });
     }
 
-    // Intercepter clic gauche sur /produit/... OU produit/...
+    /* === Intercepter TOUS les liens de la grille (y compris “Voir le détail”) pour ouvrir la QV === */
     document.addEventListener('click', function(e){
-      var a = e.target.closest('a[href*="/produit/"], a[href^="produit/"]');
-      if (!a) return;
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // laisser "ouvrir dans un onglet"
+      const grid = document.querySelector('.product-grid');
+      if (!grid) return;
+
+      const a = e.target.closest('a[href]');
+      if (!a || !grid.contains(a)) return;
+
+      // Ne pas intercepter le lien "Voir la fiche" dans la modale
+      if (a.id === 'qv-link' || a.closest('#qv')) return;
+
+      // Permet une exception manuelle si besoin
+      if (a.hasAttribute('data-no-qv')) return;
+
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // ouvrir nouvel onglet : OK
+
+      const slug = slugFromHref(a.getAttribute('href'));
+      if (!slug) return;
+
       e.preventDefault();
-      var slug = slugFromHref(a.getAttribute('href'));
-      if (slug) openQV(slug);
+      openQV(slug);
     });
 
     // Fermer la modale en cliquant hors du contenu
@@ -414,8 +433,81 @@
     });
   })();
   </script>
+
+  <!-- ====== JS : ouverture du MODAL PAIEMENT depuis n'importe quel [data-open-checkout] ====== -->
+  <script>
+    (function(){
+      'use strict';
+      const modal = document.getElementById('checkout-modal');
+      if(!modal) return;
+
+      const backdrop = modal.querySelector('.checkout-modal__backdrop');
+      const closeEls = modal.querySelectorAll('[data-close-modal]');
+      const subtotalEl = document.getElementById('co-subtotal');
+      const shippingEl = document.getElementById('co-shipping');
+      const totalEl    = document.getElementById('co-total');
+
+      function lockScroll(lock){
+        document.documentElement.classList.toggle('modal-open', lock);
+        document.body.classList.toggle('modal-open', lock);
+      }
+
+      function fillTotals(){
+        // Récupère les totaux depuis le mini-panier si présent sur la page
+        const sub = document.getElementById('cart-subtotal')?.textContent?.trim();
+        const ship= document.getElementById('cart-shipping')?.textContent?.trim();
+        const tot = document.getElementById('cart-total')?.textContent?.trim()
+                 || document.querySelector('.cart-modal__summary .line.total span:last-child')?.textContent?.trim();
+
+        if (sub && subtotalEl)  subtotalEl.textContent = sub;
+        if (ship && shippingEl) shippingEl.textContent = ship;
+        if (tot && totalEl)     totalEl.textContent    = tot;
+      }
+
+      function closeCartIfOpen(){
+        const cartModal = document.getElementById('cart-modal') || document.querySelector('.cart-modal');
+        if (cartModal && cartModal.getAttribute('aria-hidden') === 'false') {
+          cartModal.setAttribute('aria-hidden','true');
+        }
+      }
+
+      function openModal(){
+        fillTotals();
+        closeCartIfOpen();
+        modal.setAttribute('aria-hidden','false');
+        lockScroll(true);
+        document.addEventListener('keydown', onEsc);
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        lockScroll(false);
+        document.removeEventListener('keydown', onEsc);
+      }
+      function onEsc(e){ if(e.key === 'Escape') closeModal(); }
+
+      closeEls.forEach(el => el.addEventListener('click', closeModal));
+      backdrop?.addEventListener('click', closeModal);
+
+      // Ouvrir depuis le bouton “Passer au paiement” du MINI-PANIER
+      document.addEventListener('click', (e)=>{
+        const trigger = e.target.closest('[data-open-checkout]');
+        if(!trigger) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // nouvel onglet -> laisse passer
+        e.preventDefault();
+        openModal();
+      });
+    })();
+  </script>
+
+  <script defer src="search.js"></script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

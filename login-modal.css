@@ -1,0 +1,210 @@
+
+/* ======================================================================
+   Boukla — login-modal.css
+   Modal de connexion (et inscription optionnelle) — scope strict .login-modal
+   Design aligné : Playfair/Inter, caps + letter-spacing, accent #F2C94C
+   ====================================================================== */
+
+:root{
+  --text:#1a0903;
+  --muted:#6f6f6f;
+  --border:#e8e6ee;
+  --accent:#F2C94C;
+  --accent-ink:#1a1a1a;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+  --radius:16px;
+}
+
+/* Empêche le scroll quand le modal est ouvert (ajouté par le JS) */
+html.modal-open, body.modal-open { overflow: hidden; }
+
+/* ----- Container global du modal ----- */
+.login-modal{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1100;
+}
+.login-modal[aria-hidden="false"]{ display: block; }
+
+/* Backdrop semi-transparent + blur léger */
+.login-modal__backdrop{
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+
+/* Boîte de dialogue */
+.login-modal__dialog{
+  position: relative;
+  max-width: 520px;
+  margin: 6vh auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  animation: lm-fade-in .18s ease-out;
+}
+
+@keyframes lm-fade-in{
+  from{ opacity: .6; transform: translateY(4px) scale(.995); }
+  to  { opacity: 1;  transform: translateY(0)    scale(1); }
+}
+
+/* Bouton fermer */
+.login-modal__close{
+  position: absolute;
+  top: 8px; right: 10px;
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 1px solid #00000022;
+  background:#fff;
+  cursor: pointer;
+  font-size: 28px; line-height: 1;
+}
+.login-modal__close:hover{ transform: translateY(-1px); }
+
+/* En-tête */
+.login-modal__header{
+  text-align: center; padding: 10px 6px 8px;
+}
+.login-modal__header .eyebrow{
+  margin:0 0 8px; text-transform:uppercase; letter-spacing:.35em;
+  font-size:12px; color:var(--muted);
+}
+.login-modal__header .title{
+  margin:0 0 6px;
+  font-family:"Playfair Display", Georgia, serif;
+  font-weight:700; text-transform:uppercase; letter-spacing:.3em;
+  font-size: clamp(22px, 4.5vw, 32px);
+  color:var(--text);
+}
+.login-modal__header .subtitle{
+  margin:0 auto 8px; color:var(--muted); max-width: 420px; line-height:1.6;
+}
+
+/* Onglets (optionnels) : Connexion / Inscription */
+.login-tabs{
+  display:flex; gap:8px; justify-content:center; margin: 6px 0 12px;
+}
+.login-tab{
+  appearance:none; border:1px solid var(--border); background:#fff;
+  border-radius: 999px; padding: 8px 14px; cursor:pointer; font: inherit;
+}
+.login-tab[aria-selected="true"]{
+  background: var(--accent);
+  border-color: #00000033;
+  color: var(--accent-ink);
+  box-shadow: 0 1px 0 #00000012;
+}
+
+/* Contenu des vues (login/register) */
+.login-views{ margin-top: 8px; }
+.login-view{ display:none; }
+.login-view.is-active{ display:block; }
+
+/* Formulaire */
+.login-modal__form{ margin-top: 6px; }
+.login-modal__form .hp{ position:absolute !important; left:-5000px; width:1px; height:1px; opacity:0; }
+
+.login-modal__form .field{
+  display: grid; gap: 6px; margin: 14px 0;
+}
+.login-modal__form label{
+  font-size: 14px; color:#312d2d;
+}
+.login-modal__form input[type="email"],
+.login-modal__form input[type="text"],
+.login-modal__form input[type="password"]{
+  border:1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit; color: var(--text);
+  outline: none; background: #fff;
+}
+.login-modal__form input:focus{
+  border-color:#c7c5d8; box-shadow: 0 0 0 3px #c7c5d822;
+}
+
+/* Mot de passe : suffixe visibilité (option JS) */
+.login-input-wrap{
+  position: relative;
+}
+.login-input-wrap .toggle-visibility{
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  border: 0; background: transparent; cursor: pointer; font-size: 13px; color: #494949;
+}
+
+/* Alerte / feedback */
+.login-modal__form .form-feedback{
+  margin-top: 8px; min-height: 22px; font-size: 14px;
+}
+.login-modal__form .form-feedback.ok{ color: #136b2b; }
+.login-modal__form .form-feedback.err{ color: #9d1b1b; }
+
+/* Actions */
+.login-modal__form .actions{
+  display:flex; gap:10px; align-items:center; flex-wrap: wrap; margin-top: 10px;
+}
+.login-modal__form .btn{
+  height: 44px; padding: 0 18px;
+  border-radius: 12px; border:1px solid #00000033;
+  background:#111; color:#fff; cursor:pointer;
+}
+.login-modal__form .btn:hover{ transform: translateY(-1px); }
+.login-modal__form .btn--ghost{
+  background:#fff; color:#111; border:1px solid #00000033;
+}
+.login-modal__form .btn--accent{
+  background: var(--accent); color: var(--accent-ink); border:1px solid #00000033;
+}
+
+.login-modal__form .links{
+  display:flex; gap:12px; flex-wrap:wrap; margin-top: 6px; font-size: 14px;
+}
+.login-modal__form .links a{
+  color:#333; text-decoration: underline; text-underline-offset: 3px;
+}
+
+/* Séparateur "ou" pour options alternatives */
+.login-sep{
+  position: relative; text-align: center; margin: 12px 0 2px; height: 22px;
+  color: var(--muted); font-size: 12px;
+}
+.login-sep::before, .login-sep::after{
+  content: ""; position: absolute; top: 50%; width: 40%; height: 1px; background: var(--border);
+}
+.login-sep::before{ left: 0; }
+.login-sep::after { right: 0; }
+
+/* Boutons OAuth (facultatif) */
+.oauth-buttons{
+  display: grid; gap: 8px; margin-top: 10px;
+}
+.oauth-btn{
+  display:flex; align-items:center; justify-content:center; gap: 8px;
+  height: 44px; border-radius: 12px; border:1px solid var(--border);
+  background:#fff; cursor:pointer; font: inherit; color:#111;
+}
+.oauth-btn:hover{ transform: translateY(-1px); }
+.oauth-btn img{ width: 18px; height: 18px; }
+
+/* Pied du modal */
+.login-modal__foot{
+  margin-top: 10px; font-size: 13px; color: var(--muted); text-align: center;
+}
+
+/* Accessibilité */
+.login-modal .sr-only{
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 1px, 1px);
+  white-space: nowrap; border: 0;
+}
+
+/* Responsive */
+@media (max-width: 760px){
+  .login-modal__dialog{ margin: 4vh auto; border-radius: 14px; }
+}

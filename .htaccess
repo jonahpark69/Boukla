@@ -1,0 +1,34 @@
+# --- Boukla /.htaccess ---------------------------------------------
+
+# Encodage par défaut
+AddDefaultCharset UTF-8
+
+# Empêche les collisions de MultiViews (Apache content-negotiation)
+Options -MultiViews
+
+# Page d'index par défaut
+DirectoryIndex index.html index.php
+
+# --- URL Rewriting
+RewriteEngine On
+
+# (Facultatif) Si ton site est dans un sous-dossier, tu peux préciser la base.
+# Sous MAMP avec http://localhost:8888/Boukla/ tu peux laisser commenté :
+# RewriteBase /Boukla/
+
+# 1) Laisse passer les fichiers et dossiers physiques (assets, css, js, etc.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2) /shop  ->  shop.html
+RewriteRule ^shop/?$ shop.html [L]
+
+# 3) Jolies URLs produit : /produit/slug  ->  product.php?slug=slug
+RewriteRule ^produit/([^/?#]+)/?$ product.php?slug=$1 [QSA,NC,L]
+
+# 4) Canonique : si quelqu’un arrive sur product.php?slug=... => 301 vers /produit/slug
+RewriteCond %{THE_REQUEST} \s/+product\.php\?slug=([^\s&]+) [NC]
+RewriteRule ^ produit/%1? [R=301,L]
+
+# -------------------------------------------------------------------

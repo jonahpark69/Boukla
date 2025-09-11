@@ -30,7 +30,7 @@
 
       <!-- Fil d’Ariane -->
       <nav class="breadcrumb" aria-label="breadcrumbs">
-        <a href="index.php">Home</a>
+        <a href="index.html">Home</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">About Us</span>
       </nav>

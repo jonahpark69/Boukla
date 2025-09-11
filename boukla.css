@@ -93,7 +93,7 @@ body:has(.hero) .logo svg{
   width: auto;
 }
 body:has(.hero) .nav{
-  margin-left: calc(var(--logo-w) + 620px);
+  margin-left: calc(var(--logo-w) + 400px);
   display:flex;
   gap:32px;
 }
@@ -157,7 +157,7 @@ body:has(.hero) .hero{
 }
 body:has(.hero) .hero__left { background: none; padding: 0; }
 body:has(.hero) .hero__model{
-  width: 1080px;
+  width: 880px;
   height: 570px;
   object-fit: cover;
   object-position: center;
@@ -173,7 +173,7 @@ body:has(.hero) .promo{
   border-radius:var(--radius-home);
   box-shadow:var(--shadow-home);
   overflow:hidden;
-  margin-left: -180px;
+  margin-left: -530px;
   transform: translateY(40px);
 }
 body:has(.hero) .promo__media{ display:grid; grid-template-columns: 1fr 80px; align-items:stretch; overflow:hidden; }
@@ -209,7 +209,7 @@ body:has(.hero) .promo__off{ margin-left:15px; font-family:"Playfair Display", G
 body:has(.hero) .hero__bottom{ grid-column:1 / -1; position:relative; height:420px; }
 body:has(.hero) .bottom__split{ position:absolute; inset:0 auto 0 0; width:auto; }
 body:has(.hero) .bottom__split--white{ background:#fff; }
-body:has(.hero) .bottom__split--yellow{ position:absolute; top:0; right:9%; left:27%; bottom:180px; background:var(--mustard); }
+body:has(.hero) .bottom__split--yellow{ position:absolute; top:0; right:23%; left:28%; bottom:180px; background:var(--mustard); }
 body:has(.hero) .kicker{
   position:absolute;
   left:320px;
@@ -221,7 +221,7 @@ body:has(.hero) .kicker{
 }
 body:has(.hero) .headline{
   position:absolute;
-  left:320px;
+  left:310px;
   top:40px;
   font-family:"Playfair Display", Georgia, serif;
   color:#8e3a16;
@@ -242,7 +242,7 @@ body:has(.hero) .subline{
   gap:10px;
 }
 body:has(.hero) .subline .bar{ width:14px; height:2px; background:#8a5a3d; }
-body:has(.hero) .lead{ position:absolute; left:52%; top:92px; right:24px; max-width:540px; color:#6c4b36; line-height:1.5; }
+body:has(.hero) .lead{ position:absolute; left:42%; top:92px; right:24px; max-width:540px; color:#6c4b36; line-height:1.5; }
 body:has(.hero) .cta{
   position:absolute;
   left:90px;
@@ -270,7 +270,7 @@ body:has(.hero) .socials{
 body:has(.hero) .social{ display:block; margin:0; padding:0; line-height:0; }
 body:has(.hero) .social { margin-top: -10px; }
 body:has(.hero) .social:first-child { margin-top: 0; }
-body:has(.hero) .social img{ display:block; width:80px; height:80px; }
+body:has(.hero) .social img{ display:block; width:80px; height:80px; margin-left: -340px; }
 
 /* Sections Natural / Featured / After / Promo-Social / Motif */
 body:has(.hero) .section-natural{ position: relative; background: #fff; padding: 0 0 70px; overflow: visible; isolation: isolate; }
@@ -278,23 +278,23 @@ body:has(.hero) .section-natural{ position: relative; background: #fff; padding:
 /* FIX anti-scroll: marges full-bleed symétriques */
 body:has(.hero) .section-natural__band{
   position: relative;
-  height: 600px;
+  height: 620px;
   background: #d67a3b;
   width: 100vw;
-  margin-left:  calc(50% - 50vw + -640px);
+  margin-left:  calc(50% - 50vw + -712px);
   margin-right: calc(50% - 50vw);
   z-index: 0;
 }
 
 body:has(.hero) .section-natural__stage{ position: relative; width: min(1040px, 92vw); margin: -110px auto 0; z-index: 1; }
-body:has(.hero) .section-natural__img-large{ width: 1000px; height: 1080px; object-fit: cover; display: block; margin: 0 auto; box-shadow: var(--shadow-home); position: relative; top: -280px; left: -850px; }
-body:has(.hero) .section-natural__img-small{ position: absolute; right: 30px; bottom: -40px; width: 600px; height: 650px; top: 300px; left: 0px; object-fit: cover; object-position: 85% 40%; box-shadow: var(--shadow-home); z-index: 1; }
-body:has(.hero) .section-natural__title{ position: absolute; left: clamp(18px, 8vw, 120px); bottom: 90px; margin: 0; font-family:"Playfair Display", Georgia, serif; font-weight: 700; line-height: .9; color: #5b1d13; pointer-events: none; }
+body:has(.hero) .section-natural__img-large{ width: 1000px; height: 1080px; object-fit: cover; display: block; margin: 0 auto; box-shadow: var(--shadow-home); position: relative; top: -280px; left: -900px; }
+body:has(.hero) .section-natural__img-small{ position: absolute; right: 0px; bottom: -40px; width: 600px; height: 650px; top: 300px; left: -110px; object-fit: cover; object-position: 85% 40%; box-shadow: var(--shadow-home); z-index: 1; }
+body:has(.hero) .section-natural__title{ position: absolute; left: clamp(18px, 8vw, 120px); bottom: 90px; margin: 0; font-family:"Playfair Display", Georgia, serif; font-weight: 700; line-height: .9; color: #5b1d13; pointer-events: none; left: -20px;}
 body:has(.hero) .section-natural__title span{ display: block; font-size: clamp(42px, 9vw, 110px); }
 body:has(.hero) .section-natural__title span:first-child { position: relative; left: -850px; top: -60px; color: #5b1d13; }
 body:has(.hero) .section-natural__title span:last-child  { position: relative; left: -720px; top: -60px; color: #a0522d; }
 body:has(.hero) .section-natural__content{ width: min(680px, 88vw); margin: 48px auto 0; text-align: center; position: relative; z-index: 2; --btn-offset-x: 280px; --btn-offset-y: -220px; }
-body:has(.hero) .section-natural__text{ color:#6c4b36; line-height:1.55; max-width: 320px; margin: 0 auto 18px; text-align: justify; --text-offset-x: -870px; --text-offset-y: -130px; position: relative; left: var(--text-offset-x); top:  var(--text-offset-y); }
+body:has(.hero) .section-natural__text{ color:#6c4b36; line-height:1.55; max-width: 320px; margin: 0 auto 18px; text-align: justify; --text-offset-x: -1000px; --text-offset-y: -130px; position: relative; left: var(--text-offset-x); top:  var(--text-offset-y); }
 
 body:has(.hero) .section-natural__btn,
 body:has(.hero) .section-natural__btn:link,
@@ -310,7 +310,7 @@ body:has(.hero) .section-natural__btn:visited{
   cursor:pointer;
   transition: background .2s, transform .15s, opacity .15s;
   position: relative;
-  left: -220px;
+  left: -330px;
   top: var(--btn-offset-y, -220px);
   z-index: 3;
   padding: 12px 18px;
@@ -319,34 +319,180 @@ body:has(.hero) .section-natural__btn:visited{
   white-space: nowrap;
 }
 
-/* FIX anti-scroll: marges full-bleed symétriques */
-body:has(.hero) .section-featured{
+/* === Offsets du FOND (marron) — à ajuster librement === */
+:root{
+  --featured-bg-x: -232px;   /* + à droite / − à gauche */
+  --featured-bg-y: -200px;   /* + en bas   / − en haut  */
+
+  /* Offsets du CONTENU (indépendants du fond) */
+  --featured-content-x: 0px; /* + à droite / − à gauche */
+  --featured-content-y: -200px; /* − pour remonter / + pour descendre */
+}
+
+/* Empêche tout scroll horizontal parasite sur le héros */
+body:has(.hero) .hero{
   position: relative;
-  background: #8a3b1f;
-  padding: clamp(28px, 5vw, 48px) 0;
+  overflow-x: hidden; /* (ou clip si supporté) */
+}
+
+/* FIX anti-scroll: full-bleed symétrique + couche de fond indépendante */
+body:has(.hero) .section-featured{
+  grid-column: 1 / -1;
+  position: relative;
   color: #fff;
+  padding: clamp(28px, 5vw, 48px) 0;
+
+  /* full-bleed */
   width: 100vw;
   margin-left:  calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  z-index: 0;
+
+  z-index: 0;            /* crée un contexte pour le ::before */
+  /* NE PAS mettre de background ici : il est géré par ::before */
 }
 
-body:has(.hero) .hero > .section-featured{ grid-column:1 / -1; width:100%; padding:50px 0; position:relative; top:-190px; left: -170px;}
-body:has(.hero) .section-featured__inner{ width:min(1100px, 92vw); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap: clamp(20px,4vw,36px); align-items:start; }
-body:has(.hero) .featured__figure{ margin:0; border-radius: var(--radius-home); overflow:hidden; box-shadow: var(--shadow-home); }
-body:has(.hero) .featured__figure img{ display:block; width:100%; height: clamp(220px, 36vw, 360px); object-fit: cover; object-position: center; }
-body:has(.hero) .featured__figure--left{ grid-column:1/2; grid-row:1/3; position:relative; top:0; left:-50px; height: clamp(700px,82vh,1100px); }
-body:has(.hero) .featured__figure--left img{ width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
-body:has(.hero) .featured__figure--right{ grid-column:2/3; grid-row:1/3; position:relative; top:350px; left:0; height: clamp(700px,82vh,1100px); z-index:1; }
-body:has(.hero) .featured__figure--right img{ width:100%; height:100%; object-fit:cover; object-position:50% 50%; }
-body:has(.hero) .featured__content{ grid-column:2/3; grid-row:1/3; position:relative; z-index:2; align-self:start; justify-self:start; margin:120px 0 0 24px; left:-20px; gap:24px; }
-body:has(.hero) .featured__title{ margin:0 0 12px; font-family:"Playfair Display", Georgia, serif; font-weight:700; letter-spacing:2px; color:#d88c4f; font-size: clamp(18px, 2.2vw, 24px); }
-body:has(.hero) .featured__lead{ margin:0; color:#ffece2; line-height:1.55; max-width:38ch; }
-body:has(.hero) .featured__btn{ justify-self:start; display:inline-block; text-decoration:none; font-weight:700; background:#ffece2; color:#000; padding:10px 18px; border-radius:6px; box-shadow:0 10px 24px rgba(0,0,0,.25); transition: transform .15s, opacity .15s, background .2s; margin-top:16px; }
-body:has(.hero) .section-after-featured{ background:#fff; padding:12px 0 80px; }
-body:has(.hero) .after-card{ width: clamp(320px, 40vw, 560px); margin-left:400px; margin-top:-170px; display:grid; gap:24px; align-content:start; text-align:left; }
-body:has(.hero) .after-card .featured__btn{ justify-self:start; margin-left:0; color:#5b1d13; margin-top:-13px; }
-body:has(.hero) .section-after-featured .featured__btn{ background: var(--orange-bg) !important; color:#fff !important; }
+/* Calque FOND (marron) déplacé indépendamment du contenu */
+body:has(.hero) .section-featured::before{
+  content: "";
+  position: absolute;
+  inset: 0;                         /* couvre toute la section (padding inclus) */
+  background: #8a3b1f;              /* ta couleur de fond */
+  transform: translate(var(--featured-bg-x), var(--featured-bg-y));
+  pointer-events: none;             /* ne capture aucun clic */
+  z-index: 0;                       /* reste sous le contenu */
+}
+
+/* Conteneur interne : grille stable et au-dessus du fond
+   + offset du CONTENU uniquement (ne bouge pas le fond) */
+body:has(.hero) .section-featured__inner{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 4vw, 36px);
+  align-items: start;
+
+  margin-left: 0;   /* supprime l’ancien décalage mécanique */
+  position: relative;
+  z-index: 1;       /* au-dessus du ::before (fond) */
+
+  /* ➜ Déplace UNIQUEMENT le contenu (pas le fond) */
+  transform: translate(var(--featured-content-x), var(--featured-content-y));
+  will-change: transform;
+}
+
+/* Figures / contenu internes (inchangés) */
+body:has(.hero) .featured__figure{
+  margin: 0;
+  border-radius: var(--radius-home);
+  overflow: hidden;
+  box-shadow: var(--shadow-home);
+}
+body:has(.hero) .featured__figure img{
+  display: block;
+  width: 100%;
+  height: clamp(220px, 36vw, 360px);
+  object-fit: cover;
+  object-position: center;
+}
+
+body:has(.hero) .featured__figure--left{
+  grid-column: 1/2;
+  grid-row: 1/3;
+  position: relative;
+  top: 0;
+  left: -50px;
+  height: clamp(700px, 82vh, 1100px);
+}
+body:has(.hero) .featured__figure--left img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+}
+
+body:has(.hero) .featured__figure--right{
+  grid-column: 2/3;
+  grid-row: 1/3;
+  position: relative;
+  top: 350px;
+  left: 0;
+  height: clamp(700px, 82vh, 1100px);
+  z-index: 1;
+}
+body:has(.hero) .featured__figure--right img{
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+}
+
+body:has(.hero) .featured__content{
+  grid-column: 2/3;
+  grid-row: 1/3;
+  position: relative;
+  z-index: 2;
+  align-self: start;
+  justify-self: start;
+  margin: 120px 0 0 24px;
+  left: -20px;
+  gap: 24px;
+}
+
+body:has(.hero) .featured__title{
+  margin: 0 0 12px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d88c4f;
+  font-size: clamp(18px, 2.2vw, 24px);
+}
+body:has(.hero) .featured__lead{
+  margin: 0;
+  color: #ffece2;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+body:has(.hero) .featured__btn{
+  justify-self: start;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  background: #ffece2;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 6px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  transition: transform .15s, opacity .15s, background .2s;
+  margin-top: 16px;
+}
+
+/* Section suivante : inchangée */
+body:has(.hero) .section-after-featured{
+  background: #fff;
+  padding: 12px 0 80px;
+}
+body:has(.hero) .after-card{
+  width: clamp(320px, 40vw, 560px);
+  margin-left: 400px;
+  margin-top: -170px;
+  display: grid;
+  gap: 24px;
+  align-content: start;
+  text-align: left;
+}
+body:has(.hero) .after-card .featured__btn{
+  justify-self: start;
+  margin-left: 0;
+  color: #5b1d13;
+  margin-top: -13px;
+}
+body:has(.hero) .section-after-featured .featured__btn{
+  background: var(--orange-bg) !important;
+  color: #fff !important;
+}
+
+/* === PATCH MINIMAL, identique à ton test console === */
+/* (ne dépend pas de :has, et force la valeur comme en console) */
+.after-card{
+  transform: translate(-200px, 0) !important; /* ajuste -200px si besoin */
+}
 
 /* Section Promo-Social — centrer le BLOC lui-même */
 body:has(.hero) .section-promo-social{
@@ -391,16 +537,18 @@ body:has(.hero) .promo-social__title{
   font-size:clamp(24px, 3.6vw, 44px);
   line-height:1.2;
   color:var(--dark-brown);
+  margin-left: 0px;
 }
 
 body:has(.hero) .promo-social__figure{ width:1080px; margin:40px auto 0; }
-body:has(.hero) .promo-social__figure img{ width:100%; height:420px; object-fit:cover; object-position:50% 0%; }
+body:has(.hero) .promo-social__figure img{ width:100%; height:420px; object-fit:cover; object-position:50% 0%; margin-left: -170px;}
 
 body:has(.hero) .promo-social__links{
   display:flex;
   justify-content:center;
   gap:28px;
   margin-top:24px; /* + d'air sous l'image */
+  margin-left: -170px;
 }
 
 /* Bouton/point d'icône */
@@ -625,53 +773,61 @@ body:has(.hero) .search-popover__btn{
 /* 3) SHOP (ex- shop.css) — scoper les éléments header/breadcrumb     */
 /* ------------------------------------------------------------------ */
 
-/* Breadcrumb Shop */
-body:has(.product-grid) .breadcrumb {
+/* =========================
+   SHOP — breadcrumb centré
+   ========================= */
+body:has(.product-grid) .breadcrumb{
   display: flex;
   align-items: center;
   gap: 40px;
+  justify-content: center;    /* centre le contenu */
   font-size: 14px;
   color: var(--muted);
-  margin: 20px auto 8px;
-  margin-left: 820px;
+  width: 100%;
+  margin: 20px auto 8px;      /* centre la ligne elle-même */
   position: relative;
-  top: -140px;
-  z-index: 4;
+  top: 30px;                     /* pas de décalage vertical risqué */
+  z-index: 1000;
 }
-body:has(.product-grid) .breadcrumb a { color: inherit; text-decoration: none; }
-body:has(.product-grid) .breadcrumb a:hover { color: var(--text); text-decoration: underline; }
-body:has(.product-grid) .breadcrumb span { opacity: .6; }
+/* évite qu’un enfant avec margin:auto pousse à droite */
+body:has(.product-grid) .breadcrumb > *{ margin: 0; }
 
-/* Hero court Shop */
-/* Shop — bandeau fin */
+body:has(.product-grid) .breadcrumb a{ color: inherit; text-decoration: none; }
+body:has(.product-grid) .breadcrumb a:hover{ color: var(--text); text-decoration: underline; }
+body:has(.product-grid) .breadcrumb span{ opacity: .6; }
+
+/* Shop — bandeau fin (corrigé) */
 body:has(.product-grid) .hero--thin{
-  padding-top: clamp(20px, 6vw, 56px);
-  padding-right: 0;
-  padding-bottom: 8px;
-  padding-left: 0;
+  /* empêche la marge du H1 d'impacter la section suivante */
+  display: flow-root;
+
+  /* même rendu qu'avant, version raccourcie */
+  padding: clamp(20px, 6vw, 56px) 0 8px;
   text-align: center;
 }
 
-/* Shop — titre H1 */
-body:has(.product-grid) .h1{
+/* Shop — titre H1 (corrigé) : on remplace la marge par du padding */
+body:has(.product-grid) .hero--thin .h1{
+  margin: 0;           /* ne pousse plus la section suivante */
+  padding-top: 0;      /* au cas où tu avais un padding ajouté avant */
+  position: relative;  
+  top: -10px;          /* ↑ remonte de 24px (mets -16px, -32px, etc.) */
+  left: 0px; /* ajuste ici pour DESCENDRE le H1 */
+
   font-family: "Playfair Display", serif;
   font-weight: 700;
   font-size: clamp(28px, 5vw, 48px);
   line-height: 1.1;
   letter-spacing: 0.2px;
-  color: #f2e6d8;
-
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: -295px;
-
-  position: relative;
-  top: 50px;
+  color: var(--dark-brown, #1a0903);
+  z-index: 0;
 }
 
-
-
+body:has(.product-grid) #collection .product-grid{
+  position: relative;
+  z-index: 1; 
+  margin-top: 0px;
+}
 
 /* Logo entête Shop (ne pas appliquer ailleurs) */
 body:has(.product-grid) .header .logo{
@@ -775,7 +931,7 @@ body:has(.product-grid) .header .logo{
 }
 
 /* Assure la superposition correcte */
-.header, .hero--thin, .breadcrumb { position: relative; z-index: 4; }
+.hero--thin, .breadcrumb { position: relative; z-index: 4; }
 
 /* Responsive minimal Shop */
 @media (max-width: 560px) { .card__title { font-size: 18px; } }
@@ -801,6 +957,8 @@ body:has(.product-grid) .header .logo{
 @media (max-width: 760px){ .qv__grid { grid-template-columns: 1fr; }
   .qv__media { min-height: 320px; } }
 .qv .qv__media img[src*="boukla-1.png"] { object-fit: cover; object-position: 10% 10% !important; }
+
+
 
 /* ------------------------------------------------------------------ */
 /* 4) CART (ex- cart.css) — inchangé, avec neutralisation Home        */
@@ -960,30 +1118,6 @@ body:has(.product-page) .header{
 }
 body:has(.product-page) .header .logo{ position: static; left: auto; top: auto; transform: none; }
 body:has(.product-page) .header .logo img{ height: var(--header-logo-h) !important; width: auto !important; display: block; }
-
-/* Breadcrumb Shop — visible et à sa place */
-body:has(.product-grid) .breadcrumb{
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  font-size: 14px;
-  color: var(--muted);
-
-  /* plus aucun décalage hors écran */
-  margin-top: 20px;
-  margin-right: auto;
-  margin-bottom: 8px;
-  margin-left: 820px;
-
-  position: relative;
-  top: 30px;   /* léger lift (au lieu de -140px qui le sortait du viewport) */
-  z-index: 12;  /* passe au-dessus du header/panneaux */
-}
-
-
-body:has(.product-page) .breadcrumb a{ color:inherit; text-decoration:none; }
-body:has(.product-page) .breadcrumb a:hover{ color:var(--text); text-decoration:underline; }
-body:has(.product-page) .breadcrumb span{ opacity:.6; }
 
 /* Grille fiche */
 .product{

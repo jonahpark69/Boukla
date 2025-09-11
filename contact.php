@@ -13,7 +13,7 @@
   <main>
     <div class="page-contact">
       <nav class="breadcrumb" aria-label="breadcrumbs">
-        <a href="index.php">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span>
+        <a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span>
       </nav>
 
       <section class="hero-contact container">

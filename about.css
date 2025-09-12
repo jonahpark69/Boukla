@@ -1,4 +1,3 @@
-
 /* ======================================================================
    Boukla — about.css (page About Us)
    Scope strict : body:has(.page-about) pour ne rien casser ailleurs.
@@ -45,13 +44,16 @@ body:has(.page-about) main{
 
 /* --------- Breadcrumb --------- */
 
-body:has(.page-about) .breadcrumb{
+body:has(.page-about) .breadcrumb {
   font-size: 14px;
   color: var(--muted);
   display: flex;
   gap: 8px;
   align-items: center;
   padding: 12px 0 0;
+  margin-left: 30px;
+  margin-top: -60px; /* Remonte le breadcrumb */
+  position: relative;
 }
 body:has(.page-about) .breadcrumb a{
   color: inherit;
@@ -212,6 +214,7 @@ body:has(.page-about) .team h2{
   text-transform: uppercase;
   letter-spacing: .2em;
   font-size: clamp(18px, 2.6vw, 22px);
+  margin-left: 25px;
 }
 body:has(.page-about) .team-grid{
   display: grid;
@@ -239,11 +242,16 @@ body:has(.page-about) .team-card p{
   color: var(--muted);
   font-size: 14px;
 }
+
 body:has(.page-about) .avatar{
-  height: 120px;
+  height: 200px;                 /* ta hauteur souhaitée */
   border-radius: 12px;
-  background: linear-gradient(180deg, #eee, #ddd);
   border: 1px solid var(--border);
+
+  /* pour bien adapter l’image */
+  background-size: cover;        /* remplit le bloc, quitte à recadrer */
+  background-position: center;   /* centre le sujet */
+  background-repeat: no-repeat;  /* évite les répétitions */
 }
 
 /* --------- CTA --------- */

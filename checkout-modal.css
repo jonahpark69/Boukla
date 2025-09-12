@@ -1,4 +1,3 @@
-
 /* ======================================================================
    Boukla — checkout-modal.css
    Modal récap "Procéder au paiement" — scope : .checkout-modal
@@ -48,4 +47,19 @@ html.modal-open, body.modal-open{ overflow:hidden; }
 
 @media (max-width: 760px){
   .checkout-modal__dialog{ margin: 4vh auto; border-radius: 14px; }
+}
+
+@media (max-width: 480px) {
+  .cmodal__panel, .cmodal__header, .cmodal__footer {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .cmodal__title {
+    font-size: 18px !important;
+  }
+  .btn-primary, .btn-ghost {
+    font-size: 15px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+  }
 }

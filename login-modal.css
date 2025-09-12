@@ -1,4 +1,3 @@
-
 /* ======================================================================
    Boukla — login-modal.css
    Modal de connexion (et inscription optionnelle) — scope strict .login-modal
@@ -207,4 +206,19 @@ html.modal-open, body.modal-open { overflow: hidden; }
 /* Responsive */
 @media (max-width: 760px){
   .login-modal__dialog{ margin: 4vh auto; border-radius: 14px; }
+}
+
+@media (max-width: 480px) {
+  .modal__panel, .modal__header, .modal__footer {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .modal__title {
+    font-size: 18px !important;
+  }
+  .btn-primary, .btn-ghost {
+    font-size: 15px !important;
+    height: 40px !important;
+    padding: 0 10px !important;
+  }
 }

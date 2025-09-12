@@ -200,3 +200,25 @@ body:has(.page-checkout) .sr-only{
 .checkout-lines span {
   display: inline-block;
 }
+@media (max-width: 480px) {
+  body:has(.page-checkout) .container,
+  body:has(.page-checkout) .panel,
+  body:has(.page-checkout) .grid-2 {
+    padding-left: 8px;
+    padding-right: 8px;
+    max-width: 100vw;
+  }
+  body:has(.page-checkout) .page-title {
+    font-size: 22px;
+  }
+  body:has(.page-checkout) .breadcrumb {
+    margin-left: 8px;
+    font-size: 12px;
+  }
+  body:has(.page-checkout) .btn,
+  body:has(.page-checkout) .btn--accent {
+    font-size: 15px;
+    height: 40px;
+    padding: 0 10px;
+  }
+}

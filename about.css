@@ -312,3 +312,20 @@ body:has(.page-about) .sr-only{
   overflow: hidden; clip: rect(0, 0, 1px, 1px);
   white-space: nowrap; border: 0;
 }
+
+@media (max-width: 480px) {
+  body:has(.page-about) .container,
+  body:has(.page-about) .grid-2,
+  body:has(.page-about) .panel {
+    padding-left: 8px;
+    padding-right: 8px;
+    max-width: 100vw;
+  }
+  body:has(.page-about) .page-title {
+    font-size: 22px;
+  }
+  body:has(.page-about) .breadcrumb {
+    margin-left: 8px;
+    font-size: 12px;
+  }
+}

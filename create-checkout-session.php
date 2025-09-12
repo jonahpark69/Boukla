@@ -130,6 +130,23 @@ $order = [
   'total' => $total,
 ];
 
+// Enregistrement de la commande en base
+require_once 'db.php';
+$stmt = $pdo->prepare("INSERT INTO orders (ref, created_at, first, last, email, phone, addr1, addr2, zip, city, country, billing_addr1, billing_zip, billing_city, billing_country, same_billing, pay_method, subtotal, shipping, total)
+VALUES (?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([
+  $orderRef, $first, $last, $email, $phone, $addr1, $addr2, $zip, $city, $country,
+  $bill_addr1, $bill_zip, $bill_city, $bill_country, $sameBilling ? 1 : 0, $pay_method, $subtotal, $shipping, $total
+]);
+$orderId = $pdo->lastInsertId();
+foreach ($items as $it) {
+  $name = $it['title'] ?? $it['name'] ?? '';
+  $qty = (int)$it['qty'];
+  $price = (int)$it['price'];
+  $pdo->prepare("INSERT INTO order_items (order_id, product_name, qty, price) VALUES (?, ?, ?, ?)")
+      ->execute([$orderId, $name, $qty, $price]);
+}
+
 // Garde une trace (utile pour la page succès / logs)
 $_SESSION['last_order'] = $order;
 

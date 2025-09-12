@@ -220,11 +220,27 @@
     if (e.key === 'Escape'){ closeModal(); }
   });
 
-  // checkout (placeholder)
+  // checkout (synchronisation panier + redirection)
   document.addEventListener('click', (e)=>{
     if (e.target.id === 'cart-checkout'){
       e.preventDefault();
-      alert('Redirection vers le checkout… (à brancher)');
+      // Envoie le panier JS au serveur avant de rediriger
+      fetch('set-cart.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(cart.items)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = 'checkout.php';
+        } else {
+          alert('Erreur lors de la synchronisation du panier.');
+        }
+      })
+      .catch(()=>{
+        alert('Erreur lors de la synchronisation du panier.');
+      });
     }
   });
 

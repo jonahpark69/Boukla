@@ -1207,7 +1207,7 @@ body:has(.hero) .search-popover{
   background: #fff;
   border: 1px solid var(--border, #e8e6ee);
   border-radius: 12px;
-  box-shadow: var(--shadow-home, 0 18px 40px rgba(0,0,0,.12));
+  box-shadow: var(--shadow, 0 18px 40px rgba(0,0,0,.12));
   opacity: 0;
   transform: translateY(-6px) scale(.98);
   pointer-events: none;
@@ -1523,5 +1523,205 @@ body:has(.hero) .search-popover__btn:hover{
   position:absolute !important; width:1px !important; height:1px !important;
   padding:0 !important; margin:-1px !important; overflow:hidden !important;
   clip:rect(0,0,0,0) !important; white-space:nowrap !important; border:0 !important;
+}
+
+/* ======================================================================
+   STYLES SPÉCIFIQUES AU CHECKOUT (ex- checkout.css)
+   Objectif : moderniser le rendu sans impacter le reste.
+   ====================================================================== */
+
+/* Wrapper général */
+.checkout {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 40%);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+/* Étapes du checkout */
+.checkout-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+.checkout-steps .step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.checkout-steps .step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  width: 24px;
+  height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+}
+.checkout-steps .step.is-active::after {
+  background: var(--accent);
+}
+.checkout-steps .step.completed .step-icon {
+  background: var(--accent);
+  color: #fff;
+}
+.checkout-steps .step.completed .step-title {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Icones des étapes */
+.step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  background: var(--border);
+  transition: background .3s, color .3s;
+}
+.step-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+  stroke: currentColor;
+  transition: stroke .3s;
+}
+
+/* Titres des étapes */
+.step-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Contenu principal du checkout */
+.checkout-main {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+/* Formulaire de contact */
+.contact-form {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.contact-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.contact-form label {
+  font-size: 14px;
+  color: var(--text);
+}
+.contact-form input,
+.contact-form select {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--text);
+  transition: border-color .3s;
+}
+.contact-form input:focus,
+.contact-form select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+/* Résumé de la commande */
+.order-summary {
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+.order-summary h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--text);
+}
+.order-summary .summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.order-summary .summary-item:last-child {
+  border-bottom: none;
+}
+.order-summary .summary-item .item-label {
+  font-size: 14px;
+  color: var(--muted);
+}
+.order-summary .summary-item .item-value {
+  font-size: 16px;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Boutons du checkout */
+.btn-checkout {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+  transition: background .3s, transform .2s;
+}
+.btn-checkout:hover {
+  background: #d09e2b;
+  transform: translateY(-2px);
+}
+.btn-checkout:active {
+  transform: translateY(1px);
+}
+
+/* Responsive Checkout */
+@media (max-width: 768px) {
+  .checkout {
+    grid-template-columns: 1fr;
+  }
+  .checkout-steps {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .checkout-steps .step {
+    width: 100%;
+    text-align: left;
+  }
+  .checkout-steps .step:not(:last-child)::after {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .checkout-main {
+    padding: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .order-summary h2 {
+    font-size: 16px;
+  }
+  .order-summary .summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .order-summary .summary-item .item-label {
+    margin-bottom: 4px;
+  }
 }
 

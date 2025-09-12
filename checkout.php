@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- checkout.php -->
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,17 +11,21 @@
 </head>
 <body>
 
-  <!-- Header habituel ici -->
-
   <main>
     <div class="page-checkout">
       <nav class="breadcrumb" aria-label="breadcrumbs">
-        <a href="index.php">Home</a>
+        <a href="index.html">Home</a>
         <span aria-hidden="true">/</span>
-        <a href="cart.php">Panier</a>
+        <a href="shop.html">Panier</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Paiement</span>
       </nav>
+      <?php if (!empty($_SESSION['checkout_error'])): ?>
+        <div class="panel" style="background:#ffeaea;color:#a00;margin:16px 0;padding:12px 18px;border-radius:10px;">
+          <?= htmlspecialchars($_SESSION['checkout_error']) ?>
+        </div>
+        <?php unset($_SESSION['checkout_error']); ?>
+      <?php endif; ?>
 
       <section class="hero-checkout container">
         <p class="eyebrow">Étape finale</p>
@@ -137,7 +142,7 @@
 
           <div class="actions">
             <button type="submit" class="btn btn--accent">Procéder au paiement</button>
-            <a class="btn" href="cart.php">Retour au panier</a>
+            <a class="btn" href="shop.html">Retour à la boutique</a>
           </div>
 
           <p class="muted">En cliquant, vous serez redirigé vers une page de paiement sécurisée.</p>
@@ -147,23 +152,33 @@
         <aside class="panel summary">
           <h2>Récapitulatif</h2>
           <?php
-          // Exemple basique : utilise $_SESSION['cart'] si dispo, sinon démo
-          session_start();
+          // Accepte les clés 'name' (JS) ou 'title' (fallback)
           $items = $_SESSION['cart'] ?? [
-            ['title'=>'Veste Atelier', 'qty'=>1, 'price'=>18000],
-            ['title'=>'Chemise Selvedge', 'qty'=>1, 'price'=>9500],
+            ['name'=>'Veste Atelier', 'qty'=>1, 'price'=>18000],
+            ['name'=>'Chemise Selvedge', 'qty'=>1, 'price'=>9500],
           ];
           $subtotal = 0;
-          foreach($items as $it){ $subtotal += (int)$it['price'] * (int)$it['qty']; }
+          foreach($items as $it){
+            // Récupère le nom du produit
+            $label = isset($it['title']) ? $it['title'] : ($it['name'] ?? '');
+            // Prix : si < 100, on suppose que c'est en euros, sinon en centimes
+            $prix = (float)$it['price'];
+            if ($prix < 100) $prix = round($prix * 100); // convertit en centimes si besoin
+            $subtotal += $prix * (int)$it['qty'];
+            $it['_label'] = $label;
+            $it['_prix'] = $prix;
+            $it['_qty'] = (int)$it['qty'];
+            $itList[] = $it;
+          }
           $shipping = ($subtotal >= 15000) ? 0 : 700; // gratuit dès 150€
           $total = $subtotal + $shipping;
           function euro($c){ return number_format($c/100, 2, ',', ' ') . ' €'; }
           ?>
           <div class="checkout-lines">
-            <?php foreach($items as $it): ?>
+            <?php foreach($itList as $it): ?>
               <div class="line">
-                <span><?= htmlspecialchars($it['title']) ?> × <?= (int)$it['qty'] ?></span>
-                <span><?= euro($it['price'] * $it['qty']) ?></span>
+                <span><?= htmlspecialchars($it['_label']) ?> × <?= $it['_qty'] ?></span>
+                <span><?= euro($it['_prix'] * $it['_qty']) ?></span>
               </div>
             <?php endforeach; ?>
             <div class="line"><span>Sous-total</span><span><?= euro($subtotal) ?></span></div>

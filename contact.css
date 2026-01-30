@@ -1,0 +1,154 @@
+/* =====================================
+   Boukla — Page Contact (scopée)
+   S'aligne sur le HTML fourni :
+   .page-contact, .hero-contact, .page-title, .grid-2, .panel, .contact-form, .hp, .bullets, .map-placeholder
+   ===================================== */
+
+/* Breadcrumb */
+.page-contact .breadcrumb{
+  display:flex; gap:8px; align-items:center;
+  font-size: 14px;
+  color:#6f6f6f;
+  margin: 12px 0 8px;
+  margin-left: 30px;
+}
+.page-contact .breadcrumb a{ color:#1a0903; text-decoration:underline; text-underline-offset:2px; }
+.page-contact .breadcrumb a:hover{ opacity:.85; }
+
+/* Hero */
+.page-contact .hero-contact{
+  padding: 20px 0 8px;
+}
+.page-contact .eyebrow{
+  margin:0 0 6px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#1a0903;
+  opacity:.9;
+}
+.page-contact .page-title{
+  margin:0 0 6px;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height:1.1;
+  letter-spacing:.2px;
+  color:#1a0903;
+}
+.page-contact .subtitle{
+  margin:0;
+  color:#6f6f6f;
+  font-size: clamp(14px, 2.4vw, 16px);
+}
+
+/* Grid 2 colonnes */
+.page-contact .grid-2{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap:24px;
+  padding: 16px 0 48px;
+}
+@media (max-width: 960px){
+  .page-contact .grid-2{ grid-template-columns: 1fr; }
+}
+
+/* Panneaux (cards) */
+.page-contact .panel{
+  background:#fff;
+  border:1px solid #e8e6ee;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  padding:20px;
+}
+@media (min-width: 961px){
+  .page-contact .panel{ padding:24px; }
+}
+.page-contact .panel h2{
+  margin:0 0 14px;
+  font-family:"Playfair Display", serif;
+  font-weight:700;
+  font-size:22px;
+  color:#1a0903;
+}
+
+/* Liste coordonnées */
+.page-contact .bullets{
+  margin: 6px 0 16px;
+  padding-left: 18px;
+  color:#161616;
+}
+.page-contact .bullets li + li{ margin-top:6px; }
+
+/* Carte placeholder */
+.page-contact .map-placeholder{
+  height: 280px;
+  border:1px dashed #e8e6ee;
+  border-radius:16px;
+  display:grid; place-items:center;
+  color:#6f6f6f;
+  background:
+    linear-gradient(0deg, rgba(255,255,255,.85), rgba(255,255,255,.85)),
+    repeating-linear-gradient(45deg, #fafafa, #fafafa 10px, #f3f3f3 10px, #f3f3f3 20px);
+}
+
+/* Formulaire */
+.page-contact .contact-form .field{ margin-bottom: 14px; }
+.page-contact .contact-form label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:6px;
+  color:#1a0903;
+}
+
+.page-contact .contact-form input[type="text"],
+.page-contact .contact-form input[type="email"],
+.page-contact .contact-form textarea{
+  width:100%;
+  border:1px solid #e8e6ee;
+  border-radius:12px;
+  padding:12px 14px;
+  font:inherit;
+  color:#161616;
+  background:#fff;
+  outline:none;
+  transition: box-shadow .2s, border-color .2s;
+}
+.page-contact .contact-form textarea{ resize:vertical; }
+.page-contact .contact-form input:focus,
+.page-contact .contact-form textarea:focus{
+  border-color:#F2C94C;
+  box-shadow:0 0 0 4px rgba(242,201,76,.2);
+}
+
+/* Actions */
+.page-contact .contact-form .actions{
+  display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+}
+.page-contact .contact-form button[type="submit"]{
+  appearance:none; border:none; cursor:pointer;
+  border-radius:12px; padding:12px 18px; font-weight:700;
+  background:#F2C94C; color:#1a1a1a;
+  box-shadow:0 6px 16px rgba(242,201,76,.35);
+}
+.page-contact .contact-form button[type="submit"]:hover{ transform: translateY(-1px); }
+
+.page-contact .contact-form .form-status{
+  min-height:1.25em;
+  font-size:14px;
+  color:#6f6f6f;
+  margin:0;
+}
+
+.page-contact .form-note{
+  margin:8px 0 0;
+  font-size:13px;
+  color:#6f6f6f;
+}
+
+/* Honeypot anti-spam */
+.page-contact .hp{ position:absolute; left:-9999px; opacity:0; height:0; width:0; }
+
+

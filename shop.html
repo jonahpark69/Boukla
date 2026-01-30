@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Boukla — Shop</title>
+
+  <!-- Fonts (mêmes que la home) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Preload corrigé : on précharge le logo réellement utilisé -->
+  <link rel="preload" as="image" href="assets/images/logo-boukla-3.svg" type="image/svg+xml"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="boukla.css">
+  <link rel="stylesheet" href="checkout-modal.css">
+
+  <!-- Patch d’alignement header (logo ↔︎ panier) sur le même container que le breadcrumb -->
+  <style>
+    .header .header__bar{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: var(--header-pad-y, 12px) 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== ENTÊTE ====== -->
+  <header class="header">
+    <div class="container header__bar">
+      <a class="logo" href="index.html" aria-label="Boukla">
+        <img src="assets/images/logo-boukla-3.svg" alt="Boukla" height="32" width="120" decoding="async"/>
+      </a>
+
+      <!-- Bouton OUVRIR le mini-panier -->
+      <div class="header__actions">
+        <button class="icon-btn btn-cart"
+                data-cart-open
+                aria-controls="cart-modal"
+                aria-expanded="false"
+                aria-label="Ouvrir le panier">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 12.39a2 2 0 0 0 2 1.61h8.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="badge" data-cart-count>0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== BREADCRUMB ====== -->
+  <div class="breadcrumb container">
+    <a href="index.html">Home</a> <span aria-hidden="true">/</span> <strong>Shop</strong>
+  </div>
+
+  <!-- ====== HERO COURT ====== -->
+  <section class="hero hero--thin container">
+    <h1 class="h1">New Arrivals</h1>
+  </section>
+
+  <!-- ====== GRILLE PRODUITS ====== -->
+  <main id="collection" class="container">
+    <ul id="grid" class="product-grid">
+      <!-- Crème hydratante -->
+      <li class="card" data-cat="soins" data-price="3490" data-new="1">
+        <a class="card__media" href="product.php?slug=creme-hydratante">
+          <img src="assets/images/produit/boukla-1.png" alt="Crème hydratante" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.php?slug=creme-hydratante">Crème hydratante</a></h3>
+          <p class="card__price">34,90 €</p>
+          <a class="btn btn--ghost" href="product.php?slug=creme-hydratante">Voir le détail</a>
+        </div>
+      </li>
+
+      <!-- Masque hydratant -->
+      <li class="card" data-cat="masques" data-price="2490" data-new="1">
+        <a class="card__media" href="product.php?slug=masque-hydratant">
+          <img src="assets/images/produit/étiquette-boukla-3.jpg" alt="Masque hydratant" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.php?slug=masque-hydratant">Masque hydratant</a></h3>
+          <p class="card__price">24,90 €</p>
+          <a class="btn btn--ghost" href="product.php?slug=masque-hydratant">Voir le détail</a>
+        </div>
+      </li>
+
+      <!-- Shampoing solide -->
+      <li class="card" data-cat="shampoings" data-price="1490" data-new="0">
+        <a class="card__media" href="product.php?slug=shampoing-solide">
+          <img src="assets/images/produit/étiquette-boukla-4.png" alt="Shampoing solide" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.php?slug=shampoing-solide">Shampoing solide</a></h3>
+          <p class="card__price">14,90 €</p>
+          <a class="btn btn--ghost" href="product.php?slug=shampoing-solide">Voir le détail</a>
+        </div>
+      </li>
+
+      <!-- Huile de ricin -->
+      <li class="card" data-cat="huiles" data-price="2990" data-new="1">
+        <a class="card__media" href="product.php?slug=huile-de-ricin">
+          <img src="assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg" alt="Huile de ricin" loading="lazy" width="480" height="600">
+        </a>
+        <div class="card__body">
+          <h3 class="card__title"><a href="product.php?slug=huile-de-ricin">Huile de ricin</a></h3>
+          <p class="card__price">29,90 €</p>
+          <a class="btn btn--ghost" href="product.php?slug=huile-de-ricin">Voir le détail</a>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <!-- ====== MODALE QUICK VIEW ====== -->
+  <dialog id="qv" class="qv">
+    <form method="dialog" class="qv__box">
+      <button class="qv__close" aria-label="Fermer" value="close">×</button>
+
+      <div class="qv__grid">
+        <div class="qv__media">
+          <img id="qv-image" alt="" loading="lazy">
+          <div id="qv-thumbs" class="qv__thumbs"></div>
+        </div>
+
+        <div class="qv__content">
+          <p id="qv-badge" class="qv__badge" hidden>Nouveau</p>
+          <h2 id="qv-title" class="qv__title"></h2>
+          <p id="qv-short" class="qv__short"></p>
+          <p class="qv__price"><span id="qv-price"></span></p>
+
+          <div class="qv__actions">
+            <a id="qv-link" class="btn btn--ghost" href="#">Voir la fiche</a>
+            <button id="qv-add" type="button" class="btn btn--primary">Ajouter au panier</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ====== MODAL PAIEMENT ====== -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <div class="checkout-modal__backdrop" data-close-modal></div>
+
+    <div class="checkout-modal__dialog" role="document">
+      <button class="checkout-modal__close" type="button" aria-label="Fermer" data-close-modal>&times;</button>
+
+      <header class="checkout-modal__header">
+        <p class="eyebrow">Vérification</p>
+        <h2 id="co-title" class="title">Procéder au paiement</h2>
+        <p class="subtitle">Dernier coup d’œil avant la page sécurisée.</p>
+      </header>
+
+      <div class="checkout-modal__body">
+        <div class="checkout-modal__lines">
+          <div class="line"><span>Total articles</span><span id="co-subtotal">—</span></div>
+          <div class="line"><span>Livraison</span><span id="co-shipping">—</span></div>
+          <div class="line total"><span>Total</span><span id="co-total">—</span></div>
+        </div>
+
+        <div class="checkout-modal__actions">
+          <a class="btn btn--accent" href="./checkout.php" data-checkout-go>Aller au paiement</a>
+          <button class="btn" data-close-modal>Modifier le panier</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-grid">
+      <!-- Marque -->
+      <section class="footer-brand">
+        <a href="index.php" class="footer-logo" aria-label="Boukla">
+          <img src="assets/images/logo-boukla-2.svg" alt="Boukla" width="132" height="32" loading="lazy">
+        </a>
+        <p class="footer-tagline">Soins clean pour boucles &amp; cheveux crépus — hydrater, définir, protéger.</p>
+        <ul class="footer-social">
+          <li>
+            <a href="https://www.instagram.com/boukla" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+              <img src="assets/icons/instagram.svg" alt="" width="18" height="18" loading="lazy">
+            </a>
+          </li>
+          <li>
+            <a href="https://www.pinterest.com/boukla" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" title="Pinterest">
+              <img src="assets/icons/pinterest.svg" alt="" width="18" height="18" loading="lazy">
+            </a>
+          </li>
+          <li>
+            <a href="https://x.com/boukla" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="X (Twitter)">
+              <img src="assets/icons/x.svg" alt="" width="18" height="18" loading="lazy">
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Liens -->
+      <nav class="footer-links" aria-label="Navigation pied de page">
+        <div class="footer-col">
+          <h3 class="footer-title">Boutique</h3>
+          <ul>
+            <li><a href="shop.php">Shop</a></li>
+            <li><a href="new.php">Nouveautés</a></li>
+            <li><a href="best-sellers.php">Best-sellers</a></li>
+            <li><a href="collections.php">Collections</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Aide</h3>
+          <ul>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="faq.php">FAQ</a></li>
+            <li><a href="shipping.php">Livraison &amp; retours</a></li>
+            <li><a href="care-guide.php">Guide boucles</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-title">Légal</h3>
+          <ul>
+            <li><a href="privacy.php">Confidentialité</a></li>
+            <li><a href="terms.php">CGV</a></li>
+            <li><a href="cookies.php">Cookies</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Newsletter -->
+      <section class="footer-newsletter">
+        <h3 class="footer-title">Newsletter</h3>
+        <p class="footer-note">Conseils boucles, routines &amp; lancements en avant-première.</p>
+        <form class="footer-form" action="#" method="post">
+          <label class="sr-only" for="nl-email">Votre e-mail</label>
+          <input id="nl-email" name="email" type="email" required placeholder="vous@email.com">
+          <button type="submit">S’inscrire</button>
+        </form>
+      </section>
+
+      <!-- Contact -->
+      <section class="footer-contact">
+        <h3 class="footer-title">Coordonnées</h3>
+        <ul class="footer-contact-list">
+          <li><a href="mailto:hello@boukla.fr">hello@boukla.fr</a></li>
+          <li>12 Rue des Artisans, 75000 Paris</li>
+          <li>Lun–Ven&nbsp;: 10h–19h</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom__inner">
+        <p class="footer-copy">© 2025 Boukla. Tous droits réservés.</p>
+        <p class="footer-made">Fabriqué avec soin — Paris.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- ============ /FOOTER ============ -->
+
+  <!-- ====== JSON INLINE (pour fonctionner sans serveur) ====== -->
+  <script id="products-json" type="application/json">
+  [
+    {"slug":"creme-hydratante","name":"Crème hydratante","price":34.9,"currency":"EUR","short":"Hydrate sans alourdir, redéfinit les boucles et limite les frisottis.","images":["assets/images/produit/boukla-1.png"],"badge":"Nouveau"},
+    {"slug":"masque-hydratant","name":"Masque hydratant","price":24.9,"currency":"EUR","short":"Soin profond hebdomadaire pour boucles repulpées et brillantes.","images":["assets/images/produit/étiquette-boukla-3.jpg"]},
+    {"slug":"shampoing-solide","name":"Shampoing solide","price":14.9,"currency":"EUR","short":"Nettoyage doux, mousse fine, respecte le cuir chevelu.","images":["assets/images/produit/étiquette-boukla-4.png"]},
+    {"slug":"huile-de-ricin","name":"Huile de ricin","price":29.9,"currency":"EUR","short":"Fortifie visiblement les longueurs, brillance naturelle.","images":["assets/images/produit/étiquette-produit-boukla-2-mock-up-2.jpg"]}
+  ]
+  </script>
+
+  <!-- ====== JS (cart) ====== -->
+  <script defer src="cart.js"></script>
+
+  <!-- ====== JS (liste : filtres/tri tolérant) ====== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var grid = document.getElementById('grid');
+    if (!grid) return;
+
+    var filters = document.getElementById('filters');
+    var sort    = document.getElementById('sort');
+
+    // Pré-sélection ?cat=...
+    var params = new URLSearchParams(location.search);
+    var initialCat = (params.get('cat') || 'all').toLowerCase();
+    if (filters) {
+      var input = filters.querySelector('input[name="cat"][value="' + initialCat + '"]');
+      if (input) input.checked = true;
+    }
+
+    function applySort() {
+      if (!sort) return; // pas de tri -> ordre HTML
+      var mode = sort.value;
+      var items = Array.prototype.slice.call(grid.children).filter(function(li){ return li.style.display !== 'none'; });
+      var cmp = null;
+      if (mode === 'price-asc')  cmp = function(a,b){ return (+a.dataset.price) - (+b.dataset.price); };
+      if (mode === 'price-desc') cmp = function(a,b){ return (+b.dataset.price) - (+a.dataset.price); };
+      if (mode === 'new')        cmp = function(a,b){ return (+b.dataset.new)   - (+a.dataset.new); };
+      if (cmp) items.sort(cmp).forEach(function(li){ grid.appendChild(li); });
+    }
+
+    function applyFilters() {
+      var cat = filters && filters.querySelector('input[name="cat"]:checked') ? filters.querySelector('input[name="cat"]:checked').value : 'all';
+      Array.prototype.forEach.call(grid.children, function(li){
+        var ok = (cat === 'all') || (li.dataset.cat === cat);
+        li.style.display = ok ? '' : 'none';
+      });
+      applySort();
+    }
+
+    // Wire buttons inside cards if they already exist
+    function slugFromHref(href){
+      if (!href) return null;
+      var m = href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
+      if (m) return decodeURIComponent(m[1]);
+      try {
+        var u = new URL(href, location.origin);
+        var s = u.searchParams.get('slug');
+        return s ? decodeURIComponent(s) : null;
+      } catch(e){ return null; }
+    }
+    function parsePrice(text){
+      var n = parseFloat(String(text).replace(/[^0-9,.-]/g,'').replace(',', '.'));
+      return isNaN(n) ? 0 : n;
+    }
+    function wireCardButtons(){
+      var cards = grid.querySelectorAll('.card');
+      Array.prototype.forEach.call(cards, function(card){
+        var link = card.querySelector('.card__title a, .card__media[href*="/produit/"], .card__media[href^="produit/"], .card__media[href*="product.php?slug="]');
+        var slug = link ? slugFromHref(link.getAttribute('href')) : null;
+        var name = (card.querySelector('.card__title') && card.querySelector('.card__title').textContent) ? card.querySelector('.card__title').textContent.trim() : 'Produit';
+        var priceTxt = card.querySelector('.card__price') ? card.querySelector('.card__price').textContent : '0';
+        var price = parsePrice(priceTxt);
+        var imageEl = card.querySelector('.card__media img');
+        var image = imageEl ? imageEl.getAttribute('src') : '';
+
+        // trouve des boutons existants qui ressemblent à “Ajouter au panier”
+        var candidates = card.querySelectorAll('[data-add-to-cart], [data-role="add-to-cart"], .btn--primary, button, a');
+        Array.prototype.forEach.call(candidates, function(btn){
+          var label = (btn.textContent || '').toLowerCase();
+          var seemsAdd = (label.indexOf('ajout') > -1 || label.indexOf('panier') > -1 || label.indexOf('add') > -1) &&
+                         (label.indexOf('detail') === -1 && label.indexOf('fiche') === -1 && label.indexOf('voir') === -1);
+          if (!seemsAdd) return;
+          btn.setAttribute('data-add-to-cart','');
+          if (slug) btn.dataset.id = slug;
+          btn.dataset.name = name;
+          btn.dataset.price = price;
+          btn.dataset.image = image;
+        });
+      });
+    }
+
+    filters && filters.addEventListener('change', function(){ applyFilters(); wireCardButtons(); });
+    sort && sort.addEventListener('change', function(){ applySort(); wireCardButtons(); });
+
+    applyFilters();
+    wireCardButtons(); // première passe
+  });
+  </script>
+
+  <!-- ====== JS QUICK VIEW (ouvre aussi sur “Voir le détail”) ====== -->
+  <script>
+  (function () {
+    'use strict';
+
+    var DATA_URL = 'products.json';
+    var modal = document.getElementById('qv');
+    if (!modal) return;
+
+    var els = {
+      img:    document.getElementById('qv-image'),
+      thumbs: document.getElementById('qv-thumbs'),
+      title:  document.getElementById('qv-title'),
+      short:  document.getElementById('qv-short'),
+      price:  document.getElementById('qv-price'),
+      badge:  document.getElementById('qv-badge'),
+      link:   document.getElementById('qv-link'),
+      add:    document.getElementById('qv-add')
+    };
+
+    var isFileProto = location.protocol === 'file:';
+    var bySlug = new Map();
+    var loaded = false;
+
+    function ensureData() {
+      if (loaded) return Promise.resolve();
+
+      var inline = document.getElementById('products-json');
+      if (inline && inline.textContent.trim()) {
+        try {
+          var list = JSON.parse(inline.textContent);
+          bySlug = new Map(list.map(function(p){ return [p.slug, p]; }));
+          loaded = true;
+          return Promise.resolve();
+        } catch(e){
+          console.warn('JSON inline invalide', e);
+        }
+      }
+
+      if (Array.isArray(window.PRODUCTS)) {
+        bySlug = new Map(window.PRODUCTS.map(function(p){ return [p.slug, p]; }));
+        loaded = true;
+        return Promise.resolve();
+      }
+
+      if (isFileProto) {
+        console.warn('En file://, fetch(products.json) est bloqué par le navigateur.');
+        return Promise.reject(new Error('fetch bloqué en file://'));
+      }
+
+      return fetch(DATA_URL, { cache: 'no-store' })
+        .then(function(res){ return res.json(); })
+        .then(function(list){
+          bySlug = new Map(list.map(function(p){ return [p.slug, p]; }));
+          loaded = true;
+        });
+    }
+
+    function slugFromHref(href) {
+      if (!href) return null;
+      var m = href.match(/(?:^|\/)produit\/([^\/?#]+)/i);
+      if (m) return decodeURIComponent(m[1]);
+      try {
+        var u = new URL(href, location.origin);
+        var s = u.searchParams.get('slug');
+        return s ? decodeURIComponent(s) : null;
+      } catch(e){ return null; }
+    }
+
+    function openDialog() {
+      if (typeof modal.showModal === 'function') modal.showModal();
+      else modal.setAttribute('open', '');
+    }
+    function closeDialog() {
+      if (typeof modal.close === 'function') modal.close();
+      else modal.removeAttribute('open');
+    }
+
+    function formatPrice(n, currency){
+      try {
+        return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: currency || 'EUR' }).format(n || 0);
+      } catch(e){ return (n || 0) + ' €'; }
+    }
+
+    function parsePrice(text){
+      var n = parseFloat(String(text).replace(/[^0-9,.-]/g,'').replace(',', '.'));
+      return isNaN(n) ? 0 : n;
+    }
+
+    function openQV(slug) {
+      ensureData().then(function(){
+        var p = bySlug.get(slug);
+        if (!p) return;
+
+        els.title.textContent = p.name || '';
+        els.short.textContent = p.short || '';
+        els.price.textContent = formatPrice(p.price, p.currency);
+
+        if (p.badge) { els.badge.textContent = p.badge; els.badge.hidden = false; }
+        else { els.badge.hidden = true; }
+
+        var main = (p.images && p.images[0]) || '';
+        els.img.src = main; els.img.alt = p.name || '';
+
+        els.thumbs.innerHTML = '';
+        (p.images || []).forEach(function(src){
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'qv__thumb';
+          var im = document.createElement('img'); im.src = src; im.alt = '';
+          b.appendChild(im);
+          b.addEventListener('click', function(){ els.img.src = src; });
+          els.thumbs.appendChild(b);
+        });
+
+        /* Lien fiche : vers PHP (OK MAMP) */
+        els.link.setAttribute('href', 'product.php?slug=' + slug);
+
+        // Brancher le bouton "Ajouter au panier" de la modale
+        els.add.setAttribute('data-add-to-cart','');
+        els.add.dataset.id = slug;
+        els.add.dataset.name = p.name;
+        els.add.dataset.price = (typeof p.price === 'number') ? p.price : parsePrice(p.price);
+        els.add.dataset.image = main || '';
+
+        openDialog();
+      }).catch(function(){
+        alert("Impossible de charger les produits en mode fichier.\nAssure-toi que le JSON inline est présent.");
+      });
+    }
+
+    /* === Intercepter TOUS les liens de la grille (y compris “Voir le détail”) pour ouvrir la QV === */
+    document.addEventListener('click', function(e){
+      const grid = document.querySelector('.product-grid');
+      if (!grid) return;
+
+      const a = e.target.closest('a[href]');
+      if (!a || !grid.contains(a)) return;
+
+      // Ne pas intercepter le lien "Voir la fiche" dans la modale
+      if (a.id === 'qv-link' || a.closest('#qv')) return;
+
+      // Permet une exception manuelle si besoin
+      if (a.hasAttribute('data-no-qv')) return;
+
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return; // ouvrir nouvel onglet : OK
+
+      const slug = slugFromHref(a.getAttribute('href'));
+      if (!slug) return;
+
+      e.preventDefault();
+      openQV(slug);
+    });
+
+    // Fermer la modale en cliquant hors du contenu
+    modal.addEventListener('click', function(e){
+      var box = e.target.closest('.qv__box');
+      if (!box) closeDialog();
+    });
+  })();
+  </script>
+
+  <!-- ====== JS : ouverture du MODAL PAIEMENT depuis n'importe quel [data-open-checkout] ====== -->
+  <script>
+    (function(){
+      'use strict';
+      const modal = document.getElementById('checkout-modal');
+      if(!modal) return;
+
+      const backdrop = modal.querySelector('.checkout-modal__backdrop');
+      const closeEls = modal.querySelectorAll('[data-close-modal]');
+      const subtotalEl = document.getElementById('co-subtotal');
+      const shippingEl = document.getElementById('co-shipping');
+      const totalEl    = document.getElementById('co-total');
+
+      function lockScroll(lock){
+        document.documentElement.classList.toggle('modal-open', lock);
+      }
+
+      function fillTotals(){
+        const sub = document.getElementById('cart-subtotal')?.textContent?.trim();
+        const ship= document.getElementById('cart-shipping')?.textContent?.trim();
+        const tot = document.getElementById('cart-total')?.textContent?.trim()
+                 || document.querySelector('.cart-modal__summary .line.total span:last-child')?.textContent?.trim();
+
+        if (sub && subtotalEl)  subtotalEl.textContent = sub;
+        if (ship && shippingEl) shippingEl.textContent = ship;
+        if (tot && totalEl)     totalEl.textContent    = tot;
+      }
+
+      function closeCartIfOpen(){
+        const cartModal = document.getElementById('cart-modal') || document.querySelector('.cart-modal');
+        if (cartModal && cartModal.getAttribute('aria-hidden') === 'false') {
+          cartModal.setAttribute('aria-hidden','true');
+        }
+      }
+
+      function openModal(){
+        fillTotals();
+        closeCartIfOpen();
+        modal.setAttribute('aria-hidden','false');
+        lockScroll(true);
+        document.addEventListener('keydown', onEsc);
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true');
+        lockScroll(false);
+        document.removeEventListener('keydown', onEsc);
+      }
+      function onEsc(e){ if(e.key === 'Escape') closeModal(); }
+
+      closeEls.forEach(el => el.addEventListener('click', closeModal));
+      backdrop?.addEventListener('click', closeModal);
+
+      // Ouvrir depuis le bouton “Passer au paiement” du MINI-PANIER
+      document.addEventListener('click', (e)=>{
+        const trigger = e.target.closest('[data-open-checkout]');
+        if(!trigger) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        e.preventDefault();
+        openModal();
+      });
+    })();
+  </script>
+
+  <!-- ====== PATCH: forcer la navigation vers checkout.php malgré d’éventuels intercepts globaux ====== -->
+  <script>
+    (function(){
+      const link = document.querySelector('#checkout-modal [data-checkout-go]');
+      if (!link) return;
+      link.addEventListener('click', function(e){
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // nouvel onglet OK
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation?.();
+        window.location.assign(this.href);
+      }, true); // capture: avant tout autre listener
+    })();
+  </script>
+
+  <script defer src="search.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
